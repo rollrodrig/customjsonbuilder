@@ -1,4 +1,4 @@
-import { TOptsGenerator } from "./OptsGenerator";
+import { OptsGenerator ,TOptsGenerator } from "./OptsGenerator";
  /**
  *
  * @param {string} string
@@ -11,13 +11,9 @@ export interface TKeyOpts {
 export const keyOpts = (string:string): TKeyOpts => {
     let splited = string.split(":");
     let k = splited[0];
+    let opts = OptsGenerator(splited[1])
     return {
         key: k,
-        opts:{
-            type:"string",
-            min:10,
-            max:20,
-            default:[]
-        }
+        opts:opts
     }
 }
