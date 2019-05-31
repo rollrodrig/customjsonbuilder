@@ -1,0 +1,5 @@
+docker-compose exec app /bin/bash
+
+docker-compose exec app /bin/bash
+
+docker-compose exec app npm install

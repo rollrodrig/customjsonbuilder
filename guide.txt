@@ -1,0 +1,338 @@
+## primitives
+	# string
+	{ 
+		name: "rolly"
+	}
+	/?q={name:string}
+
+	# number
+	{ 
+		id: 123123
+	}
+	/?{id:number}
+
+	# boolean
+	{ 
+		success: true
+	}
+	/?{success:boolean}
+	
+	# null
+	{ 
+		content: null
+	}
+	/?{content:null}
+
+	# undefined
+	{ 
+		isdeclared: undefined
+	}
+	/?{isdeclared:undefined}
+
+## non primitives
+	# text
+	- by default have a max length 100
+	{ 
+		longtext: "Lorem ipsum dolor sit amet, consectetur adipisicing elit..." 
+	}
+	/?{longtext:text}
+
+	# username
+	{
+		theusername: "rolly445"
+	}
+	/?{theusername:username}
+
+	# firstname
+	{
+		myFirstName: "rolly"
+	}
+	/?{myFirstName:name}
+
+	# lastname
+	{
+		myLastName: "rodriguez"
+	}
+	/?{myLastName:lastname}
+
+	# email
+	{
+		primaryEmail: "roll@fake.com"
+	}
+	/?{primaryEmail:email}
+	
+	# phone
+	{
+		thecurrentphone: "+51 987 987 987"
+	}
+	/?{thecurrentphone:phone}
+
+	# day
+	{
+		todayis: "Monday"
+	}
+	/?{ todayis:day }
+	
+	# time
+	{
+		theTimeIs: "5:00pm"
+	}
+	/?{ theTimeIs:time }
+
+## mofifier
+	# min
+	{ 
+		username: "Loremipsum" 
+	}
+	/?{name:string|min:3}
+	
+	# max
+	{ 
+		username: "Loremipsum" 
+	}
+	/?{name:string|max:10}
+
+	# min an max
+	{ 
+		username: "Loremipsum" 
+	}
+	/?{username:string|min:3|max:10}
+
+	# length
+	{ 
+		username: "Lorem" 
+	}
+	/?{username:string|length:5}
+
+## modifier option 2
+
+	# min an max
+	{ 
+		username: "Loremipsum" 
+	}
+	/?{username:[string,min:3max:10]}
+
+
+
+## default
+	# boolean
+	{ 
+		success: true
+	}
+	/?{success:boolean|default:true}
+
+	# string
+	{ 
+		status: "APROVED"
+	}
+	/?{status:string|default:"APROVED"}
+
+	# number
+	{ 
+		errorCode: 9002
+	}
+	/?{errorCode:number|default:9002}
+
+
+# default from array
+	{ 
+		errorCode: 9002
+	}
+	{ 
+		errorCode: 9003
+	}
+	{ 
+		errorCode: 9004
+	}
+	/?{errorCode:number|default:[9002,9003,9004]}
+
+	{ 
+		status: "NO"
+	}
+	{ 
+		status: "YES"
+	}
+	{ 
+		status: "PENDING"
+	}
+	/?{status:string|default:["NO","YES","PENDING"]}
+
+## default option 2
+	# boolean
+	{ 
+		success: true
+	}
+	/?{success:default:true}
+
+	# string
+	{ 
+		status: "YES"
+	}
+	/?{status:default:"YES"}
+	{ 
+		status: "NO|YES|PENDING"
+	}
+	/?{status:default:["NO","YES","PENDING"]}
+
+	# number
+	{ 
+		errorCode: 9002
+	}
+	/?{errorCode:default:9002}
+	{ 
+		errorCode: 100|110|120
+	}
+	/?{errorCode:default:[100,110,120]}
+
+# nested content
+{
+	topic:"Lorem"
+	schedule:{
+		day:"Monday",
+		time:"3:00pm",
+	}
+}
+/?{ topic:string, schedule:{ day:day, time: time} }
+
+{
+	title:"Lorem",
+	parent: {
+		kid1: "Lipsum",
+		kid2: {
+			id: 998,
+			frase: "Lipsum"
+		},
+		kid3: {
+			nested1: {
+				start: "Omega",
+				nested2: {
+					ends: "Alfa"
+				}
+			}
+		}
+
+
+	}
+}
+/?{title:string, parent:{ kid1: string, kid2: {id:number, frase: string}, kid3: { nested:1: {start: string, nested2:{ends:string}} }}}
+
+
+# array
+[
+	{ name:"Jane"},
+	{ name:"Mosh"},
+	{ name:"Sandra"}
+]
+/?[{nane:firstname}, 3]
+/?{nane:firstname}:[3]
+
+{
+	authors: [
+		{ name:"Jane"},
+		{ name:"Mosh"},
+		{ name:"Sandra"}
+	]
+}
+/?{ authors:[{nane:firstname}, 3]}
+/?{ authors:{nane:firstname}:[3]}
+/?{ authors:{nane:firstname}[3]}
+
+{
+	ids: [343,755,477]
+}
+/?{ ids: [number, 3]}
+/?{ ids: [number|min:3|max:3, 3]}
+
+{
+	names: ["Steve","Jack","Rogers"]
+}
+/?{ names: [firtname, 3]}
+
+
+{
+	approved:true,
+	posts: [
+		{
+			title:"Lorem lipsum",
+			author: "Jhon",
+			body:" Lorem ipsum dolor sit amet, consectetur adipisicing elit...",
+			views:466,
+			likes:64,
+			comments:4
+
+		},
+		{
+			title:"Consectetur lipsum",
+			author: "Snow",
+			body:" Lorem ipsum dolor sit amet, consectetur adipisicing elit..."
+			views:466,
+			likes:64,
+			comments:4
+
+		}
+	]
+}
+/?{ approved:boolean|default:true, posts:[{title:text|max:60, author:firstname, body:text, views:number, likes:number, comments:number}, 2]}
+
+{
+	approved:true,
+	postIds:[343,633,76,43]
+	
+}
+/?{ approved:default:true, postIds:[number, 4] }
+
+{
+	author:"roll",
+	posts:[
+		{
+			id: 77
+			title: "consectetur adipisicing elit"
+		},
+		{
+			id: 89
+			title: "sit amet, consectetur adipis"
+		},
+		{
+			id: 145
+			title: "ctetur adipis sit amet, conseicing elit"
+		}
+	]
+}
+/?{ author:default:"roll", posts:[{ id:number, title:text}, 3] }
+
+
+
+
+### examples
+
+{
+	dummy:"Lorem",
+	content:9988
+}
+/?{dummy:string, content:number}
+
+{
+	username:"rolly445",
+	email:"roll@fake.com",
+}
+/?{name:username, email:email}
+
+{
+	status:"APPROVED|PENDING|REJECTED",
+	send:true,
+	reviews:34
+
+}
+/?{status:string|default["APPROVED","PENDING","REJECTED"], send:boolean|default:[true, false], reviews:default: 34}
+
+
+
+
+
+
+
+
+
+
+
+

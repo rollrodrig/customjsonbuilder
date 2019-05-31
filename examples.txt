@@ -1,0 +1,74 @@
+## user cases
+{name:string}
+{name:string, phone:number}
+{name:string, phone:{main:number, work:number}}
+{name:string, phone:[{main:number},10]}
+{name:firstname, phone:phone}
+{name:firstname, phone:phone, email:email}
+{comment:text, views:number, email:email}
+{approved:boolean, views:number}
+[{name:firstname},5]
+{posts:[{id: number, title:string, body:text},10]}
+{author:number, posts:[{title:string, body:text},10]}
+
+
+### strategy
+{name:string}
+1. name:string
+2.
+name
+string
+
+{name:string, phone:number}
+1. 
+name:string, phone:number
+2. 
+name:string
+phone:number
+3.
+name
+string
+phone
+number
+
+## key:opts
+1.
+entry: name:string
+ouput:
+{
+    key: "name",
+    opts: {
+        type: "string",
+    }
+}
+
+2.
+entry: name:string|min=10|max=20
+ouput:
+{
+    key: "name",
+    opts: {
+        type: "string",
+        min:10,
+        max:20,
+    }
+}
+
+3.
+entry: name:default=rolly
+ouput:
+{
+    key: "name",
+    opts: {
+        default: ["rolly"]
+    }
+}
+4.
+entry: name:default=rolly,erick
+ouput:
+{
+    key: "name",
+    opts: {
+        default: ["rolly","erick"]
+    }
+}
