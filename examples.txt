@@ -1,15 +1,17 @@
 ## user cases
 {name:string}
+{post:{title:string, body: string}}
+{posts:[{title:string};10]}
 {name:string, phone:number}
 {name:string, phone:{main:number, work:number}}
-{name:string, phone:[{main:number},10]}
+{name:string, phone:[{main:number}10]}
 {name:firstname, phone:phone}
 {name:firstname, phone:phone, email:email}
 {comment:text, views:number, email:email}
 {approved:boolean, views:number}
 [{name:firstname},5]
-{posts:[{id: number, title:string, body:text},10]}
-{author:number, posts:[{title:string, body:text},10]}
+{posts:[{id: number, title:string, body:text}10]}
+{author:number, posts:[{title:string, body:text}10]}
 
 
 ### strategy
