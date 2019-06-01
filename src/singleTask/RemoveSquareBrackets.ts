@@ -1,6 +1,6 @@
 import { firstChar } from "./FirstChar";
 import { lastChar } from "./LastChar";
-export const removeSquareBrackets = (s: string) => {
+export const removeSquareBrackets = (s: string): string => {
     let string: string = s;
     if (firstChar(string) === "[") {
         string = string.substring(1);
