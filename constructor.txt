@@ -1,0 +1,170 @@
+## user cases
+
+# 1
+{name:string}
+- path
+[
+    {
+        key:"name",
+        value:"string",
+        nested: false,
+    }
+]
+- response
+{ name: "EnfimWhel"}
+
+# 2
+{name:string, phone:number}
+- path
+[
+    {
+        key:"name",
+        value:"string",
+        nested: false,
+    },
+    {
+        key:"phone",
+        value:"number",
+        nested: false,
+    }
+]
+- response
+{ name:"nerioeef", phone:987987987 }
+
+# 3 
+{ name:string , location:{ city: string, avenue: string } }
+[
+    {
+        key:"name",
+        value:"string",
+        nested: false,
+    },
+    {
+        key:"location",
+        value:"object",
+        nested:[
+            {
+                key:"city",
+                value:"string",
+            },
+            {
+                key:"avenue",
+                value:"string",
+            }
+        ]
+    }
+]
+- response
+{ name:"eifnWftg" , location:{ city: "Vrifj", avenue: "nfiejf" } }
+
+# 4
+[{name:firstname};3] !!!!! NO SUPPORT !!!!!! ERROR
+
+# 5
+{data:[{name:firstname};3]}
+- path
+[
+    {
+        key:"data",
+        value:"array",
+        times:3,
+        nested:[
+            {
+                key:"name",
+                value:"firstname",
+            }
+        ]
+    }
+]
+- response
+{
+    authors:[
+        { name: "Amanda"},
+        { name: "Carolina"},
+        { name: "Victoria"},
+    ]
+}
+
+
+# 6
+{data:{authorId:uuid, name:username, posts:[{id:uuid, title:title, body:text, comments:[{id:uuid, body:text};2]};3]}}
+[
+    {
+        key:"data",
+        value:"object"
+        nested:[
+            {
+               key:"author",
+               value:"uuid", 
+            },
+            {
+               key:"name",
+               value:"username", 
+            },
+            {
+                key:"posts",
+                value: "array",
+                times:2,
+                nested: [
+                    {
+                        key:"id",
+                        value:"uuid"
+                    },
+                    {
+                        key:"title",
+                        value:"title"
+                    },
+                    {
+                        key:"body",
+                        value:"text"
+                    },
+                    {
+                        key:"comments",
+                        value:"array",
+                        times:3,
+                        nested:[
+                            {
+                                key:"id",
+                                value:"uuid",
+                            },
+                            {
+                                key:"body",
+                                value:"text",
+                            },
+                        ]
+                    },
+
+                ]
+            }
+        ]
+    }
+]
+
+- response
+{
+    data:{
+        authorId:"uuid", 
+        name:"username", 
+        posts:[
+            {
+                id:uuid, 
+                title:title, 
+                body:text, 
+                comments:[
+                    {id: abc1, body:lorem...},
+                    {id: abc2, body:lipsum...},
+                    {id: abc3, body:dolor...},
+                ]
+            },
+            {
+                id:uuid, 
+                title:title, 
+                body:text, 
+                comments:[
+                    {id: abc1, body:lorem...},
+                    {id: abc2, body:lipsum...},
+                    {id: abc3, body:dolor...},
+                ]
+            },
+        ]
+}
