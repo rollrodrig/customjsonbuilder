@@ -2,6 +2,8 @@
 {name:string}
 {post:{title:string, body: string}}
 {posts:[{title:string};10]}
+{posts:[{title:string} // error
+{posts:title:string} // error
 {name:string, phone:number}
 {name:string, phone:{main:number, work:number}}
 {name:string, phone:[{main:number}10]}
