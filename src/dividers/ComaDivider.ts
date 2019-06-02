@@ -1,5 +1,9 @@
-export const keyOpts = (string:string) => {
-    let splited = string.split(":");
-    let k = splited[0];
+export const comaDivider = (string:string) => {
+    // name:string
+    // name:string,email:string,nicks:{first:string,last:string}
+    // name:{aa:hola,bb:si},email:string,nicks:{first:string,last:string}
+    // name:[{aa:hola,bb:si};4],email:string,nicks:{first:string,last:string}
+
+
     return ["name:string","email:string"]
 }
