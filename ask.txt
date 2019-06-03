@@ -1,0 +1,49 @@
+Hello, i need split the string when match comma `,` but ignore the other commas that
+are inside `{}` or `[]`
+
+here some examples
+
+                // case 1 easy
+                // string
+                s = 'a:nmp,b:xyz,c:oiu'
+                s.split(',');
+                // arr expected working 
+                arr = ['a:nmp', 'b:xyz', 'c:oiu']
+
+                // string 2
+                s = 'a:mnp,b:{m:x,n:y},c:oiu'
+                arr = s.split(','); // not work any more
+                // arr expected 
+                ['a:nmp', 'b:{m:x,n:y}', 'c:oiu']
+
+                // string 3
+                s = 'a:mnp,b:{m:x,n:{o:1,p:4}},c:oiu'
+                arr = s.split(','); // not work any more
+                // arr expected 
+                ['a:nmp', 'b:{m:x,n:{o:1,p:4}}', 'c:oiu']
+                
+                // string 4
+                s = 'a:mnp,b:[{m:x,n:{o:1,p:4}}],c:oiu'
+                arr = s.split(','); // not work any more
+                // arr expected 
+                ['a:nmp', 'b:[{m:x,n:{o:1,p:4}}]', 'c:oiu']
+
+I am trying many regex pattern but i can't figureout a good pattern :(
+
+
+post:{title:string, body: string}
+
+post:{title:string, body: string}
+{posts:[{title:string};10]}
+{posts:[{title:string} // error
+{posts:title:string} // error
+{name:string, phone:number}
+{name:string, phone:{main:number, work:number}}
+{name:string, phone:[{main:number}10]}
+{name:firstname, phone:phone}
+{name:firstname, phone:phone, email:email}
+{comment:text, views:number, email:email}
+{approved:boolean, views:number}
+[{name:firstname},5]
+{posts:[{id: number, title:string, body:text}10]}
+{author:number, posts:[{title:string, body:text}10]}
