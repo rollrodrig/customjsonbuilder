@@ -1,4 +1,4 @@
-import { OptsGenerator ,TOptsGenerator } from "../generators/OptsGenerator";
+import { OptsGenerator ,TOptsGenerator } from "../constructors/OptsGenerator";
  /**
  *
  * @param {string} string
