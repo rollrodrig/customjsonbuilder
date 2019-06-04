@@ -284,12 +284,10 @@ Now it only works on localhost but we are working to launch the app and create a
 We are thinking and working in more and more data types like `city, uuid, date, time` and the capability to add default values to the json response.
 
 # Thanks
-Especial thanks to (faker)[https://github.com/marak/Faker.js/] that is used behind the scenes to generate the fake data. Also thank to the other opensources projects.
+Especial thanks to [faker](https://github.com/marak/Faker.js/) that is used behind the scenes to generate the fake data. Also thank to the other opensources projects.
 
 # Collaborate
 Feel free to collaborate with this project.
 
 # Follow me
-on twitter (@rollrodrig)[https://twitter.com/rollrodrig]
-
-
+on twitter [@rollrodrig](https://twitter.com/rollrodrig)
