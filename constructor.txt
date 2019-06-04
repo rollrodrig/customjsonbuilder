@@ -1,7 +1,7 @@
 ## user cases
 
 # 1
-{name:string}
+https:...com/?q={name:string}
 - path
 [
     {
@@ -14,7 +14,7 @@
 { name: "EnfimWhel"}
 
 # 2
-{name:string, phone:number}
+?q={name:string, phone:number}
 - path
 [
     {
@@ -30,6 +30,30 @@
 ]
 - response
 { name:"nerioeef", phone:987987987 }
+
+?q={person:[{firstname:firstname,lastname:lastname, email:email}};3]
+// response
+{
+    person:[
+        {
+            firstname:"rolly",
+            lastname:"kger ekrgerk jgerkjg",
+            email:"email@gmail.com"
+        },
+        {
+            firstname:"manual",
+            lastname:"rodriguez",
+            email:"email@gmail.com"
+        },
+        {
+            firstname:"erick",
+            lastname:"rodriguez",
+            email:"email@gmail.com"
+        },
+    ]
+}
+
+
 
 # 3 
 { name:string , location:{ city: string, avenue: string } }
@@ -168,3 +192,59 @@
             },
         ]
 }
+
+
+###  use case 3
+
+{name:string}
+[
+    {
+        key:name.
+        value:string
+    }
+]
+
+{name:{fist:string, last:string}}
+value: [
+    {
+        key:name.
+        value:[
+            {
+                key:first,
+                value:string   
+            },
+            {
+                key:last,
+                value:string
+            }
+        ]
+    }
+]
+
+
+{name:{fist:string, last:[{one:string, two:string};10]}}
+[
+    {
+        key:name.
+        value:[
+            {
+                key:first,
+                value:string   
+            },
+            {
+                key:last,
+                times:10
+                value:[
+                    {
+                        key:one,
+                        value:string
+                    },
+                    {
+                        key:two,
+                        value:string
+                    }
+                ]
+            }
+        ]
+    }
+]
