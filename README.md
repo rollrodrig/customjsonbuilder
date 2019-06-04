@@ -1,4 +1,5 @@
-# JSONbuilder - generate json response with custom fields con the fly (beta)
+# JSONbuilder
+# generate json response with custom fields con the fly (beta)
 
 
 ## Example
@@ -33,7 +34,7 @@ npm start
 ```
 Running on http://0.0.0.0:3000
 ```
-4. Open the browser and visit the link [http://0.0.0.0:3000](http://localhost:6500/q/?q={name:string})
+4. Open the browser and visit the link [http://0.0.0.0:3000](http://localhost:3000/q/?q={name:string})
 
 ## Run on Docker
 1. Make sure that docker is intalled, you can follow this [docker getting started tutorial](https://www.docker.com/get-started)
@@ -165,7 +166,7 @@ Until this version we support these data types
 * text
 * paragraphs
 ### example
-object with post title
+post title
 ```
 {postTitle:title}
 ```
@@ -175,7 +176,7 @@ will generate
     "postTitle": "Rerum odio quam."
 }
 ```
-user name email
+user email
 ```
 {user_email:email}
 ```
@@ -272,7 +273,7 @@ Will generate
         ]
     }
 }
-
+```
 # Beta
 This project is on beta so maybe there should some bug... but please if you found some bug feel free the leave a comment.
 
