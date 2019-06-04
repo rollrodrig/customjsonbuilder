@@ -7,12 +7,12 @@ describe('buid: ', () => {
             .to.deep.eq([
                 {key:"name",value:"string",nested:false,times:-1}
             ])
-        expect(build("{name:string, age:number}"))
+        expect(build("{name:string,age:number}"))
             .to.deep.eq([
                 {key:"name",value:"string",nested:false,times:-1},
                 {key:"age",value:"number",nested:false,times:-1},
             ])
-        expect(build("{id:number, person: firstname, email:email}"))
+        expect(build("{id:number,person:firstname,email:email}"))
             .to.deep.eq([
                 {key:"id",value:"number",nested:false,times:-1},
                 {key:"person",value:"firstname",nested:false,times:-1},
@@ -20,7 +20,7 @@ describe('buid: ', () => {
             ]);   
     })
 	it('.nested objects ', () => {
-        expect(build("{id:number, person:{name:firstname, email:email}, age:number}"))
+        expect(build("{id:number,person:{name:firstname,email:email},age:number}"))
             .to.deep.eq([
                 {key:"id",value:"number",nested:false,times:-1},
                 {
@@ -34,7 +34,7 @@ describe('buid: ', () => {
                 },
                 {key:"age",value:"number",nested:false,times:-1},
             ]);
-        expect(build("{id:number, person:{name:firstname, email:{work:email, home:email}}, age:number}"))
+        expect(build("{id:number,person:{name:firstname,email:{work:email,home:email}},age:number}"))
             .to.deep.eq([
                 {key:"id",value:"number",nested:false,times:-1},
                 {key:"person",value:"object",times:-1,nested:[
@@ -50,7 +50,30 @@ describe('buid: ', () => {
     it('.nested arrays ', () => {
         expect(build("{authors:[{name:string};2]}"))
             .to.deep.eq([
-                {key:"authors",value:"array",nested:"[{name:string};2]",times:2}
+                {key:"authors",value:"array",times:2,nested:[
+                    {key:"name",value:"string",times:-1,nested:false}
+                ]}
             ])
+        expect(build("{authors:[{name:string,email:string};2],id:number}"))
+            .to.deep.eq([
+                {key:"authors",value:"array",times:2,nested:[
+                    {key:"name",value:"string",times:-1,nested:false},
+                    {key:"email",value:"string",times:-1,nested:false},
+                ]},
+                {key:"id",value:"number",times:-1,nested:false},
+            ]);
+        expect(build("{authors:[{name:string,email:string};2],id:number,books:[{title:title,desc:text};8]}"))
+            .to.deep.eq([
+                {key:"authors",value:"array",times:2,nested:[
+                    {key:"name",value:"string",times:-1,nested:false},
+                    {key:"email",value:"string",times:-1,nested:false},
+                ]},
+                {key:"id",value:"number",times:-1,nested:false},
+                {key:"books",value:"array",times:8,nested:[
+                    {key:"title",value:"title",times:-1,nested:false},
+                    {key:"desc",value:"text",times:-1,nested:false},
+                ]},
+            ]);
+
     })
 });

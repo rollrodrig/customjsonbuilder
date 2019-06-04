@@ -1,8 +1,12 @@
 export enum NonPromitives {
-    username,
-    name,
-    firstname,
-    lastname,
-    phone,
-    email
+    firstName = "firstName",
+    lastName = "lastName",
+    email = "email",
+    word = "word",
+    words = "words",
+    sentence = "sentence",
+    paragraph = "paragraph",
+    title = "title",
+    text = "text",
+    paragraphs = "paragraphs",
 }

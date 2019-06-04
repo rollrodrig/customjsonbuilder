@@ -1,5 +1,8 @@
 export enum Primitives {
-    string,
-    number,
-    boolean
+    string = "string",
+    number = "number",
+    boolean = "boolean",
+    null = "null",
+    undefined = "undefined",
+    empty = "empty",
 }

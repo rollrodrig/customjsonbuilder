@@ -6,21 +6,19 @@ import { removeSquareBrackets } from '../singleTask/RemoveSquareBrackets';
 import { comaDivider } from '../dividers/ComaDivider';
 import { keyValueDivider } from '../dividers/KeyValueDivider';
 import { arrayTimes } from '../singleTask/ArrayTimes';
+import { objectExtractor } from './objectExtractor';
 export interface TBuild {
     key:string, 
     value:string, 
-    nested:any,
-    times:number,
+    nested?:any,
+    times?:number,
 }
 export const build = (s:string) => {
     let string = s;
-    string = spaceCleaner(string);
-    if(isObject(string)) {
+    if(isObject(string))
         string = removeCurlyBraces(string);
-    }
-    if(isArray(string)){
+    if(isArray(string))
         string = removeSquareBrackets(string);
-    }
     let kvArray = comaDivider(string);
     let response:TBuild[] = kvArray.map((kv:string):TBuild=>{
         let k = keyValueDivider(kv);
@@ -33,7 +31,7 @@ export const build = (s:string) => {
             nested = build(k.value);
         } else if(isArray(k.value)) {
             value = 'array';
-            nested = k.value;
+            nested = build(objectExtractor(k.value));
             times = arrayTimes(k.value);
         }else {
             value = k.value;
