@@ -1,7 +1,7 @@
 import faker from 'faker';
 import { build } from './constructors/build';
 import { generateResponse } from './constructors/generateResponse';
-export default class Builder {
+class Builder {
     pattern:string;
     response:any;
     constructor(p?:any){
@@ -15,3 +15,4 @@ export default class Builder {
         return this.response;
     }
 }
+export = Builder;

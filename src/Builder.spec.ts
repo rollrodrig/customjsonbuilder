@@ -7,7 +7,6 @@ describe('Builder: ', () => {
         let builder = new Builder();
         builder.setPattern("{name:string}");
         let response = builder.getResponse();
-        console.log(response);
         expect(response).to.deep.eq({name:response.name})
     });
 });
