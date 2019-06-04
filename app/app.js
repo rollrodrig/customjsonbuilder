@@ -8,7 +8,8 @@ const HOST = '0.0.0.0';
 // App
 const app = express();
 app.get('/', (req, res) => {
-    res.send('Hello world :)');
+    let m = { "READ!!": "Try this example http://localhost:6500/q/?q={name:string}" };
+    res.end(JSON.stringify(m));
 });
 app.get('/q/', query_1.query);
 app.listen(PORT, HOST);
