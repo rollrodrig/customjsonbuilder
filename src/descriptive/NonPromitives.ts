@@ -1,4 +1,5 @@
 export enum NonPromitives {
+    username = "username",
     firstName = "firstName",
     lastName = "lastName",
     email = "email",

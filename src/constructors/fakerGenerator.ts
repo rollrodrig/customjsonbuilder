@@ -22,6 +22,9 @@ export const fakerGenerator = (value):any => {
         case Primitives.empty:
             generated = ""
         break;
+        case NonPromitives.username:
+            generated = faker.internet.userName();
+        break;
         case NonPromitives.firstName:
             generated = faker.name.firstName();
         break;
