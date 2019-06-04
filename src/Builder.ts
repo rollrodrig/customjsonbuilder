@@ -1,18 +1,17 @@
 import faker from 'faker';
+import { build } from './constructors/build';
+import { generateResponse } from './constructors/generateResponse';
 export default class Builder {
-    query:any;
-    json:any;
-    constructor(q:any){
-        this.query = q;
-        // console.log(this.query);
+    pattern:string;
+    response:any;
+    constructor(p?:any){
+        this.pattern = p;
     }
-    setQuery(query) {
-        this.query = query;
+    setPattern(p:string) {
+        this.pattern = p;
     }
-    getJson() {
-        this.json = {
-            name:faker.name.firstName(),
-        }
-        return this.json;
+    getResponse() {
+        this.response = generateResponse(build(this.pattern))
+        return this.response;
     }
 }

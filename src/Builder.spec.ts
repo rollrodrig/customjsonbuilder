@@ -4,7 +4,11 @@ import faker from 'faker';
 
 describe('Builder: ', () => {
 	it('.getJson: should return the json ', () => {
-        let builder = new Builder("");
+        let builder = new Builder();
+        builder.setPattern("{name:string}");
+        let response = builder.getResponse();
+        console.log(response);
+        expect(response).to.deep.eq({name:response.name})
     });
 });
 
