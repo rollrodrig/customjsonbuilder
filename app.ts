@@ -15,6 +15,6 @@ app.get('/', (req, res) => {
   let m = {"READ!!":"Try this example http://localhost:6500/q/?q={name:string}"}
   res.end(JSON.stringify(m));
 });
-app.get('/q/', query);
+app.all('/q/', query);
 app.listen(PORT, HOST);
 console.log(`Running on http://${HOST}:${PORT}`);
