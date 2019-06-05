@@ -1,5 +1,5 @@
 # JSONbuilder
-# generate json response with custom fields con the fly (beta)
+# Fake json responses with custom fields on the fly (beta)
 
 
 ## Example
@@ -7,7 +7,7 @@ A simple query like this
 
 ``` http://localhost:3000/?q={name:string,email:email}```
 
-will response with json like
+will respond with json like:
 ```
 {
     "name":"Alexa",
@@ -17,12 +17,12 @@ will response with json like
 
 ## Installation
 1. clone the project or download [the zip file](https://github.com/rollrodrig/jsonbuilder/archive/master.zip)
-2. go in to the folder 
+2. go to the folder 
 ```
 cd jsonbuilder-master
 ```
 ## Run server on Node
-1 Install dependencies
+1. Install dependencies
 ```
 npm install
 ```
@@ -37,8 +37,8 @@ Running on http://0.0.0.0:3000
 4. Open the browser and visit the link [http://0.0.0.0:3000](http://localhost:3000/q/?q={name:string})
 
 ## Run on Docker
-1. Make sure that docker is intalled, you can follow this [docker getting started tutorial](https://www.docker.com/get-started)
-2. Create docker container with docker compose
+1. Make sure that docker is installed, you can follow this [docker getting started tutorial](https://www.docker.com/get-started)
+2. Create a docker container with `docker-compose`
 ```
 docker-compose build
 ```
@@ -50,30 +50,30 @@ docker-compose up
 
 # Guide
 ### Pattern
-The pattern should be after `?q=` varialble, example: http://localhost:3000/q/q?=**THE PATTERN GOES HERE**
+The pattern should come after the `?q=` variable. Example: `http://localhost:3000/q/q?=<THE PATTERN GOES HERE>`
 
 ### Key:Value
 It is like writing regular json
 ```
 {THE_KEY_THAT_I_WANT : THE_DATA_TYPE}
 ```
-### example
+### Simple example
 I want an object with a key `name` and a random word as `value`
 ```
 {name:string}
 ```
-The server will respond with
+The server will respond with data like
 ```
 {
     "name":"Granite"
 }
 ```
 ### Multiple values
-Now i need a json response with id, name, email
+Now I need a json response with `id`, `name` and `email`
 ```
 {id:number,name:string,email:email}
 ``` 
-The server will respond with
+The server will respond with data like
 ```
 {
     "id":49994,
@@ -81,13 +81,13 @@ The server will respond with
     "email":"Eula_Deckow@yahoo.com"
 }
 ```
-### Neste object
-I want an object with `userId`, `name` nested object with `contact` that contains `phone` and `email`.
-The pattern should be something like this
+### Nested object
+I want an object with a `userId`, a `name` and a nested object `contact` which contains `phone` and `email`.
+The pattern should be:
 ```
 {userId:number,name:firstname,contact:{phone:number,email:email}}
 ```
-The server will respond with
+The server will respond with data like
 ```
 {
     "userId":94781,
@@ -98,13 +98,13 @@ The server will respond with
     }
 }
 ```
-### Nested nested object
+### Doubly nested object
 Lets try something more complex.
-I want an object with `userId`, `name` nested object with `contact` that contains `phone` and `email` with nested content `persona_email` and `company_email`
+I want an object with `userId`, `name`, a nested object with `contact` that contains `phone` and `email` with nested content `personal_email` and `company_email`
 ```
-{userId:number,name:firstname,contact:{phone:number,email:{persona_email:email,company_email:email}}}
+{userId:number,name:firstname,contact:{phone:number,email:{personal_email:email,company_email:email}}}
 ```
-The server will respond with
+The server will respond with data like
 ```
 {
     "userId":7316,
@@ -112,22 +112,22 @@ The server will respond with
     "contact":{
         "phone":14357,
         "email":{
-            "persona_email":"Rowena_Homenick@yahoo.com",
+            "personal_email":"Rowena_Homenick@yahoo.com",
             "company_email":"Caesar52@hotmail.com"
         }
     }
 }
 ```
 ### Array response
-I want a 3 `posts` with `id` and `title`
+I want 3 `posts` with `id` and `title`
 The array follow this pattern. 
 
 Notice that we use `KEY:[{...};3]`.
-the `;3` means the number `posts` that the sever should generate
+the `;3` signifies the number of `posts` that the server should generate
 ```
 {posts:[{id:number,title:string};3]}
 ```
-And the server will respond
+And the server will respond with data like
 ```
 {
     "posts": [
@@ -147,7 +147,7 @@ And the server will respond
 }
 ```
 ## Data types
-Until this version we support these data types
+In the current version we support these data types:
 * string
 * number
 * boolean
@@ -165,7 +165,7 @@ Until this version we support these data types
 * title
 * text
 * paragraphs
-### example
+### Example
 post title
 ```
 {postTitle:title}
@@ -196,7 +196,7 @@ will generate
     "name": "Ergonomic Concrete Pants"
 }
 ```
-* user information
+* User information
 ```
 {userId:number,username:username,name:firstname,email:email}
 ```
@@ -208,7 +208,7 @@ will generate
     "email": "Valentin.Buckridge@hotmail.com"
 }
 ```
-* user last 3 posts
+* User last 3 posts
 ```
 {data:{user_id:number,posts:[{post_id:number,title:title,post_resume:paragraph,views_number:number,comments_number:number};3]}}
 ```
@@ -275,16 +275,16 @@ Will generate
 }
 ```
 # Beta
-This project is on beta so maybe there should some bug... but please if you found some bug feel free the leave a comment.
+This project is in beta so pehaps there are possibly still some some bugs... If you find any bugs, feel free the leave a comment! 
 
 # API live
-Now it only works on localhost but we are working to launch the app and create a public API.
+Now it only works on localhost but we are working to launch a hosted app and create a public API.
 
 # Features
-We are thinking and working in more and more data types like `city, uuid, date, time` and the capability to add default values to the json response.
+We are thinking and working on adding more data types like `city, uuid, date, time` and the capability to add default values to the json response.
 
 # Thanks
-Especial thanks to [faker](https://github.com/marak/Faker.js/) that is used behind the scenes to generate the fake data. Also thank to the other opensources projects.
+Especial thanks to [faker](https://github.com/marak/Faker.js/) that is used behind the scenes to generate the fake data. Also thanks to the other opensource projects.
 
 # Collaborate
 Feel free to collaborate with this project.
