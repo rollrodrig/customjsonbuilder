@@ -1,13 +1,17 @@
 'use strict';
 const express = require('express');
 import { query } from './src/query';
-// Constants
 const PORT = 3000;
 const HOST = '0.0.0.0';
-// App
 const app = express();
+app.use(function (req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', '*');
+  res.setHeader('Access-Control-Allow-Credentials', true);
+  next();
+});
 app.get('/', (req, res) => {
-
   let m = {"READ!!":"Try this example http://localhost:6500/q/?q={name:string}"}
   res.end(JSON.stringify(m));
 });
