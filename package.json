@@ -6,7 +6,7 @@
     "prebuild": "tslint -c tslint.json -p tsconfig.json --fix",
     "build": "tsc",
     "start": "node app/app.js",
-    "dev": "--watch ./**/*.ts --ignore ./**/*.spec.ts --exec ts-node ./app.ts",
+    "dev": "nodemon --watch ./**/*.ts --ignore ./**/*.spec.ts --exec ts-node ./app.ts",
     "test": " echo 'running dummy test'",
     "mocha": "mocha  --watch --watch-extensions ts --require ts-node/register \"./src/**/*.spec.ts\"",
     "mochaf": "mocha  --watch --watch-extensions ts --require ts-node/register test/Promise2.spec.ts",
@@ -42,6 +42,7 @@
     "nodemon": "^1.18.10",
     "serverless-offline": "^5.0.1",
     "ts-node": "^8.0.3",
+    "ts-node-dev": "^1.0.0-pre.39",
     "tslint": "^5.14.0",
     "typescript": "^3.3.4000"
   },
