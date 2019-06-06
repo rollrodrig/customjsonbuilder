@@ -8,9 +8,7 @@
     "start": "node app/app.js",
     "dev": "nodemon --watch ./**/*.ts --ignore ./**/*.spec.ts --exec ts-node ./app.ts",
     "test": " echo 'running dummy test'",
-    "mocha": "mocha  --watch --watch-extensions ts --require ts-node/register \"./src/**/*.spec.ts\"",
-    "mochaf": "mocha  --watch --watch-extensions ts --require ts-node/register test/Promise2.spec.ts",
-    "jest": "jest"
+    "mocha": "mocha  --watch --watch-extensions ts --require ts-node/register \"./src/**/*.spec.ts\""
   },
   "dependencies": {
     "cookie-parser": "~1.4.3",
