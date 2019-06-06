@@ -40,13 +40,13 @@ Running on http://0.0.0.0:3000
 1. Make sure that docker is installed, you can follow this [docker getting started tutorial](https://www.docker.com/get-started)
 2. Create a docker container with `docker-compose`
 ```
-docker-compose build
+docker-compose build --no-cache
 ```
 3. Run the container
 ```
 docker-compose up
 ```
-4. Open the browser and visit [http://localhost:6500](http://localhost:6500/q/?q={name:string})
+4. Open the browser and visit [http://localhost:3000](http://localhost:3000/q/?q={name:string})
 
 # Guide
 ### Pattern
