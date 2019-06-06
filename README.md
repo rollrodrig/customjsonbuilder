@@ -155,16 +155,21 @@ In the current version we support these data types:
 * undefined
 * empty
 * username
+* name
 * firstName
 * lastName
 * email
+* title
+* text
 * word
 * words
 * sentence
+* sentences
 * paragraph
-* title
-* text
 * paragraphs
+* uuid
+* age (number between 1-110)
+* age18 (number between 18-110)
 ### Example
 post title
 ```

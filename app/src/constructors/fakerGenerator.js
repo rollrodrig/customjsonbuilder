@@ -6,6 +6,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const faker_1 = __importDefault(require("faker"));
 const Primitives_1 = require("../descriptive/Primitives");
 const NonPromitives_1 = require("../descriptive/NonPromitives");
+const v1_1 = __importDefault(require("uuid/v1"));
+const randomBetween_1 = require("../singleTask/randomBetween");
 exports.fakerGenerator = (value) => {
     let generated = faker_1.default.random.word();
     switch (value) {
@@ -30,10 +32,13 @@ exports.fakerGenerator = (value) => {
         case NonPromitives_1.NonPromitives.username:
             generated = faker_1.default.internet.userName();
             break;
-        case NonPromitives_1.NonPromitives.firstName:
+        case NonPromitives_1.NonPromitives.name:
             generated = faker_1.default.name.firstName();
             break;
-        case NonPromitives_1.NonPromitives.lastName:
+        case NonPromitives_1.NonPromitives.firstname:
+            generated = faker_1.default.name.firstName();
+            break;
+        case NonPromitives_1.NonPromitives.lastname:
             generated = faker_1.default.name.lastName();
             break;
         case NonPromitives_1.NonPromitives.email:
@@ -51,6 +56,9 @@ exports.fakerGenerator = (value) => {
         case NonPromitives_1.NonPromitives.sentence:
             generated = faker_1.default.lorem.sentence();
             break;
+        case NonPromitives_1.NonPromitives.sentences:
+            generated = faker_1.default.lorem.sentences();
+            break;
         case NonPromitives_1.NonPromitives.paragraph:
             generated = faker_1.default.lorem.paragraph();
             break;
@@ -59,6 +67,15 @@ exports.fakerGenerator = (value) => {
             break;
         case NonPromitives_1.NonPromitives.text:
             generated = faker_1.default.lorem.text();
+            break;
+        case NonPromitives_1.NonPromitives.uuid:
+            generated = v1_1.default();
+            break;
+        case NonPromitives_1.NonPromitives.age:
+            generated = randomBetween_1.randomBetween(1, 110);
+            break;
+        case NonPromitives_1.NonPromitives.age18:
+            generated = randomBetween_1.randomBetween(18, 110);
             break;
     }
     return generated;

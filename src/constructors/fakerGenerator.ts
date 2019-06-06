@@ -1,6 +1,9 @@
 import faker from 'faker';
 import { Primitives } from '../descriptive/Primitives';
 import { NonPromitives } from '../descriptive/NonPromitives';
+import uuidv1 from 'uuid/v1';
+import { randomBetween } from '../singleTask/randomBetween';
+
 export const fakerGenerator = (value):any => {
     let generated:any = faker.random.word();
     switch(value) {
@@ -25,10 +28,13 @@ export const fakerGenerator = (value):any => {
         case NonPromitives.username:
             generated = faker.internet.userName();
         break;
-        case NonPromitives.firstName:
+        case NonPromitives.name:
             generated = faker.name.firstName();
         break;
-        case NonPromitives.lastName:
+        case NonPromitives.firstname:
+            generated = faker.name.firstName();
+        break;
+        case NonPromitives.lastname:
             generated = faker.name.lastName();
         break;
         case NonPromitives.email:
@@ -46,6 +52,9 @@ export const fakerGenerator = (value):any => {
         case NonPromitives.sentence:
             generated = faker.lorem.sentence();
         break;
+        case NonPromitives.sentences:
+            generated = faker.lorem.sentences();
+        break;
         case NonPromitives.paragraph:
             generated = faker.lorem.paragraph();
         break;
@@ -54,6 +63,15 @@ export const fakerGenerator = (value):any => {
         break;
         case NonPromitives.text:
             generated = faker.lorem.text();
+        break;
+        case NonPromitives.uuid:
+            generated = uuidv1();
+        break;
+        case NonPromitives.age:
+            generated = randomBetween(1,110);
+        break;
+        case NonPromitives.age18:
+            generated = randomBetween(18,110);
         break;
     }
     return generated
