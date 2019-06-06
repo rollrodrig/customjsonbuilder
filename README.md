@@ -29,6 +29,8 @@ npm install
 2. Launch the server
 ```
 npm start
+// or with a custom port
+PORT=4545 npm start
 ```
 3. It will prompt
 ```

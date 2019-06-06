@@ -13,7 +13,7 @@ app.use(function (req, res, next) {
     next();
 });
 app.get('/', (req, res) => {
-    let m = { "READ!!": "Try this example http://localhost:6500/q/?q={name:string}" };
+    let m = { "READ!!": "Try this example http://localhost:" + PORT + "/q/?q={name:string}" };
     res.end(JSON.stringify(m));
 });
 app.all('/q/', query_1.query);
