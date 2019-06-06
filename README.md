@@ -5,7 +5,7 @@
 ## Example
 A simple query like this
 
-``` http://localhost:3000/?q={name:string,email:email}```
+``` http://localhost:6500/?q={name:string,email:email}```
 
 will respond with json like:
 ```
@@ -32,9 +32,9 @@ npm start
 ```
 3. It will prompt
 ```
-Running on http://0.0.0.0:3000
+Running on http://0.0.0.0:6500
 ```
-4. Open the browser and visit the link [http://0.0.0.0:3000](http://localhost:3000/q/?q={name:string})
+4. Open the browser and visit the link [http://0.0.0.0:6500](http://localhost:6500/q/?q={name:string})
 
 ## Run on Docker
 1. Make sure that docker is installed, you can follow this [docker getting started tutorial](https://www.docker.com/get-started)
@@ -46,11 +46,11 @@ docker-compose build --no-cache
 ```
 docker-compose up
 ```
-4. Open the browser and visit [http://localhost:3000](http://localhost:3000/q/?q={name:string})
+4. Open the browser and visit [http://localhost:6500](http://localhost:6500/q/?q={name:string})
 
 # Guide
 ### Pattern
-The pattern should come after the `?q=` variable. Example: `http://localhost:3000/q/q?=<THE PATTERN GOES HERE>`
+The pattern should come after the `?q=` variable. Example: `http://localhost:6500/q/q?=<THE PATTERN GOES HERE>`
 
 ### Key:Value
 It is like writing regular json
