@@ -57,6 +57,17 @@ npm install customjsonbuilder --save
 ```
 2. usage example
 ```
+const customJsonBuilder = require('customjsonbuilder');
+// set the pattern that you need
+let cjb = new customJsonBuilder("{name:firstname,age:age,verified:boolean}");
+console.log(cjb.getResponse())
+
+// update the pattern
+cjb.setPattern("{email:email,name:username}")
+console.log(cjb.getResponse())
+```
+3. express example
+```
 const express = require('express');
 const app = express();
 const customJsonBuilder = require('customjsonbuilder');
@@ -66,9 +77,8 @@ let cjb = new customJsonBuilder("{name:firstname,age:age,verified:boolean}");
 
 app.get('/', (req, res) => {
 	
-	// and generate a json object
+	// and generate
 	let response = cjb.getResponse();
-
 	res.end(JSON.stringify( response ));
 	
 	// update the pattern
