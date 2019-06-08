@@ -1,6 +1,6 @@
 {
   "name": "customjsonbuilder",
-  "version": "0.0.8",
+  "version": "0.0.12",
   "main":"index.js",
   "description": "Build Json response with on-the-fly custom key values",
   "scripts": {

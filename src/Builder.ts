@@ -27,5 +27,16 @@ class Builder {
         this.response = generateResponse(build(this.pattern))
         return this.response;
     }
+
+    static generateJson(pattern:string) {
+        let p:string = spaceCleaner(pattern);
+        if(isBracesEquals(p) === false) {
+            throw SyntaxError("Syntax error, make sure open and close {} are in the pattern")
+        }
+        if(isSquareEquals(p) === false) {
+            throw SyntaxError("Syntax error, make sure open and close [] are in the pattern")
+        }
+        return generateResponse(build(p))
+    }
 }
 export = Builder;

@@ -66,6 +66,10 @@ console.log(cjb.getResponse())
 // update the pattern
 cjb.setPattern("{email:email,name:username}")
 console.log(cjb.getResponse())
+
+// or use the static method
+console.log(customJsonBuilder.generateJson("{email:email,name:username}"))
+
 ```
 3. express example
 ```javascript
