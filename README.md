@@ -50,7 +50,39 @@ docker-compose up
 ```
 4. Open the browser and visit [http://localhost:6500](http://localhost:6500/q/?q={name:string})
 
-# Guide
+## NPM
+1. install via npm
+```
+npm install customjsonbuilder --save
+```
+2. usage example
+```
+const express = require('express');
+const app = express();
+const customJsonBuilder = require('customjsonbuilder');
+
+// set the pattern that you need
+let cjb = new customJsonBuilder("{name:firstname,age:age,verified:boolean}");
+
+app.get('/', (req, res) => {
+	
+	// and generate a json object
+	let response = cjb.getResponse();
+
+	res.end(JSON.stringify( response ));
+	
+	// update the pattern
+	cjb.setPattern("{email:email,name:username}")
+	console.log(cjb.getResponse()); // { email: 'Bennie.Lakin@yahoo.com', name: 'Caleb11' }
+
+});
+app.listen('8200', '0.0.0.0');
+console.log(`Running on http://0.0.0.0:8200`);
+```
+
+
+
+# Pattern Guide
 ### Pattern
 The pattern should come after the `?q=` variable. Example: `http://localhost:6500/q/q?=<THE PATTERN GOES HERE>`
 
