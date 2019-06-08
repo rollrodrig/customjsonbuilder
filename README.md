@@ -5,7 +5,7 @@
 ## Example
 A simple query like this
 
-``` http://localhost:6500/?q={name:string,email:email}```
+``` http://localhost:6500/q/?q={name:string,email:email}```
 
 will respond with json like:
 ```
@@ -19,7 +19,7 @@ will respond with json like:
 1. clone the project or download [the zip file](https://github.com/rollrodrig/jsonbuilder/archive/master.zip)
 2. go to the folder 
 ```
-cd jsonbuilder-master
+cd customjsonbuilder-master
 ```
 ## Run server on Node
 1. Install dependencies
