@@ -8,7 +8,7 @@ A simple query like this
 ``` http://localhost:6500/q/?q={name:string,email:email}```
 
 will respond with json like:
-```
+```json
 {
     "name":"Alexa",
     "email":"Champlin@gmail.com"
@@ -56,8 +56,9 @@ docker-compose up
 npm install customjsonbuilder --save
 ```
 2. usage example
-```
+```javascript
 const customJsonBuilder = require('customjsonbuilder');
+
 // set the pattern that you need
 let cjb = new customJsonBuilder("{name:firstname,age:age,verified:boolean}");
 console.log(cjb.getResponse())
@@ -67,7 +68,7 @@ cjb.setPattern("{email:email,name:username}")
 console.log(cjb.getResponse())
 ```
 3. express example
-```
+```javascript
 const express = require('express');
 const app = express();
 const customJsonBuilder = require('customjsonbuilder');
@@ -107,7 +108,7 @@ I want an object with a key `name` and a random word as `value`
 {name:string}
 ```
 The server will respond with data like
-```
+```json
 {
     "name":"Granite"
 }
@@ -118,7 +119,7 @@ Now I need a json response with `id`, `name` and `email`
 {id:number,name:string,email:email}
 ``` 
 The server will respond with data like
-```
+```json
 {
     "id":49994,
     "name":"Mission",
@@ -132,7 +133,7 @@ The pattern should be:
 {userId:number,name:firstname,contact:{phone:number,email:email}}
 ```
 The server will respond with data like
-```
+```json
 {
     "userId":94781,
     "name":"Maria",
@@ -149,7 +150,7 @@ I want an object with `userId`, `name`, a nested object with `contact` that cont
 {userId:number,name:firstname,contact:{phone:number,email:{personal_email:email,company_email:email}}}
 ```
 The server will respond with data like
-```
+```json
 {
     "userId":7316,
     "name":"discrete",
@@ -172,7 +173,7 @@ the `;3` signifies the number of `posts` that the server should generate
 {posts:[{id:number,title:string};3]}
 ```
 And the server will respond with data like
-```
+```json
 {
     "posts": [
         {
@@ -220,7 +221,7 @@ post title
 {postTitle:title}
 ```
 will generate
-```
+```json
 {
     "postTitle": "Rerum odio quam."
 }
@@ -230,7 +231,7 @@ user email
 {user_email:email}
 ```
 will generate
-```
+```json
 {
     "user_email": "Heber1@hotmail.com"
 }
@@ -240,7 +241,7 @@ will generate
 ```
 {name:string}
 ```
-```
+```json
 {
     "name": "Ergonomic Concrete Pants"
 }
@@ -249,7 +250,7 @@ will generate
 ```
 {userId:number,username:username,name:firstname,email:email}
 ```
-```
+```json
 {
     "userId": 89330,
     "username": "Filomena_Bogisich",
@@ -261,7 +262,7 @@ will generate
 ```
 {data:{user_id:number,posts:[{post_id:number,title:title,post_resume:paragraph,views_number:number,comments_number:number};3]}}
 ```
-```
+```json
 {
     "data": {
         "user_id": 26027,
@@ -296,7 +297,7 @@ will generate
 {data:{shopId:number,finished:boolean,catId:number,clientId:number,items:[{id:number,name:word,quantity:number};3]}}
 ```
 Will generate
-```
+```json
 {
     "data": {
         "shopId": 56079,
