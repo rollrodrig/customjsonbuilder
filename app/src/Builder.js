@@ -25,5 +25,15 @@ class Builder {
         this.response = generateResponse_1.generateResponse(build_1.build(this.pattern));
         return this.response;
     }
+    static generateJson(pattern) {
+        let p = SpaceCleaner_1.spaceCleaner(pattern);
+        if (isBracesEquals_1.isBracesEquals(p) === false) {
+            throw SyntaxError("Syntax error, make sure open and close {} are in the pattern");
+        }
+        if (isSquareEquals_1.isSquareEquals(p) === false) {
+            throw SyntaxError("Syntax error, make sure open and close [] are in the pattern");
+        }
+        return generateResponse_1.generateResponse(build_1.build(p));
+    }
 }
 module.exports = Builder;
