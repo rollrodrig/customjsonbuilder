@@ -1,9 +1,8 @@
 {
-  "name": "jsonbuilder",
+  "name": "customjsonbuilder",
   "version": "0.0.4",
   "main":"index.js",
   "description": "Build Json response with on-the-fly custom key values",
-  "private": true,
   "scripts": {
     "prebuild": "tslint -c tslint.json -p tsconfig.json --fix",
     "build": "tsc",
