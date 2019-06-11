@@ -46,6 +46,6 @@ describe('Builder: ', () => {
             supernested = `{nested_${i}:${supernested}}`;
         }
         let generated = Builder.generateJson(supernested);
-        console.log(generated);
+        // console.log(generated);
     })
 });
