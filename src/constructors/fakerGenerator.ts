@@ -73,6 +73,12 @@ export const fakerGenerator = (value):any => {
         case NonPromitives.age18:
             generated = randomBetween(18,110);
         break;
+        case Primitives.true:
+            generated = true;
+        break;
+        case Primitives.false:
+            generated = false;
+        break;
     }
     return generated
 }

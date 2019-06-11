@@ -219,6 +219,8 @@ In the current version we support these data types:
 * uuid
 * age (number between 1-110)
 * age18 (number between 18-110)
+* true (always return true)
+* false (always return false)
 ### Example
 post title
 ```
@@ -326,6 +328,17 @@ Will generate
             }
         ]
     }
+}
+```
+* true, false example
+```
+{valid:true,erros:false}
+```
+Will generate
+```json
+{
+    "valid":true,
+    "errors":false
 }
 ```
 # Beta

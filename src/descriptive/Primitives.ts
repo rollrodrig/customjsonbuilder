@@ -5,4 +5,6 @@ export enum Primitives {
     null = "null",
     undefined = "undefined",
     empty = "empty",
+    true = "true",
+    false = "false",
 }
