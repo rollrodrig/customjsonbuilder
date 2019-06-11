@@ -10,10 +10,12 @@ const ArrayTimes_1 = require("../singleTask/ArrayTimes");
 const objectExtractor_1 = require("./objectExtractor");
 exports.build = (s) => {
     let string = s;
-    if (isObject_1.isObject(string))
+    if (isObject_1.isObject(string)) {
         string = RemoveCurlyBraces_1.removeCurlyBraces(string);
-    if (isArray_1.isArray(string))
+    }
+    if (isArray_1.isArray(string)) {
         string = RemoveSquareBrackets_1.removeSquareBrackets(string);
+    }
     let kvArray = ComaDivider_1.comaDivider(string);
     let response = kvArray.map((kv) => {
         let k = KeyValueDivider_1.keyValueDivider(kv);

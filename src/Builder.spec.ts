@@ -1,7 +1,5 @@
 import { expect, assert } from 'chai';
 import Builder from './Builder';
-import faker from 'faker';
-
 describe('Builder: ', () => {
 	it('.getResponse: should return the json ', () => {
         let builder = new Builder();
@@ -26,13 +24,11 @@ describe('Builder: ', () => {
         let b3 = new Builder("{name:string,name:[{a:string};10,age:number}");
         expect(()=>{b3.validatePattern()}).to.throw(SyntaxError);
     });
-
     it('static .generateJson: should response with error', () => {
         expect(()=>{ Builder.generateJson("{name:string") }).to.throw(SyntaxError);
         expect(()=>{ Builder.generateJson("{name:string,name:{a:string,age:number}") }).to.throw(SyntaxError);
         expect(()=>{ Builder.generateJson("{name:string,name:[{a:string};10,age:number}") }).to.throw(SyntaxError);
     });
-
     it('static .generateJson: should generate json object', () => {
         let r1 = Builder.generateJson("{name:string}");
         expect(r1)
@@ -44,5 +40,12 @@ describe('Builder: ', () => {
         assert.isArray(r3.email);
         expect(r3.email.length).eq(3)
     });
-
+    it('.supernested object ', () => {
+        let supernested = "{bottom:string}";
+        for(var i = 0; i < 26; i++) {
+            supernested = `{nested_${i}:${supernested}}`;
+        }
+        let generated = Builder.generateJson(supernested);
+        console.log(generated);
+    })
 });

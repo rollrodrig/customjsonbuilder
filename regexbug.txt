@@ -1,0 +1,105 @@
+Hello community.
+i am working in a  opensource proyect. It basically generate json response from query string.
+
+The bug.
+
+I was testing the project and i found bug in a regex (were i am not god :( )
+
+This is the regex that i am using. 
+				
+				(?:(\{).*?(\})|[^,])+
+
+Basically it split the string when match the pattern
+Example.
+
+			// string example
+			a:{anyhing},b:{anything},c:{anything}
+
+			// expected
+			[
+				"a:{anyhing}",
+				"b:{anything}",
+				"c:{anything}"
+			]
+
+			
+				
+
+Case 1. Success
+The string that i am passing
+
+				"a:{m:st,n:{x:st}},b:{m:st}"
+
+Expected result: succcess
+				
+				[
+					"a:{m:st,n:{x:st}}",
+					"b:{m:st}"
+				]
+
+
+Case 2. Fail
+The string that i am passing
+
+				"a:{n:{x:st},m:st},b:{m:st}"
+
+Unexpected result
+
+				[
+					"a:{n:{x:st}",
+					"m:st}",
+					"b:{m:st}",
+				]				
+
+Expected result: should be like Case 1
+				
+				[
+					"a:{m:st,n:{x:st}}",
+					"b:{m:st}"
+				]
+
+
+				
+
+Thank you.
+
+
+
+Feel free to read about the project here
+https://github.com/rollrodrig/customjsonbuilder
+and here
+https://www.npmjs.com/package/customjsonbuilder
+
+Edit:
+
+The string could have hell nested `{}` like this
+				// string
+				"a:{m: {x:str,y:str}, n:str },b:{m:str,n:str},c:{t:string}"
+				// expected
+				[
+					"a:{m: {x:str,y:str}, n:str }",
+					"b:{m:str,n:str}",
+					"c:{t:string}",
+				]
+
+				// string
+				"a:{m: {x:{d:str,i:str},y:str}, n:str },b:{m:str,n:str},c:{t:string}"
+				// expected
+				[
+					"a:{m: {x:{d:str,i:str},y:str}, n:str }",
+					"b:{m:str,n:str}",
+					"c:{t:string}"
+				]
+
+				// string
+				"a:{n:{x:{h:{i:string},x:{d:string}}},m:{h:string}},b:{k:string,l:{u:str,r:str}},c:{t:string}"
+				// expected
+				[
+					"a:{n:{x:{h:{i:string},x:{d:string}}},m:{h:string}}",
+					"b:{k:string,l:{u:str,r:str}}",
+					"c:{t:string}"
+				]
+
+
+
+
