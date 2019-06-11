@@ -15,10 +15,12 @@ export interface TBuild {
 }
 export const build = (s:string) => {
     let string = s;
-    if(isObject(string))
+    if(isObject(string)){
         string = removeCurlyBraces(string);
-    if(isArray(string))
+    }
+    if(isArray(string)) {
         string = removeSquareBrackets(string);
+    }
     let kvArray = comaDivider(string);
     let response:TBuild[] = kvArray.map((kv:string):TBuild=>{
         let k = keyValueDivider(kv);
