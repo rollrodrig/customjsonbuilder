@@ -22,4 +22,30 @@ describe('ComaDivider: ', () => {
         expect(comaDivider("name:string,nicks:{first:string,last:[{name:string, age:23};5]},other:string"))
             .to.deep.equal(["name:string","nicks:{first:string,last:[{name:string, age:23};5]}","other:string"]);
     });
+
+    it('fixing bug', () => {
+        let r1 = [];
+        r1 = comaDivider("a:string,b:string");
+        expect(r1).to.deep.equal(["a:string","b:string"])
+        r1 = comaDivider("a:string,b:string,c:string");
+        expect(r1).to.deep.equal(["a:string","b:string","c:string"])
+        r1 = comaDivider("a:{m:{x:string},n:strin},b:string");
+        expect(r1).to.deep.equal(["a:{m:{x:string},n:strin}","b:string"])
+        r1 = comaDivider("a:{n:strin,m:{x:string}},b:string");
+        expect(r1).to.deep.equal(["a:{n:strin,m:{x:string}}","b:string"])
+        r1 = comaDivider("b:{x:{n:string},y:{m:string}},a:string");
+        expect(r1).to.deep.equal(["b:{x:{n:string},y:{m:string}}","a:string"])
+        r1 = comaDivider("b:{x:{n:string},y:{m:string,h:{t:string,r:string}}},a:string");
+        expect(r1).to.deep.equal(["b:{x:{n:string},y:{m:string,h:{t:string,r:string}}}","a:string"])
+        r1 = comaDivider("b:{x:{n:string}},y:{m:string},a:string");
+        expect(r1).to.deep.equal(["b:{x:{n:string}}","y:{m:string}","a:string"])
+        r1 = comaDivider("b:{x:{n:string},y:{m:string,h:{t:string,r:string}}},a:string");
+        expect(r1).to.deep.equal(["b:{x:{n:string},y:{m:string,h:{t:string,r:string}}}","a:string"])
+        r1 = comaDivider("y:string,b:{x:{n:string},y:string},a:{s:{d:string}}");
+        expect(r1).to.deep.equal(["y:string","b:{x:{n:string},y:string}","a:{s:{d:string}}"])
+        r1 = comaDivider("b:string,c:{m:string,n:string},d:string");
+        expect(r1).to.deep.equal(["b:string","c:{m:string,n:string}","d:string"])
+        r1 = comaDivider("b:{x:string,y:{y:string,w:num}},c:{m:string,n:string},d:string,f:{h:num,r:str},to:{na:str}");
+        expect(r1).to.deep.equal(["b:{x:string,y:{y:string,w:num}}","c:{m:string,n:string}","d:string","f:{h:num,r:str}","to:{na:str}"])
+    })
 });

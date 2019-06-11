@@ -15,7 +15,7 @@
                 "ts ",
                 "--require",
                 "ts-node/register",
-                "\"${workspaceFolder}/src/constructors/build.spec.ts\""
+                "\"${workspaceFolder}/src/**/*.spec.ts\""
             ],
             "internalConsoleOptions": "openOnSessionStart"
         }   
