@@ -77,12 +77,6 @@ exports.fakerGenerator = (value) => {
         case NonPromitives_1.NonPromitives.age18:
             generated = randomBetween_1.randomBetween(18, 110);
             break;
-        case Primitives_1.Primitives.true:
-            generated = true;
-            break;
-        case Primitives_1.Primitives.false:
-            generated = false;
-            break;
     }
     return generated;
 };

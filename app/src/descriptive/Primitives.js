@@ -8,6 +8,4 @@ var Primitives;
     Primitives["null"] = "null";
     Primitives["undefined"] = "undefined";
     Primitives["empty"] = "empty";
-    Primitives["true"] = "true";
-    Primitives["false"] = "false";
 })(Primitives = exports.Primitives || (exports.Primitives = {}));
