@@ -1,7 +1,6 @@
 import { assert, expect } from 'chai';
 import { generateResponse } from './generateResponse';
 import { TBuild } from './build';
-
 describe('generateResponse: ', () => {
     it('simple lineal response', () => {
         let b:TBuild[], r:any;
@@ -23,7 +22,6 @@ describe('generateResponse: ', () => {
         r = generateResponse(b);
         expect(r).to.deep.equal({name:r.name, email:r.email, age:r.age});
     });
-
     it('nested object response', () => {
         let b:TBuild[], r:any;
         b = [
@@ -35,7 +33,6 @@ describe('generateResponse: ', () => {
         ];
         r = generateResponse(b);
         expect(r).to.deep.equal({name:r.name,post:{title:r.post.title,body:r.post.body}});
-
         b = [
             {key:"name",value:"firstname",times:-1,nested:false},
             {key:"post",value:"object",times:-1,nested:[
@@ -52,7 +49,6 @@ describe('generateResponse: ', () => {
 
         
     })
-
     it('nested array response', () => {
         let b:TBuild[], r:any;
         b = [
@@ -76,8 +72,6 @@ describe('generateResponse: ', () => {
         assert.isArray(r.posts);
         expect(r.posts.length).eq(2)
     })
-
-
     it('nested object array response', () => {
         let b:TBuild[], r:any;
         b = [
@@ -93,23 +87,7 @@ describe('generateResponse: ', () => {
         ];
         r = generateResponse(b);
         expect(r.post).to.deep.equal({title:r.post.title,body:r.post.body});
-
         assert.isArray(r.authors);
         expect(r.authors.length).eq(3)
-    })
-
-
-    it('two object nested fixing bug', () => {
-        // let n4 = `{parent:{b:{xx:string},a:string}}`;
-        let b = [
-            {key:"parent",value:"object",times:-1,nested:[
-                {key:"b",value:"object",times:-1,nested:[
-                    {key:"xx",value:"string",times:-1,nested:false},
-                ]},
-                {key:"a",value:"string",times:-1,nested:false},
-            ]},
-        ];
-        let response = generateResponse(b);
-        // console.log(response);
     })
 });
