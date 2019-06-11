@@ -75,17 +75,4 @@ describe('buid: ', () => {
                 ]},
             ]);
     })
-    it('two object nested fixing bug', () => {
-        // let n4 = `{parent:{b:{xx:string},a:string}}`;
-        // let b = [
-        //     {key:"parent",value:"object",times:-1,nested:[
-        //         {key:"b",value:"object",times:-1,nested:[
-        //             {key:"xx",value:"string",times:-1,nested:false},
-        //         ]},
-        //         {key:"a",value:"string",times:-1,nested:false},
-        //     ]},
-        // ];
-        // let arrBuilded = build("{parent:{b:{xx:string},a:string}}");
-        // console.log(arrBuilded);
-    })
 });
