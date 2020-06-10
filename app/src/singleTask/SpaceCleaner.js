@@ -6,5 +6,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 * @returns
 */
 exports.spaceCleaner = (string) => {
-    return string.replace(/\s/g, '');
+    return string.replace(/\s/g, "");
 };

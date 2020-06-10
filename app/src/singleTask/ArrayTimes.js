@@ -9,12 +9,12 @@ const RemoveSquareBrackets_1 = require("./RemoveSquareBrackets");
 exports.nanError = "array length is NaN";
 exports.wrongFormat = "wrong array format";
 exports.arrayTimes = (s) => {
-    let string = RemoveSquareBrackets_1.removeSquareBrackets(s);
-    let splited = string.split(";");
+    const string = RemoveSquareBrackets_1.removeSquareBrackets(s);
+    const splited = string.split(";");
     if (splited.length !== 2) {
         throw SyntaxError(`${exports.wrongFormat} ${s}`);
     }
-    let times = parseInt(splited[1]);
+    const times = parseInt(splited[1]);
     if (isNaN(times)) {
         throw TypeError(`${exports.nanError} ${s}`);
     }

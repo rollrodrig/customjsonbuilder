@@ -2,17 +2,20 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.comaDivider = (string) => {
     let braces = 0;
-    let indexes = [];
-    let divided = [];
-    let l = string.length;
+    const indexes = [];
+    const divided = [];
+    const l = string.length;
     for (let i = 0; i < l; i++) {
-        let c = string.charAt(i);
-        if (c === "{")
+        const c = string.charAt(i);
+        if (c === "{") {
             braces++;
-        if (c === "}")
+        }
+        if (c === "}") {
             braces--;
-        if (c === "," && braces === 0)
+        }
+        if (c === "," && braces === 0) {
             indexes.push(i);
+        }
     }
     indexes.push(string.length);
     indexes.reduce((prev, next) => {

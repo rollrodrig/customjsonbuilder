@@ -4,9 +4,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const faker_1 = __importDefault(require("faker"));
-const Primitives_1 = require("../descriptive/Primitives");
-const NonPromitives_1 = require("../descriptive/NonPromitives");
 const v1_1 = __importDefault(require("uuid/v1"));
+const NonPromitives_1 = require("../descriptive/NonPromitives");
+const Primitives_1 = require("../descriptive/Primitives");
 const randomBetween_1 = require("../singleTask/randomBetween");
 exports.fakerGenerator = (value) => {
     let generated = faker_1.default.random.word();
@@ -82,6 +82,9 @@ exports.fakerGenerator = (value) => {
             break;
         case Primitives_1.Primitives.false:
             generated = false;
+            break;
+        default:
+            generated = isNaN(value) ? value : parseInt(value);
             break;
     }
     return generated;

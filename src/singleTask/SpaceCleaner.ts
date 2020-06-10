@@ -3,6 +3,6 @@
  * @param {string} string
  * @returns
  */
-export const spaceCleaner = (string:string):string => {
-    return string.replace(/\s/g,'');
-}
+export const spaceCleaner = (string: string): string => {
+    return string.replace(/\s/g, "");
+};

@@ -9,4 +9,4 @@ export const removeSquareBrackets = (s: string): string => {
         string = string.substring(0, string.length - 1);
     }
     return string;
-}
+};

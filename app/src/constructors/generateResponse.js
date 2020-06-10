@@ -2,13 +2,13 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const fakerGenerator_1 = require("./fakerGenerator");
 exports.generateResponse = (build) => {
-    let response = {};
+    const response = {};
     build.map((b) => {
-        if (b.value === 'object') {
+        if (b.value === "object") {
             response[b.key] = exports.generateResponse(b.nested);
         }
-        else if (b.value === 'array') {
-            let arr = [];
+        else if (b.value === "array") {
+            const arr = [];
             for (let i = 0; i < b.times; i++) {
                 arr.push(exports.generateResponse(b.nested));
             }

@@ -1,4 +1,4 @@
-export const objectExtractor = (string:string):string => {
-    let obj = string.match(/{.*}/);
-    return obj[0]
-}
+export const objectExtractor = (string: string): string => {
+    const obj = string.match(/{.*}/);
+    return obj[0];
+};

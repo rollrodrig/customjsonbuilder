@@ -7,7 +7,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @returns {TKeyValueDivider}
  */
 exports.keyValueDivider = (s) => {
-    let splited = s.split(/:(.*)/);
+    const splited = s.split(/:(.*)/);
     return {
         key: splited[0],
         value: splited[1]
