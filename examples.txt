@@ -1,0 +1,164 @@
+{
+    name:string,
+    email:email
+}
+{
+    "name":"Alexa",
+    "email":"Champlin@gmail.com"
+}
+==========================================
+{
+    name: firstname,
+    age: age,
+    verified: boolean
+}
+{
+    "name":"Alexa",
+    "email":"Champlin@gmail.com"
+    "verified: true
+}
+
+Nested object
+==========================================
+{
+    userId: number,
+    name: firstname,
+    verified: boolean,
+    bloodtype: null,
+    contact: {
+        phone: number,
+        email: {
+            personal_email: email,
+            company_email: email,
+            aditional: empty
+        }
+    }
+}
+{
+    "userId": 89330,
+    "username": "Filomena_Bogisich",
+    "verified": true,
+    "bloodtype": null,
+    "contact": {
+        "phone": "+51 1 32423423",
+        "email: {
+            "personal_email": "fbogish@company.com",
+            "company_email": "filemena@gmail.com"
+            "aditional": {}
+        }
+    }
+}
+
+Array
+==========================================
+{
+    posts: [{
+        id:number,
+        title:string
+    };3]
+}
+{
+    "posts": [
+        {
+            "id": 65450,
+            "title": "Concrete"
+        },
+        {
+            "id": 11251,
+            "title": "interactive"
+        },
+        {
+            "id": 89704,
+            "title": "User-centric"
+        }
+    ]
+}
+==========================================
+{
+    data: {
+        user_id:number,
+        posts:[{
+            post_id:number,
+            title:title,
+            post_resume:paragraph,
+            views_number:number,
+            comments_number:number
+        };3]
+    }
+}
+{
+    "data": {
+        "user_id": 26027,
+        "posts": [
+            {
+                "post_id": 7375,
+                "title": "Velit enim et quod distinctio.",
+                "post_resume": "Quo dolores ...",
+                "views_number": 13545,
+                "comments_number": 20335
+            },
+            {
+                "post_id": 25141,
+                "title": "Consequatur ut illum nobis et.",
+                "post_resume": "Temporibus ut ...",
+                "views_number": 70492,
+                "comments_number": 80291
+            },
+            {
+                "post_id": 18477,
+                "title": "Debitis odio sunt laudantium aut eum aut laudantium.",
+                "post_resume": "Voluptatem culpa ut dol...",
+                "views_number": 23572,
+                "comments_number": 80794
+            }
+        ]
+    }
+}
+
+
+
+==========================================
+[{
+    post_id:number,
+    title:title,
+}=3]
+[
+    {
+        post_id: 2321
+        title: "Lorem post title..."
+    },
+    {
+        post_id: 5622
+        title: "Lorem post title..."
+    },
+    {
+        post_id: 2355
+        title: "Lorem post title..."
+    }
+]
+==========================================
+{
+    users:[{
+        name: name,
+        email: email
+    }3]
+}
+{
+    users: [
+        {
+            "name":"Alexa",
+            "email":"Champlin@gmail.com"
+        },
+        {
+            "name":"Roll",
+            "email":"Champlin@gmail.com"
+        }
+    ]
+}
+==========================================
+
+==========================================
+
+==========================================
+
+==========================================
