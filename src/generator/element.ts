@@ -25,9 +25,30 @@ abstract class CompoundElement implements IElement {
         this.childs.push(c)
     }
 }
-export class DictionaryElement extends CompoundElement {
-}
 export class ListElement extends CompoundElement {
+}
+// export class DictionaryElement extends IElement {
+export class DictionaryElement implements IElement {
+    key: string;
+    value: IElement;
+    childs: IElement[] = []
+    constructor(key: string) {
+        this.key = key
+    }
+    generate(): any {
+        let value = {}
+        this.childs.map((c: IElement) => {
+            let tmp = c.generate()
+            value = {
+                ...value,
+                ...tmp
+            }
+        })
+        return {[this.key]: value};
+    }
+    add(c: IElement): void {
+        this.childs.push(c)
+    }
 }
 export class KeyValueElement<T> implements IElement {
     key: string;

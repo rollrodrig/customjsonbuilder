@@ -11,12 +11,34 @@ import {
     IFinalElement,
 } from './element';
 describe('DictionaryElement: ', () => {
-	it('.run: --', () => {
+	it('Should generate one level json', () => {
         let i = new DictionaryElement('login')
-        // i.add(new StaticElement('access', true))
-        // i.add(new StaticElement('code', 'EE001-R1'))
-        // i.add(new StaticElement('time', '06-06-2020'))
-        // let generated = i.generate()
+        i.add(new KeyValueElement('access', new StaticElement(true)))
+        i.add(new KeyValueElement('code', new StaticElement('EE001-R1')))
+        i.add(new KeyValueElement('time', new StaticElement('06-06-2020')))
+        let generated = i.generate()
+        let expected = {
+            login: { 
+                access: true,
+                code: 'EE001-R1',
+                time: '06-06-2020' 
+            } 
+        }
+        expect(generated).to.deep.equal(expected)
+    });
+
+	it('Should generate two level json', () => {
+        let child = new DictionaryElement('login')
+        child.add(new KeyValueElement('access', new StaticElement(true)))
+        child.add(new KeyValueElement('code', new StaticElement('EE001-R1')))
+        child.add(new KeyValueElement('time', new StaticElement('06-06-2020')))
+
+        let parent = new DictionaryElement('user')
+        parent.add(child)
+        parent.add(new KeyValueElement('password', new StaticElement('123')))
+        parent.add(new KeyValueElement('nickname', new StaticElement('roll')))
+        let generated = parent.generate();
+        console.log(generated)
         // let expected = {
         //     login: { 
         //         access: true,
@@ -25,8 +47,7 @@ describe('DictionaryElement: ', () => {
         //     } 
         // }
         // expect(generated).to.deep.equal(expected)
-        
-    });
+    });    
 });
 describe('ListElement', () => {
 	it('.run: --', () => {
