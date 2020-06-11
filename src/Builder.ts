@@ -6,7 +6,11 @@ class Builder {
     cleaner: Cleaner;
     validator: Validator;
     generator: Generator;
+    constructor() {
+        this.cleaner = new Cleaner();
+    }
     run(pattern: string): any {
+        pattern = this.cleaner.run(pattern);
         return {
             name: "roll",
             email: "roll@codemente.com"
