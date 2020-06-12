@@ -1,7 +1,5 @@
-export interface IFinalElement<T> {
-    generate(): T;
-}
-export class StaticElement<T> implements IFinalElement<T> {
+import { IElement } from './element';
+export class StaticValue<T> implements IElement {
     value: T;
     constructor(value: T) {
         this.value = value;
@@ -10,17 +8,17 @@ export class StaticElement<T> implements IFinalElement<T> {
         return this.value;
     }
 }
-export class StringElement implements IFinalElement<string> {
+export class StringValue implements IElement {
     generate(): string {
         return "RgerGERrrJR";
     }
 }
-export class NameElement implements IFinalElement<string> {
+export class NameValue implements IElement {
     generate(): string {
         return "rolly"
     }
 }
-export class EmailElement implements IFinalElement<string> {
+export class EmailValue implements IElement {
     generate(): string {
         return "rolly@codemente.com"
     }

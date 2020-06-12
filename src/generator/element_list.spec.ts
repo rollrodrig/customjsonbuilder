@@ -1,7 +1,5 @@
 import { expect, assert } from 'chai';
 import {
-    ValueElement,
-    KeyValueElement,
     ListElement,
     DictionaryElement,
 } from './element';

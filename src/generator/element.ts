@@ -1,15 +1,5 @@
-import { IFinalElement } from './final_element';
 export interface IElement {
     generate(): any
-}
-export class ValueElement<T> implements IElement {
-    final: IFinalElement<T>;
-    constructor(final: IFinalElement<T>) {
-        this.final = final;
-    }
-    generate(): T {
-        return this.final.generate();
-    }
 }
 abstract class GenericElement implements IElement {
     key: string;
@@ -48,15 +38,6 @@ export class ListElement extends GenericElement {
         return [];
     }
 }
-export class DicFacade implements IElement {
-    dictionary: IElement;
-    constructor(key: string, element: IElement) {
-        this.dictionary = new DictionaryElement(key, new ValueElement(element))
-    }
-    generate(): any {
-        return this.dictionary.generate();
-    }
-}
 
 
 
@@ -76,8 +57,8 @@ export class DicFacade implements IElement {
 export class KeyValueElement<T> implements IElement {
     key: string;
     value: IElement;
-    final: IFinalElement<T>;
-    constructor(key: string, final: IFinalElement<T>) {
+    final: IElement;
+    constructor(key: string, final: IElement) {
         this.key = key;
         this.final = final;
     }
