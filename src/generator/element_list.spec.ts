@@ -1,5 +1,6 @@
 import { expect, assert } from 'chai';
 import {
+    ValueElement,
     KeyValueElement,
     ListElement,
     DictionaryElement,
@@ -15,14 +16,15 @@ describe('ListElement', () => {
 	it('Should return array with values', () => {
         let i = new ListElement('posts')
         
-        let post1 = new DictionaryElement('login')
-        post1.add(new KeyValueElement('title', new StaticElement('post title 1')))
-        post1.add(new KeyValueElement('title', new StaticElement('post title 2')))
+        let post = new DictionaryElement('post')
+        post.add(new KeyValueElement('title',new StaticElement('post title 1')))
+        post.add(new KeyValueElement('id',new StaticElement(1)))
+        let generated = post.generate()
 
-        i.add(new KeyValueElement('title', new StaticElement('')))
-        i.add(new KeyValueElement('title', new StaticElement('post title 2')))
-        i.add(new KeyValueElement('title', new StaticElement('post title 3')))
-        let generated = i.generate()
+        // i.add(new ValueElement(new StaticElement('')))
+        // i.add(new ValueElement(new StaticElement('post title 2')))
+        // i.add(new ValueElement(new StaticElement('post title 3')))
+        // let generated = i.generate()
         console.log(generated)
         let expected = {
             posts:[

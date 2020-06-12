@@ -47,3 +47,14 @@ export class KeyValueElement<T> implements IElement {
         return {[this.key]: this.final.generate()};
     }
 }
+export class ValueElement<T> implements IElement {
+    key: string;
+    value: IElement;
+    final: IFinalElement<T>;
+    constructor(final: IFinalElement<T>) {
+        this.final = final;
+    }
+    generate(): T {
+        return this.final.generate();
+    }
+}

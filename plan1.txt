@@ -1,0 +1,60 @@
+# Case 1
+--------------------------------
+Dic "A" ->
+add name: Value(string)
+add age: Value(number)
+add id: Value(number)
+return 
+{
+    name: roll,
+    age: 22,
+    id: 1
+}
+
+List ->
+add Dic "A"
+add Dic "A"
+return 
+[
+    { name: roll, age: 22, id: 1 },
+    { name: erick, age: 24, id: 2 },
+]
+
+
+# Case 2
+--------------------------------
+Dic "B"
+add city: Value(string)
+add country: Value(string)
+{
+    city: Lima,
+    country: Peru
+}
+
+Dic "A" ->
+add name: Value(string)
+add age: Value(number)
+add addres: Dic "B"
+{
+    name: roll
+    age: 22,
+    address: {
+        city: Lima,
+        country: Peru
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
