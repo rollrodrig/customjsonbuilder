@@ -8,7 +8,10 @@ describe('Element', () => {
         let i: IElement;
         i = new StaticValue('samsung');
         assert.equal(i.generate(), 'samsung')
-        
+
+        i = new StaticValue(2223);
+        assert.equal(i.generate(), 2223)
+
         i = new StaticValue(true);
         assert.equal(i.generate(), true)
         

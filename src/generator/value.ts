@@ -23,23 +23,3 @@ export class EmailValue implements IElement {
         return "rolly@codemente.com"
     }
 }
-// export class EmailElement extends CommonElement {
-//     generate(): {[key: string]: string} {
-//         return {[this.key]: "hola@codemente.com"};
-//     }
-// }
-// export class NumberElement extends CommonElement {
-//     generate(): {[key: string]: number} {
-//         return {[this.key]: 32432};
-//     }
-// }
-// export class BooleanElement extends CommonElement {
-//     generate(): {[key: string]: boolean} {
-//         return {[this.key]: true};
-//     }
-// }
-// export class ArrElement extends CommonElement {
-//     generate(): any {
-//         return 'a';
-//     }
-// }
