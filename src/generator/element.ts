@@ -1,40 +1,78 @@
 import { IFinalElement } from './final_element';
-
 export interface IElement {
-    key: string;
-    value: IElement;
     generate(): any
 }
-abstract class CompoundElement implements IElement {
+export class ValueElement<T> implements IElement {
+    final: IFinalElement<T>;
+    constructor(final: IFinalElement<T>) {
+        this.final = final;
+    }
+    generate(): T {
+        return this.final.generate();
+    }
+}
+abstract class GenericElement implements IElement {
     key: string;
     value: IElement;
-    childs: IElement[] = []
-    constructor(key: string) {
-        this.key = key
+    elements: IElement[] = []
+    add(c: IElement): void {
+        this.elements.push(c)
     }
     abstract generate(): any;
-    add(c: IElement): void {
-        this.childs.push(c)
-    }
 }
-export class ListElement extends CompoundElement {
-    generate(): any {
-        let value = this.childs.map((c: IElement) => {
-            return c.generate()
-        })
-        return value;
+export class DictionaryElement extends GenericElement {
+    payload = {}
+    constructor(key?: string, value?: IElement) {
+        super();
+        this.key = key;
+        this.value = value;
+        if (this.key && this.value) {
+            this.payload = {
+                [this.key]: this.value.generate()
+            }
+        }
     }
-}
-export class DictionaryElement extends CompoundElement {
     generate(): any {
-        let value = {}
-        this.childs.map((c: IElement) => {
+        this.elements.map((c: IElement) => {
             let tmp = c.generate()
-            value = {...value, ...tmp}
+            this.payload = {...this.payload, ...tmp}
         })
-        return {[this.key]: value};
+        return this.payload;
     }
 }
+export class ListElement extends GenericElement {
+    generate(): any {
+        // let value = this.childs.map((c: IElement) => {
+        //     return c.generate()
+        // })
+        return [];
+    }
+}
+export class DicFacade implements IElement {
+    dictionary: IElement;
+    constructor(key: string, element: IElement) {
+        this.dictionary = new DictionaryElement(key, new ValueElement(element))
+    }
+    generate(): any {
+        return this.dictionary.generate();
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export class KeyValueElement<T> implements IElement {
     key: string;
     value: IElement;
@@ -47,14 +85,4 @@ export class KeyValueElement<T> implements IElement {
         return {[this.key]: this.final.generate()};
     }
 }
-export class ValueElement<T> implements IElement {
-    key: string;
-    value: IElement;
-    final: IFinalElement<T>;
-    constructor(final: IFinalElement<T>) {
-        this.final = final;
-    }
-    generate(): T {
-        return this.final.generate();
-    }
-}
+

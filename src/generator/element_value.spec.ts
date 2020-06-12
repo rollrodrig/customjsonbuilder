@@ -10,7 +10,7 @@ import {
 } from './final_element';
 
 describe('ValueElement', () => {
-	it('generate: should single value', () => {
+	it('generate: should return same string', () => {
         let i: ValueElement<string>;
         i = new ValueElement(new StringElement());
         expect(i.generate()).to.deep.equal('RgerGERrrJR');
@@ -26,7 +26,7 @@ describe('ValueElement', () => {
         i = new ValueElement(new StaticElement('true'));
         expect(i.generate()).to.deep.equal('true');
      });
-     it('generate: should return key: boolean', () => {
+     it('generate: should return same boolean', () => {
         let i: ValueElement<boolean>;
         i = new ValueElement(new StaticElement(true));
         expect(i.generate()).to.deep.equal(true);
