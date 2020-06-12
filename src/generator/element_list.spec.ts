@@ -4,11 +4,8 @@ import {
     DictionaryElement,
 } from './element';
 import {
-    StaticElement,
-    StringElement,
-    NameElement,
-    EmailElement
-} from './final_element';
+    StaticValue,
+} from './value';
 
 // describe('ListElement', () => {
 // 	it('Should return array with values', () => {
