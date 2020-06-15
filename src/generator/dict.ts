@@ -1,13 +1,11 @@
 import { IElement, GenericElement } from './element';
-export class Dictionary extends GenericElement {
+export class Dict extends GenericElement {
     payload = {}
     constructor(key?: string, value?: IElement) {
         super();
-        this.key = key;
-        this.value = value;
-        if (this.key && this.value) {
+        if (key && value) {
             this.payload = {
-                [this.key]: this.value.generate()
+                [key]: value.generate()
             }
         }
     }

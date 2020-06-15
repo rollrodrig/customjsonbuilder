@@ -1,6 +1,6 @@
 import { expect, assert } from 'chai';
 import { List } from './list';
-import { Dictionary } from './dictionary';
+import { Dict } from './dict';
 import { StaticValue } from './value';
 describe('List: ', () => {
     it('Should return empty array', () => {
@@ -80,13 +80,25 @@ describe('List: ', () => {
         expect(generated).to.deep.equal([ [ 1, 2, 3 ] ]);
     });
     it('Should process Dictonary', () => {
-        let kid = new List()
-        kid.add(new StaticValue(1));
-        kid.add(new StaticValue(2));
-        kid.add(new StaticValue(3));
-        let parent = new List(kid);
-        let generated = parent.generate();
-        expect(generated).to.deep.equal([ [ 1, 2, 3 ] ]);
+        let dict1 = new Dict("name", new StaticValue("jhon"))
+        dict1.add(new Dict("code", new StaticValue("0001")))
+        let dict2 = new Dict()
+        dict2.add(new Dict("name", new StaticValue("mike")))
+        dict2.add(new Dict("code", new StaticValue("0002")))
+        let dict3 = new Dict()
+        dict3.add(new Dict("name", new StaticValue("alf")))
+        dict3.add(new Dict("code", new StaticValue("0003")))
+        let list = new List()
+        list.add(dict1);
+        list.add(dict2);
+        list.add(dict3);
+        let generated = list.generate();
+        let expected = [
+            { name: 'jhon', code: '0001' },
+            { name: 'mike', code: '0002' },
+            { name: 'alf', code: '0003' }
+        ]
+        expect(generated).to.deep.equal(expected);
     });
 
 });
