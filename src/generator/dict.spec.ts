@@ -1,7 +1,6 @@
 import { expect, assert } from 'chai';
-import {
-    Dict,
-} from './dict';
+import { Dict } from './dict';
+import { List } from './list';
 import {
     StaticValue,
 } from './value';
@@ -110,4 +109,55 @@ describe('Dict: ', () => {
         }
         expect(generated).to.deep.equal(expected)
     });
+	it('Should generate list as value', () => {
+        let list1 = new List()
+        list1.add(new StaticValue("101"));
+        list1.add(new StaticValue("102"));
+        list1.add(new StaticValue("103"));
+        let list2 = new List()
+        list2.add(new StaticValue(true));
+        list2.add(new StaticValue(true));
+        list2.add(new StaticValue(false));
+        let dict = new Dict("name", new StaticValue("jhon"))
+        dict.add(new Dict("access", new StaticValue(true)))
+        dict.add(new Dict("ids", list1))
+        dict.add(new Dict("values", list2))
+        let generated = dict.generate();
+        let expected = {
+            name: 'jhon',
+            access: true,
+            ids: [ '101', '102', '103' ],
+            values: [ true, true, false ]
+        }        
+        expect(generated).to.deep.equal(expected)
+    });
+	it('Should generate user with posts', () => {
+        let post1 = new Dict("name", new StaticValue("jhon"))
+        post1.add(new Dict("code", new StaticValue("0001")))
+        let post2 = new Dict()
+        post2.add(new Dict("name", new StaticValue("mike")))
+        post2.add(new Dict("code", new StaticValue("0002")))
+        let post3 = new Dict()
+        post3.add(new Dict("name", new StaticValue("alf")))
+        post3.add(new Dict("code", new StaticValue("0003")))
+        let posts = new List()
+        posts.add(post1);
+        posts.add(post2);
+        posts.add(post3);
+        let user = new Dict("name", new StaticValue("jhon"))
+        user.add(new Dict("access", new StaticValue(true)))
+        user.add(new Dict("posts", posts))
+        let generated = user.generate();
+        let expected = {
+            name: 'jhon',
+            access: true,
+            posts: [
+                { name: 'jhon', code: '0001' },
+                { name: 'mike', code: '0002' },
+                { name: 'alf', code: '0003' }
+            ]
+        }     
+        expect(generated).to.deep.equal(expected)
+    });
+
 });
