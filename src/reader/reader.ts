@@ -1,22 +1,17 @@
-import {
-    BinarySearchTree,
-    Node,
-    IBranch,
-    ListBranch,
-    DictBranch
-} from './tree';
-
+import { SpliterStrategy } from "./spliter";
+import { Graph, Node, IGraphable } from "./graph";
 export class Reader {
-    root:any;
-    s: string
-    tree: BinarySearchTree;
-
-    constructor(s: string, tree?: BinarySearchTree) {
-        this.s = s;
-        this.root = null; 
-        this.tree = tree;
-    }
-
+	s: string;
+	graph: Graph;
+	spliter: SpliterStrategy;
+	constructor(s: string) {
+		this.s = s;
+		this.graph = new Graph();
+		this.spliter = new SpliterStrategy();
+	}
+	run(): void {
+		//
+	}
 }
 
 /*
@@ -27,7 +22,6 @@ aaa:{aaa1:number,aaa2:number},bbb:number,ccc:{ccc1:string,ccc2:string}
 
 
 */
-
 
 /*
 capturar index { y }
@@ -234,7 +228,6 @@ data:
         |____
 
 */
-
 
 /*
 {b:{c:{m:s},$$times:3,}}
