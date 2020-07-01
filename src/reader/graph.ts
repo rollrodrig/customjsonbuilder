@@ -90,7 +90,6 @@ export class Graph {
 			}
 			// if(n>100)break;n++;
 		}
-		// this.list[initialVertex]
 		console.log("End of the path");
 	}
 }

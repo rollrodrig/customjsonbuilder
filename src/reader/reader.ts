@@ -1,16 +1,31 @@
-import { SpliterStrategy } from "./spliter";
+import { SpliterStrategy, ICallable, TSpliterData } from "./spliter";
 import { Graph, Node, IGraphable } from "./graph";
-export class Reader {
-	s: string;
+import { randomString } from "../utils/random-string";
+export class Reader implements ICallable {
+	private _pattern: string;
+	public set pattern(value: string) {
+		this._pattern = value;
+	}
 	graph: Graph;
 	spliter: SpliterStrategy;
-	constructor(s: string) {
-		this.s = s;
+	constructor(pattern: string) {
+		this._pattern = pattern;
 		this.graph = new Graph();
 		this.spliter = new SpliterStrategy();
+		this.spliter.client = this;
+		this.spliter.pattern = pattern;
+	}
+	notify(data: TSpliterData): void {
+		console.log(data);
+	}
+	done(): void {
+		console.log("done splits");
+	}
+	isDone(): boolean {
+		throw new Error("Method not implemented.");
 	}
 	run(): void {
-		//
+		this.spliter.run();
 	}
 }
 
