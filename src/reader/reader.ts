@@ -1,7 +1,8 @@
-import { SpliterStrategy, ICallable, TSpliterData } from "./spliter";
+import { SpliterStrategy, ISplitble, TSpliterData } from "./spliter";
 import { Graph, Node, IGraphable } from "./graph";
 import { randomString } from "../utils/random-string";
-export class Reader implements ICallable {
+export class TmpBlock implements IGraphable {}
+export class Reader implements ISplitble {
 	private _pattern: string;
 	public set pattern(value: string) {
 		this._pattern = value;
@@ -15,11 +16,25 @@ export class Reader implements ICallable {
 		this.spliter.client = this;
 		this.spliter.pattern = pattern;
 	}
+	unitqueId(): string {
+		return randomString();
+	}
+	addVertex(stack: number[]): void {
+		// const name: string = this.unitqueId();
+		// this.graph.addVertex(name, new TmpBlock());
+		// return name;
+		console.log(stack);
+	}
+	addConnection(left: number, right: number, stack: number[]): void {
+		console.log(left, right, stack);
+		// this.graph.addEdge(start, end);
+	}
 	notify(data: TSpliterData): void {
 		console.log(data);
 	}
 	done(): void {
 		console.log("done splits");
+		console.log(this.graph.nodes);
 	}
 	isDone(): boolean {
 		throw new Error("Method not implemented.");

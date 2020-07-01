@@ -1,4 +1,6 @@
-export interface ICallable {
+export interface ISplitble {
+	addVertex(stack: number[]): void;
+	addConnection(left: number, right: number, stack: number[]): void;
 	notify(data: any): void;
 	done(): void;
 	isDone(): boolean;
@@ -14,8 +16,8 @@ export class SpliterStrategy {
 	public set pattern(value: string) {
 		this._pattern = value;
 	}
-	private _client: ICallable;
-	public set client(value: ICallable) {
+	private _client: ISplitble;
+	public set client(value: ISplitble) {
 		this._client = value;
 	}
 	private notify(data: TSpliterData): void {
@@ -27,20 +29,23 @@ export class SpliterStrategy {
 	private isStackEmpty(): boolean {
 		return this.stack.length <= 0;
 	}
+	private addVertex(left: number): void {
+		this.stack.push(left);
+		this._client.addVertex(this.stack);
+	}
+	private addConnection(right: number): void {
+		const left = this.stack.pop();
+		this._client.addConnection(left, right, this.stack);
+	}
 	run(): void {
 		const l = this._pattern.length;
 		for (let x = 0; x < l; x++) {
 			const char = this._pattern.charAt(x);
 			if (char === "{") {
-				this.stack.push(x);
+				this.addVertex(x);
 			}
 			if (char === "}") {
-				const left = this.stack.pop();
-				this.notify({
-					left: left,
-					right: x,
-					// parent: this.lastItemInTheStack(),
-				});
+				this.addConnection(x);
 			}
 		}
 		if (this.isStackEmpty()) {
