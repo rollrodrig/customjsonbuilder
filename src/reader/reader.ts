@@ -1,7 +1,7 @@
 import { SpliterStrategy, ISplitble, TSpliterData } from "./spliter";
 import { Graph, Node, IGraphable } from "./graph";
 import { randomString } from "../utils/random-string";
-import { Block, IBlock } from "./block";
+import { Block, IBlock } from "../generator/block";
 export class StackInfo {
 	id: string;
 	left: number;

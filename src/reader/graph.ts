@@ -1,5 +1,5 @@
 export interface IGraphable {}
-import { Block } from "./block";
+import { Block } from "../generator/block";
 export class Node {
 	private _visited = false;
 	public get visited(): boolean {

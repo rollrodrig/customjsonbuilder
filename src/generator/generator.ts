@@ -1,5 +1,5 @@
 import { Graph, Node, IGraphable } from "../reader/graph";
-import { Block, IBlock } from "../reader/block";
+import { Block, IBlock } from "./block";
 export class Generator {
 	graph: Graph;
 	storage: any = {};

@@ -1,9 +1,9 @@
 import { interfaces } from "mocha";
-import { Dict } from "../generator/dict";
-import { List } from "../generator/list";
-import { StaticValue, NameValue, StringValue } from "../generator/value";
+import { Dict } from "./dict";
+import { List } from "./list";
+import { StaticValue, NameValue, StringValue } from "./value";
 import { throws } from "assert";
-import { IGraphable } from "./graph";
+import { IGraphable } from "../reader/graph";
 export interface IBlock {
 	// _pattern: string;
 	// parent: string;
