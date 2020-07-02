@@ -1,9 +1,7 @@
 export interface ISplitble {
-	addVertex(stack: number[]): void;
-	addConnection(left: number, right: number, stack: number[]): void;
-	notify(data: any): void;
+	addVertex(left: number): void;
+	addConnection(right: number): void;
 	done(): void;
-	isDone(): boolean;
 }
 export interface TSpliterData {
 	left: number;
@@ -20,22 +18,16 @@ export class SpliterStrategy {
 	public set client(value: ISplitble) {
 		this._client = value;
 	}
-	private notify(data: TSpliterData): void {
-		this._client.notify(data);
-	}
-	private lastItemInTheStack(): number {
-		return this.stack[this.stack.length - 1] || null;
-	}
 	private isStackEmpty(): boolean {
 		return this.stack.length <= 0;
 	}
 	private addVertex(left: number): void {
 		this.stack.push(left);
-		this._client.addVertex(this.stack);
+		this._client.addVertex(left);
 	}
 	private addConnection(right: number): void {
-		const left = this.stack.pop();
-		this._client.addConnection(left, right, this.stack);
+		this.stack.pop();
+		this._client.addConnection(right);
 	}
 	run(): void {
 		const l = this._pattern.length;

@@ -63,6 +63,6 @@ describe("Graph: ", () => {
 		g.addEdge("G", "C");
 		g.addEdge("G", "D");
 		g.addEdge("G", "H");
-		g.depthFirstTraverse("C");
+		// g.depthFirstTraverse("C");
 	});
 });

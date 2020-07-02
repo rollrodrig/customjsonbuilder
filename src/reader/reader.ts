@@ -1,14 +1,26 @@
 import { SpliterStrategy, ISplitble, TSpliterData } from "./spliter";
 import { Graph, Node, IGraphable } from "./graph";
 import { randomString } from "../utils/random-string";
-export class TmpBlock implements IGraphable {}
+import { Block, IBlock } from "./block";
+export class StackInfo {
+	id: string;
+	left: number;
+	right: number;
+	constructor(id: string, left: number) {
+		this.id = id;
+		this.left = left;
+		this.right = null;
+	}
+}
 export class Reader implements ISplitble {
 	private _pattern: string;
 	public set pattern(value: string) {
 		this._pattern = value;
 	}
-	graph: Graph;
-	spliter: SpliterStrategy;
+	private graph: Graph;
+	private spliter: SpliterStrategy;
+	private stack: StackInfo[] = [];
+	private splitsDone = false;
 	constructor(pattern: string) {
 		this._pattern = pattern;
 		this.graph = new Graph();
@@ -16,31 +28,50 @@ export class Reader implements ISplitble {
 		this.spliter.client = this;
 		this.spliter.pattern = pattern;
 	}
-	unitqueId(): string {
+	private unitqueId(): string {
 		return randomString();
 	}
-	addVertex(stack: number[]): void {
-		// const name: string = this.unitqueId();
-		// this.graph.addVertex(name, new TmpBlock());
-		// return name;
-		console.log(stack);
+	private lastItemFromStack(): any {
+		return this.stack[this.stack.length - 1];
 	}
-	addConnection(left: number, right: number, stack: number[]): void {
-		console.log(left, right, stack);
-		// this.graph.addEdge(start, end);
+	private createOneStack(left: number): StackInfo {
+		const stackInfo = new StackInfo(this.unitqueId(), left);
+		this.stack.push(stackInfo);
+		return stackInfo;
 	}
-	notify(data: TSpliterData): void {
-		console.log(data);
+	private createBlock(stackInfo: StackInfo): Block {
+		const block = new Block();
+		block.setLeftRange(stackInfo.left);
+		block.setRightRange(stackInfo.right);
+		block.pattern = this._pattern;
+		return block;
+	}
+	private popFromStack(): StackInfo {
+		return this.stack.pop();
 	}
 	done(): void {
-		console.log("done splits");
-		console.log(this.graph.nodes);
+		this.splitsDone = true;
+		// console.log(this.graph.nodes);
+		// console.log(this.graph.connections);
 	}
-	isDone(): boolean {
-		throw new Error("Method not implemented.");
+	addVertex(left: number): void {
+		const stackInfo: StackInfo = this.createOneStack(left);
+		const block: Block = this.createBlock(stackInfo);
+		this.graph.addVertex(stackInfo.id, block);
 	}
-	run(): void {
+	addConnection(right: number): void {
+		const childStackInfo: StackInfo = this.popFromStack();
+		childStackInfo.right = right;
+		const block: Block = this.createBlock(childStackInfo);
+		this.graph.updateNodeData(childStackInfo.id, block);
+		const parentStackInfo: StackInfo = this.lastItemFromStack();
+		if (parentStackInfo) {
+			this.graph.addEdge(parentStackInfo.id, childStackInfo.id);
+		}
+	}
+	scan(): any {
 		this.spliter.run();
+		return this.graph;
 	}
 }
 

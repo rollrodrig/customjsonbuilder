@@ -1,4 +1,5 @@
 export interface IGraphable {}
+import { Block } from "./block";
 export class Node {
 	private _visited = false;
 	public get visited(): boolean {
@@ -19,6 +20,7 @@ export class Node {
 }
 export class Graph {
 	private stack: string[] = [];
+	private _root: string = null;
 	private _nodes: { [key: string]: Node } = {};
 	public get nodes(): { [key: string]: Node } {
 		return this._nodes;
@@ -28,12 +30,20 @@ export class Graph {
 		return this._connections;
 	}
 	private queue: string[] = [];
+	addRoot(vertex: string): void {
+		if (this._root === null) this._root = vertex;
+	}
 	addVertex(vertex: string, data: IGraphable): void {
 		this.nodes[vertex] = new Node(vertex, data);
 		this.connections[vertex] = [];
+		this.addRoot(vertex);
 	}
 	addEdge(start: string, end: string): void {
 		this.connections[start].push(end);
+	}
+	updateNodeData(vertex: string, updatedBlock: IGraphable): void {
+		const node: Node = this.getNode(vertex);
+		node.data = updatedBlock;
 	}
 	getNode(vertex: string): Node {
 		return this.nodes[vertex];
@@ -48,11 +58,13 @@ export class Graph {
 		return this.stack.pop();
 	}
 	depthFirstTraverse(initialVertex: string): void {
-		console.log("Depth First Traverse");
-		console.log("Start at " + initialVertex);
-		this.stack.push(initialVertex);
-		const currentNode: Node = this.getNode(initialVertex);
+		// console.log("Depth First Traverse");
+		console.log("Start at " + this._root);
+		this.stack.push(this._root);
+		const currentNode: Node = this.getNode(this._root);
 		currentNode.visited = true;
+		const nodeData: any = currentNode.data;
+		console.log(nodeData.range);
 		let listConnectedVertexs = this.connections[this.lastItemInStack()];
 		// let n = 0;
 		while (this.hasItemInTheStack()) {
@@ -65,6 +77,10 @@ export class Graph {
 					// follow this vertex
 					console.log("Visited vertex: " + currentVertex);
 					node.visited = true;
+					const nodeData: any = node.data;
+					console.log(nodeData.range);
+					// DO SOMETHING WITH THE CURRENT NODE
+					// console.log()
 					this.stack.push(currentVertex);
 					listConnectedVertexs = this.connections[
 						this.lastItemInStack()
