@@ -1,4 +1,7 @@
 export interface IGraphable {}
+export interface IGraphHandable {
+	handleGraphNode(node: Node): void;
+}
 import { Block } from "../generator/block";
 export class Node {
 	private _visited = false;
@@ -30,6 +33,10 @@ export class Graph {
 		return this._connections;
 	}
 	private queue: string[] = [];
+	private _handler: IGraphHandable;
+	public set handler(handler: IGraphHandable) {
+		this._handler = handler;
+	}
 	addRoot(vertex: string): void {
 		if (this._root === null) this._root = vertex;
 	}
@@ -51,37 +58,47 @@ export class Graph {
 	lastItemInStack(): string {
 		return this.stack[this.stack.length - 1];
 	}
+	parentVertex(): string {
+		return this.stack[this.stack.length - 2];
+	}
 	hasItemInTheStack(): boolean {
 		return this.stack.length > 0;
 	}
 	popStack(): string {
 		return this.stack.pop();
 	}
+	handleNode(node: Node) {
+		if (this._handler) {
+			this._handler.handleGraphNode(node);
+		}
+	}
 	depthFirstTraverse(initialVertex: string): void {
 		// console.log("Depth First Traverse");
 		console.log("Start at " + this._root);
 		this.stack.push(this._root);
-		const currentNode: Node = this.getNode(this._root);
+		let currentNode: Node = this.getNode(this._root);
+		this.handleNode(currentNode);
 		currentNode.visited = true;
 		const nodeData: any = currentNode.data;
-		console.log(nodeData.range);
+		// console.log(nodeData.range);
 		let listConnectedVertexs = this.connections[this.lastItemInStack()];
 		// let n = 0;
 		while (this.hasItemInTheStack()) {
 			for (let x = 0; x < listConnectedVertexs.length; x++) {
 				const currentVertex = listConnectedVertexs[x];
-				const node: Node = this.getNode(currentVertex);
-				if (node.wasVisited()) {
-					// go next connected vertex
+				currentNode = this.getNode(currentVertex);
+				if (currentNode.wasVisited()) {
+					//=> go next connected vertex
 				} else {
-					// follow this vertex
-					console.log("Visited vertex: " + currentVertex);
-					node.visited = true;
-					const nodeData: any = node.data;
-					console.log(nodeData.range);
-					// DO SOMETHING WITH THE CURRENT NODE
-					// console.log()
+					//=> follow this vertex
+					// console.log("Visited vertex: " + currentVertex);
+					currentNode.visited = true;
+					// const nodeData: any = currentNode.data;
+					// console.log(nodeData.range);
 					this.stack.push(currentVertex);
+					// DO SOMETHING WITH THE CURRENT NODE
+					this.handleNode(currentNode);
+					// console.log()
 					listConnectedVertexs = this.connections[
 						this.lastItemInStack()
 					];

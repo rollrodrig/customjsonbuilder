@@ -75,6 +75,9 @@ export class ResponseList extends Response {
 }
 export class FormatString {
 	private _pattern: string;
+	public set pattern(value: string) {
+		this._pattern = value;
+	}
 	private _response: TResponseDict | TResponseDict[];
 	public get response(): TResponseDict | TResponseDict[] {
 		return this._response;
@@ -82,12 +85,12 @@ export class FormatString {
 	constructor(pattern: string) {
 		this._pattern = pattern;
 	}
-	private shouldBeList(): boolean {
+	private isItList(): boolean {
 		return this._pattern.search(`\\${OPTION_TIME}`) > -1;
 	}
 	generate(): TResponseDict | TResponseDict[] {
 		let formater: Response;
-		if (this.shouldBeList()) {
+		if (this.isItList()) {
 			formater = new ResponseList(this._pattern);
 		} else {
 			formater = new ResponseDict(this._pattern);
