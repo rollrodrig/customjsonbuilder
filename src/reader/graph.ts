@@ -2,7 +2,7 @@ export interface IGraphable {}
 export interface IGraphHandable {
 	visitedNode(node: Node): void;
 	depthesNode(node: Node): void;
-	handleGraphNode(node: Node): void;
+	handleNode(node: Node): void;
 }
 import { Block } from "../generator/block";
 export class Node {
@@ -81,59 +81,45 @@ export class Graph {
 	}
 	private handleNode(node: Node) {
 		if (this._handler) {
-			this._handler.handleGraphNode(node);
+			this._handler.handleNode(node);
 		}
 	}
-	depthFirstTraverse(initialVertex: string): void {
-		// console.log("Depth First Traverse");
+	depthFirstTraverse(): void {
 		console.log("Start at " + this._root);
-		this.stack.push(this._root);
-		let currentNode: Node = this.getNode(this._root);
-		// this.handleNode(currentNode);
-		this.visitedNode(currentNode);
+		let currentVertex: string = this._root;
+		this.stack.push(currentVertex);
+		let currentNode = this.getNode(currentVertex);
+		let listConnectedVertex: string[];
 		currentNode.visited = true;
-		const nodeData: any = currentNode.data;
-		// console.log(nodeData.range);
-		let listConnectedVertexs = this.connections[this.lastItemInStack()];
+		this.visitedNode(currentNode);
 		// let n = 0;
-		while (this.hasItemInTheStack()) {
-			for (let x = 0; x < listConnectedVertexs.length; x++) {
-				const currentVertex = listConnectedVertexs[x];
-				currentNode = this.getNode(currentVertex);
-				if (currentNode.wasVisited()) {
-					//=> go next connected vertex
-				} else {
-					//=> follow this vertex
-					// console.log("Visited vertex: " + currentVertex);
-					this.stack.push(currentVertex);
-					currentNode.visited = true;
-					listConnectedVertexs = this.connections[
-						this.lastItemInStack()
-					];
-					// DO SOMETHING WITH THE CURRENT NODE
-					this.visitedNode(currentNode);
-					this.depthestNode(currentNode);
-					// pop from the stack when there is no connected node
-					while (listConnectedVertexs.length <= 0) {
-						this.stack.pop();
-						listConnectedVertexs = this.connections[
-							this.lastItemInStack()
-						];
-					}
-					break;
-				}
-				// if all noded were visited, pop last vertex from the stack
-				if (x === listConnectedVertexs.length - 1) {
-					this.stack.pop();
-					if (this.stack.length > 0) {
-						listConnectedVertexs = this.connections[
-							this.lastItemInStack()
-						];
+		while (this.stack.length > 0) {
+			currentVertex = this.lastItemInStack();
+			listConnectedVertex = this.connections[currentVertex];
+			// no child nodes
+			if (listConnectedVertex.length <= 0) {
+				this.depthestNode(this.getNode(currentVertex));
+				this.stack.pop();
+			} else {
+				for (let x = 0; x < listConnectedVertex.length; x++) {
+					currentVertex = listConnectedVertex[x];
+					currentNode = this.getNode(currentVertex);
+					if (currentNode.visited === true) {
+						// if all noded were visited, pop last vertex from the stack
+						if (x === listConnectedVertex.length - 1) {
+							// this.depthestNode(this.getNode(currentVertex));
+							this.stack.pop();
+						}
+					} else {
+						// follow this vertex
+						this.stack.push(currentVertex);
+						currentNode.visited = true;
+						this.visitedNode(currentNode);
+						break;
 					}
 				}
 			}
 			// if(n>100)break;n++;
 		}
-		console.log("End of the path");
 	}
 }

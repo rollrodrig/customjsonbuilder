@@ -6,6 +6,6 @@ describe("Reader: ", () => {
 		const pattern = "{name:string,age:{year:number}}";
 		const r = new Reader(pattern);
 		const graph: Graph = r.scan();
-		graph.depthFirstTraverse("");
+		// graph.depthFirstTraverse("");
 	});
 });

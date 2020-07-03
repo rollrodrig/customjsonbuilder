@@ -40,10 +40,11 @@ export class Reader implements ISplitble {
 		return stackInfo;
 	}
 	private createBlock(stackInfo: StackInfo): Block {
-		const block = new Block();
-		block.setLeftRange(stackInfo.left);
-		block.setRightRange(stackInfo.right);
-		block.pattern = this._pattern;
+		const subPattern = this._pattern.substring(
+			stackInfo.left,
+			stackInfo.right + 1
+		);
+		const block = new Block(subPattern);
 		return block;
 	}
 	private popFromStack(): StackInfo {
