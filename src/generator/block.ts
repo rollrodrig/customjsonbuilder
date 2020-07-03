@@ -12,7 +12,6 @@ export interface IBlock {
 	// generate(): any;
 }
 export class Block implements IBlock, IGraphable {
-	private _pattern: string;
 	private _lockedPattern: string;
 	public get lockedPattern(): string {
 		return this._lockedPattern;
@@ -20,9 +19,9 @@ export class Block implements IBlock, IGraphable {
 	private parent: string;
 	private content: any = {};
 	private fomater: FormatString;
-	constructor() {
-		this.fomater = new FormatString("");
-	}
+	public leftLimit: number;
+	public rightLimit: number;
+	private _pattern: string;
 	public set pattern(pattern: string) {
 		this._pattern = pattern;
 	}
@@ -32,6 +31,15 @@ export class Block implements IBlock, IGraphable {
 	}
 	public set range(value: number[]) {
 		this._range = value;
+		this.leftLimit = value[0];
+		this.rightLimit = value[1];
+	}
+	constructor(pattern?: string, left?: number, right?: number) {
+		this._pattern = pattern || "";
+		this.leftLimit = left;
+		this.rightLimit = right;
+		this._range = [left, right];
+		this.fomater = new FormatString(this.pattern);
 	}
 	private saveOriginalLocalPattern(): void {
 		this._lockedPattern = this._pattern;
@@ -50,9 +58,11 @@ export class Block implements IBlock, IGraphable {
 	}
 	setLeftRange(value: number): void {
 		this._range[0] = value;
+		this.leftLimit = value;
 	}
 	setRightRange(value: number): void {
 		this._range[1] = value;
+		this.rightLimit = value;
 	}
 	clone(): Block {
 		const block = new Block();

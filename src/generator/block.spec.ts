@@ -1,26 +1,10 @@
 import { expect, assert } from "chai";
 import { IBlock, Block } from "./block";
-const bracesCounter = (pattern: string) => {
-	const l = pattern.length;
-	const left = [];
-	const right = [];
-	for (let x = 0; x < l; x++) {
-		const char = pattern.charAt(x);
-		if (char === "{") {
-			left.push(x);
-		}
-		if (char === "}") {
-			right.push(x);
-		}
-	}
-	console.log(left);
-	console.log(right);
-};
+import { bracesCounter } from "../utils/helpers";
 describe("Block: ", () => {
 	it("should cut its own pattern and keep a copy", () => {
 		const pattern =
 			"{name:string,birth:{day:string,year:string},city:string}";
-		// bracesCounter(pattern);
 		const block = new Block();
 		block.pattern = pattern;
 		block.setLeftRange(19);
@@ -32,7 +16,6 @@ describe("Block: ", () => {
 	it("should replace sub patterns", () => {
 		const pattern =
 			"{n:s,b:{day:string,year:{format:string,utc:string}},c:s}";
-		// bracesCounter(pattern);
 		const block = new Block();
 		block.pattern = pattern;
 		block.setLeftRange(7);
@@ -46,7 +29,6 @@ describe("Block: ", () => {
 	it("should replace two sub patterns and keep its own pattern with the copy", () => {
 		const pattern =
 			"{n:s,b:{day:string,year:{format:string,utc:string},email:{a:string,b:string}},c:s}";
-		// bracesCounter(pattern);
 		const block = new Block();
 		block.pattern = pattern;
 		block.setLeftRange(7);

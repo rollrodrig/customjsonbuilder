@@ -1,5 +1,7 @@
 export interface IGraphable {}
 export interface IGraphHandable {
+	visitedNode(node: Node): void;
+	depthesNode(node: Node): void;
 	handleGraphNode(node: Node): void;
 }
 import { Block } from "../generator/block";
@@ -59,15 +61,25 @@ export class Graph {
 		return this.stack[this.stack.length - 1];
 	}
 	parentVertex(): string {
-		return this.stack[this.stack.length - 2];
+		return this.stack[this.stack.length - 2] || null;
 	}
-	hasItemInTheStack(): boolean {
+	private hasItemInTheStack(): boolean {
 		return this.stack.length > 0;
 	}
-	popStack(): string {
+	private popStack(): string {
 		return this.stack.pop();
 	}
-	handleNode(node: Node) {
+	private visitedNode(node: Node) {
+		if (this._handler) {
+			this._handler.visitedNode(node);
+		}
+	}
+	private depthestNode(node: Node) {
+		if (this._handler) {
+			this._handler.depthesNode(node);
+		}
+	}
+	private handleNode(node: Node) {
 		if (this._handler) {
 			this._handler.handleGraphNode(node);
 		}
@@ -77,7 +89,8 @@ export class Graph {
 		console.log("Start at " + this._root);
 		this.stack.push(this._root);
 		let currentNode: Node = this.getNode(this._root);
-		this.handleNode(currentNode);
+		// this.handleNode(currentNode);
+		this.visitedNode(currentNode);
 		currentNode.visited = true;
 		const nodeData: any = currentNode.data;
 		// console.log(nodeData.range);
@@ -92,16 +105,14 @@ export class Graph {
 				} else {
 					//=> follow this vertex
 					// console.log("Visited vertex: " + currentVertex);
-					currentNode.visited = true;
-					// const nodeData: any = currentNode.data;
-					// console.log(nodeData.range);
 					this.stack.push(currentVertex);
-					// DO SOMETHING WITH THE CURRENT NODE
-					this.handleNode(currentNode);
-					// console.log()
+					currentNode.visited = true;
 					listConnectedVertexs = this.connections[
 						this.lastItemInStack()
 					];
+					// DO SOMETHING WITH THE CURRENT NODE
+					this.visitedNode(currentNode);
+					this.depthestNode(currentNode);
 					// pop from the stack when there is no connected node
 					while (listConnectedVertexs.length <= 0) {
 						this.stack.pop();
