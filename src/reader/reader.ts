@@ -52,8 +52,6 @@ export class Reader implements ISplitble {
 	}
 	done(): void {
 		this.splitsDone = true;
-		// console.log(this.graph.nodes);
-		// console.log(this.graph.connections);
 	}
 	addVertex(left: number): void {
 		const stackInfo: StackInfo = this.createOneStack(left);
@@ -70,7 +68,7 @@ export class Reader implements ISplitble {
 			this.graph.addEdge(parentStackInfo.id, childStackInfo.id);
 		}
 	}
-	scan(): any {
+	scan(): Graph {
 		this.spliter.run();
 		return this.graph;
 	}

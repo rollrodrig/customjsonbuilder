@@ -34,7 +34,6 @@ export class Graph {
 	public get connections(): { [key: string]: string[] } {
 		return this._connections;
 	}
-	private queue: string[] = [];
 	private _handler: IGraphHandable;
 	public set handler(handler: IGraphHandable) {
 		this._handler = handler;

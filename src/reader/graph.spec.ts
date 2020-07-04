@@ -23,7 +23,6 @@ describe("Graph: ", () => {
 		r.addEdge("a", "b");
 		r.addEdge("a", "c");
 		r.addEdge("b", "c");
-		console.log(r.connections);
 		const expected: any = {
 			a: ["b", "c"],
 			b: ["c"],
@@ -63,6 +62,6 @@ describe("Graph: ", () => {
 		g.addEdge("G", "C");
 		g.addEdge("G", "D");
 		g.addEdge("G", "H");
-		g.depthFirstTraverse();
+		// g.depthFirstTraverse();
 	});
 });
