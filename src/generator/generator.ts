@@ -20,40 +20,40 @@ export class Generator implements IGraphHandable {
 		this.graph.handler = this;
 		this.storage = new DataStorage();
 	}
-	handleNode(node: Node) {
-		// const block: Block = node.data as Block;
-		// const parentVertex = this.graph.parentVertex();
-		// console.log("current ", node.vertex, "parent ", parentVertex);
-	}
-	visitedNode(node: Node): void {
-		console.log(
-			"visited node ",
-			node.vertex,
-			"parent ",
-			this.graph.parentVertex()
-		);
-		this.storage.add(node.vertex, {});
-	}
-	depthesNode(node: Node): void {
-		const block: Block = node.data as Block;
+	private updateBlocks(node: Node): void {
 		const parentVertex = this.graph.parentVertex();
-		console.log("Depthes node ", node.vertex, "parent ", parentVertex);
-		const content = block.generate();
+		if (parentVertex) {
+			const parentNode = this.graph.getNode(parentVertex);
+			BlockUpdater.execute(parentNode, node);
+		}
+		console.log("parent ", parentVertex);
+	}
+	private generateContent(node: Node): void {
+		const content = BlockGenerator.execute(node);
 		this.storage.add(node.vertex, content);
+		console.log("generated ", node.vertex);
+		console.log("content ", content);
+	}
+	handleNode(node: Node) {
+		this.updateBlocks(node);
+		this.generateContent(node);
 	}
 	generate() {
 		this.graph.depthFirstTraverse();
-		// console.log(this.storage.data);
+		console.log(this.storage.data);
 		return {};
 	}
 }
 export class BlockUpdater {
-	static execute(parent: Block, child: Block): void {
-		parent.replaceSubPatterns(child.lockedPattern, "c");
+	static execute(parent: Node, child: Node): void {
+		const p = parent.data as Block;
+		const c = child.data as Block;
+		p.replaceSubPatterns(c.lockedPattern, `___VAR___${child.vertex}`);
 	}
 }
 export class BlockGenerator {
-	static execute(block: Block): void {
+	static execute(node: Node): any {
+		const block = node.data as Block;
 		return block.generate();
 	}
 }

@@ -58,7 +58,7 @@ export class Graph {
 		return this.stack[this.stack.length - 1];
 	}
 	parentVertex(): string {
-		return this.stack[this.stack.length - 2] || null;
+		return this.stack[this.stack.length - 1] || null;
 	}
 	private handleNode(node: Node) {
 		if (this._handler) {
