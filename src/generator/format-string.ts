@@ -107,26 +107,39 @@ export class FormatString {
 	}
 }
 export class ValueGenerator {
-	value: string;
-	protected storage: DataStorage;
+	private value: string;
+	private storage: DataStorage;
 	constructor() {
 		this.storage = DataStorage.getInstance();
 	}
 	private isChild(): boolean {
 		return this.value.search("___VAL___") > -1;
 	}
-	private getStorageKey(value: string): string {
-		return value.replace("___VAL___", "");
+	private getStorageKey(): string {
+		return this.value.replace("___VAL___", "");
 	}
-	generate(value: string) {
-		this.value = value;
+	private getContent(): any {
 		let content: any;
 		if (this.isChild()) {
-			const storageKey: string = this.getStorageKey(value);
+			const storageKey: string = this.getStorageKey();
 			content = this.storage.get(storageKey);
 		} else {
-			content = value;
+			content = this.value;
 		}
 		return content;
 	}
+	generate(value: string) {
+		this.value = value;
+		return this.getContent();
+	}
 }
+// class StaticGenerator {
+// 	static get(value: string): string | boolean | number {
+// 		const v = "";
+// 		// switch (value) {
+// 		// case "string":
+// 		// 	v = value;
+// 		// }
+// 		return value;
+// 	}
+// }
