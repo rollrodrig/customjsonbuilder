@@ -7,8 +7,21 @@ export class DataStorage {
 	public get data(): { [key: string]: any } {
 		return this._data;
 	}
-	add(key: string, value: any) {
+	private static instance: DataStorage;
+	constructor() {
+		if (DataStorage.instance) {
+			throw new Error("Error - use Singleton.getInstance()");
+		}
+	}
+	static getInstance(): DataStorage {
+		DataStorage.instance = DataStorage.instance || new DataStorage();
+		return DataStorage.instance;
+	}
+	add(key: string, value: any): void {
 		this._data[key] = value;
+	}
+	get(key: string): any {
+		return this._data[key];
 	}
 }
 export class Generator implements IGraphHandable {
@@ -18,7 +31,7 @@ export class Generator implements IGraphHandable {
 	constructor(graph: Graph) {
 		this.graph = graph;
 		this.graph.handler = this;
-		this.storage = new DataStorage();
+		this.storage = DataStorage.getInstance();
 	}
 	private updateBlocks(node: Node): void {
 		const parentVertex = this.graph.parentVertex();

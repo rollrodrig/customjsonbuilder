@@ -1,11 +1,14 @@
 import { OPTION_TIME } from "../utils/constant";
+import { DataStorage } from "./generator";
 export interface TResponseDict {
 	[key: string]: string;
 }
 export abstract class Response {
 	protected pattern: string;
+	protected valueGenerator: ValueGenerator;
 	constructor(pattern: string) {
 		this.pattern = pattern;
+		this.valueGenerator = new ValueGenerator();
 	}
 	protected removeFirstLastBraces() {
 		this.pattern = this.pattern.substring(1);
@@ -24,7 +27,9 @@ export class ResponseDict extends Response {
 	}
 	protected addResponse(tmp: TResponseDict, pair: string): void {
 		const keyValue = pair.split(":");
-		tmp[keyValue[0]] = keyValue[1];
+		const key = keyValue[0];
+		const value = keyValue[1];
+		tmp[key] = this.valueGenerator.generate(value);
 	}
 	generate(): TResponseDict {
 		this.removeFirstLastBraces();
@@ -45,8 +50,10 @@ export class ResponseList extends Response {
 	private TIMES = OPTION_TIME;
 	protected addResponse(tmp: TResponseDict, pair: string): void {
 		const keyValue = pair.split(":");
-		if (keyValue[0] !== this.TIMES) {
-			tmp[keyValue[0]] = keyValue[1];
+		const key = keyValue[0];
+		const value = keyValue[1];
+		if (key !== this.TIMES) {
+			tmp[key] = this.valueGenerator.generate(value);
 		}
 	}
 	private getTimes(): number {
@@ -97,5 +104,29 @@ export class FormatString {
 		}
 		this._response = formater.generate();
 		return this._response;
+	}
+}
+export class ValueGenerator {
+	value: string;
+	protected storage: DataStorage;
+	constructor() {
+		this.storage = DataStorage.getInstance();
+	}
+	private isChild(): boolean {
+		return this.value.search("___VAL___") > -1;
+	}
+	private getStorageKey(value: string): string {
+		return value.replace("___VAL___", "");
+	}
+	generate(value: string) {
+		this.value = value;
+		let content: any;
+		if (this.isChild()) {
+			const storageKey: string = this.getStorageKey(value);
+			content = this.storage.get(storageKey);
+		} else {
+			content = value;
+		}
+		return content;
 	}
 }

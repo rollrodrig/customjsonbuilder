@@ -5,12 +5,7 @@ import { StaticValue, NameValue, StringValue } from "./value";
 import { throws } from "assert";
 import { IGraphable } from "../reader/graph";
 import { FormatString } from "./format-string";
-export interface IBlock {
-	// _pattern: string;
-	// parent: string;
-	// content: any;
-	// generate(): any;
-}
+export interface IBlock {}
 export class Block implements IBlock, IGraphable {
 	private content: any = {};
 	private fomater: FormatString;

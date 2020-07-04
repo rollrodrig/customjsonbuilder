@@ -1,5 +1,10 @@
 import { expect, assert } from "chai";
-import { Generator, BlockUpdater, BlockGenerator } from "./generator";
+import {
+	Generator,
+	BlockUpdater,
+	BlockGenerator,
+	DataStorage,
+} from "./generator";
 import { Graph, Node, IGraphable } from "../reader/graph";
 import { Reader } from "../reader/reader";
 import { Block, IBlock } from "../generator/block";
@@ -52,5 +57,14 @@ describe("BlockGenerator: ", () => {
 		const node = new Node("a", block);
 		const data = BlockGenerator.execute(node);
 		expect(data).to.deep.eq({ place: "string" });
+	});
+});
+describe("DataStorage: ", () => {
+	it("should add values", () => {
+		const storge = DataStorage.getInstance();
+		storge.add("xxx", { age: "23" });
+		expect(storge.get("xxx")).to.deep.eq({ age: "23" });
+		const storgeA = DataStorage.getInstance();
+		expect(storgeA.get("xxx")).to.deep.eq({ age: "23" });
 	});
 });

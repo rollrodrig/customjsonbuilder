@@ -1,5 +1,11 @@
 import { expect, assert } from "chai";
-import { FormatString, ResponseDict, ResponseList } from "./format-string";
+import { DataStorage } from "./generator";
+import {
+	FormatString,
+	ResponseDict,
+	ResponseList,
+	ValueGenerator,
+} from "./format-string";
 describe("FormatString: ", () => {
 	it("should return dict response", () => {
 		const string = "{name:string,age:number}";
@@ -87,5 +93,21 @@ describe("ResponseList: ", () => {
 		res.generate();
 		const expected: any = [{ name: "string", age: "number", city: "lima" }];
 		expect(res.response).to.deep.equal(expected);
+	});
+});
+describe("ValueGenerator: ", () => {
+	it("should return staic value", () => {
+		const v = new ValueGenerator();
+		expect(v.generate("string")).to.equal("string");
+		expect(v.generate("number")).to.equal("number");
+	});
+	it("should return json as response", () => {
+		const v = new ValueGenerator();
+		const storage = DataStorage.getInstance();
+		storage.add("abc", { name: "jhon", age: "18" });
+		expect(v.generate("___VAL___abc")).to.deep.eq({
+			name: "jhon",
+			age: "18",
+		});
 	});
 });
