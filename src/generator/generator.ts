@@ -1,6 +1,7 @@
 import { Graph, Node, IGraphable, IGraphHandable } from "../reader/graph";
 import { Block, IBlock } from "./block";
 import { bracesCounter } from "../utils/helpers";
+import { timeStamp } from "console";
 export class DataStorage {
 	private _data: { [key: string]: any } = {};
 	public get data(): { [key: string]: any } {
@@ -42,7 +43,17 @@ export class Generator implements IGraphHandable {
 	}
 	generate() {
 		this.graph.depthFirstTraverse();
-		console.log(this.storage.data);
+		// console.log(this.storage.data);
 		return {};
+	}
+}
+export class BlockUpdater {
+	static execute(parent: Block, child: Block): void {
+		parent.replaceSubPatterns(child.lockedPattern, "c");
+	}
+}
+export class BlockGenerator {
+	static execute(block: Block): void {
+		return block.generate();
 	}
 }

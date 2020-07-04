@@ -44,8 +44,7 @@ export class Reader implements ISplitble {
 			stackInfo.left,
 			stackInfo.right + 1
 		);
-		const block = new Block(subPattern);
-		return block;
+		return new Block(subPattern);
 	}
 	private popFromStack(): StackInfo {
 		return this.stack.pop();

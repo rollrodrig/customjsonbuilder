@@ -1,7 +1,5 @@
 export interface IGraphable {}
 export interface IGraphHandable {
-	visitedNode(node: Node): void;
-	depthesNode(node: Node): void;
 	handleNode(node: Node): void;
 }
 import { Block } from "../generator/block";
@@ -38,7 +36,7 @@ export class Graph {
 	public set handler(handler: IGraphHandable) {
 		this._handler = handler;
 	}
-	addRoot(vertex: string): void {
+	private addRoot(vertex: string): void {
 		if (this._root === null) this._root = vertex;
 	}
 	addVertex(vertex: string, data: IGraphable): void {
@@ -62,43 +60,26 @@ export class Graph {
 	parentVertex(): string {
 		return this.stack[this.stack.length - 2] || null;
 	}
-	private hasItemInTheStack(): boolean {
-		return this.stack.length > 0;
-	}
-	private popStack(): string {
-		return this.stack.pop();
-	}
-	private visitedNode(node: Node) {
-		if (this._handler) {
-			this._handler.visitedNode(node);
-		}
-	}
-	private depthestNode(node: Node) {
-		if (this._handler) {
-			this._handler.depthesNode(node);
-		}
-	}
 	private handleNode(node: Node) {
 		if (this._handler) {
 			this._handler.handleNode(node);
 		}
 	}
 	depthFirstTraverse(): void {
-		console.log("Start at " + this._root);
 		let currentVertex: string = this._root;
 		this.stack.push(currentVertex);
 		let currentNode = this.getNode(currentVertex);
 		let listConnectedVertex: string[];
 		currentNode.visited = true;
-		this.visitedNode(currentNode);
+		let vertexToProcess: string;
 		// let n = 0;
 		while (this.stack.length > 0) {
 			currentVertex = this.lastItemInStack();
 			listConnectedVertex = this.connections[currentVertex];
 			// no child nodes
 			if (listConnectedVertex.length <= 0) {
-				this.depthestNode(this.getNode(currentVertex));
-				this.stack.pop();
+				vertexToProcess = this.stack.pop();
+				this.handleNode(this.getNode(vertexToProcess));
 			} else {
 				for (let x = 0; x < listConnectedVertex.length; x++) {
 					currentVertex = listConnectedVertex[x];
@@ -106,14 +87,13 @@ export class Graph {
 					if (currentNode.visited === true) {
 						// if all noded were visited, pop last vertex from the stack
 						if (x === listConnectedVertex.length - 1) {
-							// this.depthestNode(this.getNode(currentVertex));
-							this.stack.pop();
+							vertexToProcess = this.stack.pop();
+							this.handleNode(this.getNode(vertexToProcess));
 						}
 					} else {
 						// follow this vertex
 						this.stack.push(currentVertex);
 						currentNode.visited = true;
-						this.visitedNode(currentNode);
 						break;
 					}
 				}
