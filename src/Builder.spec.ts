@@ -6,7 +6,7 @@ describe("Builder", () => {
 		const input = `
 			{
 				name: firstname,
-				age: number
+				age: number,
 			}
 		`;
 		const res = Builder.run(input);
