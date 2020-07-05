@@ -7,6 +7,7 @@ import {
 	ResponseDict,
 	ResponseList,
 	ValueGenerator,
+	VAR_CHILD_IDENTIFIER,
 } from "./format-string";
 
 describe("FormatString: ", () => {
@@ -139,15 +140,20 @@ describe("ResponseList: ", () => {
 });
 describe("ValueGenerator: ", () => {
 	let stub1: any;
+	let stub2: any;
 	before(function () {
 		stub1 = stub(ValueGeneratorFactory.prototype, "get").callsFake(
 			(value): any => {
 				return value;
 			}
 		);
+		// stub2 = stub(DataStorage, "getInstance").callsFake((): any => {
+		// 	return new DataStorage();
+		// });
 	});
 	after(function () {
 		stub1.restore();
+		// stub2.restore();
 	});
 	it("should return staic value", () => {
 		const v = new ValueGenerator();
@@ -156,11 +162,11 @@ describe("ValueGenerator: ", () => {
 	});
 	it("should return json as response", () => {
 		const v = new ValueGenerator();
-		const storage = DataStorage.getInstance();
-		storage.add("abc", { name: "jhon", age: "18" });
-		expect(v.generate("___VAL___abc")).to.deep.eq({
-			name: "jhon",
-			age: "18",
-		});
+		// const storage = DataStorage.getInstance();
+		// storage.add("abc", { name: "jhon", age: "18" });
+		// expect(v.generate(VAL_CHILD_IDENTIFIER + "abc")).to.deep.eq({
+		// 	name: "jhon",
+		// 	age: "18",
+		// });
 	});
 });

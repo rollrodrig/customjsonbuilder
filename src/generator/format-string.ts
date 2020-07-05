@@ -108,6 +108,7 @@ export class FormatString {
 		return this._response;
 	}
 }
+export const VAR_CHILD_IDENTIFIER = "___VAR___";
 export class ValueGenerator {
 	private value: string;
 	private storage: DataStorage;
@@ -117,19 +118,24 @@ export class ValueGenerator {
 		this.valueFactory = new ValueGeneratorFactory();
 	}
 	private isChild(): boolean {
-		return this.value.search("___VAL___") > -1;
+		return this.value.search(VAR_CHILD_IDENTIFIER) > -1;
 	}
 	private getStorageKey(): string {
-		return this.value.replace("___VAL___", "");
+		return this.value.replace(VAR_CHILD_IDENTIFIER, "");
+	}
+	private getFromStorage(storageKey: string): any {
+		return this.storage.get(storageKey);
+	}
+	private getFromFactory(): any {
+		return this.valueFactory.get(this.value);
 	}
 	private getContent(): any {
 		let content: any;
 		if (this.isChild()) {
 			const storageKey: string = this.getStorageKey();
-			content = this.storage.get(storageKey);
+			content = this.getFromStorage(storageKey);
 		} else {
-			// content = this.value;
-			content = this.valueFactory.get(this.value);
+			content = this.getFromFactory();
 		}
 		return content;
 	}

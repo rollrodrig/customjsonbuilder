@@ -24,6 +24,9 @@ export class Node {
 export class Graph {
 	private stack: string[] = [];
 	private _root: string = null;
+	public get root(): string {
+		return this._root;
+	}
 	private _nodes: { [key: string]: Node } = {};
 	public get nodes(): { [key: string]: Node } {
 		return this._nodes;
