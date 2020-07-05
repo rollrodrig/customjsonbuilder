@@ -16,15 +16,10 @@ describe("Generator: ", () => {
 		// const pattern = "{place:string}";
 		// const pattern = "{name:name,age:number,id:uuid}";
 		// const pattern = "{name:string,age:{year:number},id:string}";
-		const pattern = `
-			{
-				name:string,
-				age:{
-					year:number
-				},
-				id:string
-			}
-		`;
+		// const pattern =
+		// 	"{name:string,age:{year:number,month:october,$times:3}}";
+		// const pattern = "{name:name,age:number,id:uuid,$times:3}";
+		const pattern = "{user:uuid,posts:{id:number,title:string,$times:4}}";
 		const reader = new Reader(pattern);
 		const gen = new Generator(reader.scan());
 		const res = gen.generate();
