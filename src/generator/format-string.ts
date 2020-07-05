@@ -1,5 +1,7 @@
 import { OPTION_TIME } from "../utils/constant";
 import { DataStorage } from "./generator";
+import { ValueGeneratorFactory } from "./value";
+import { IValueGenerator } from "./value";
 export interface TResponseDict {
 	[key: string]: string;
 }
@@ -109,8 +111,10 @@ export class FormatString {
 export class ValueGenerator {
 	private value: string;
 	private storage: DataStorage;
+	private valueFactory: IValueGenerator;
 	constructor() {
 		this.storage = DataStorage.getInstance();
+		this.valueFactory = new ValueGeneratorFactory();
 	}
 	private isChild(): boolean {
 		return this.value.search("___VAL___") > -1;
@@ -125,6 +129,7 @@ export class ValueGenerator {
 			content = this.storage.get(storageKey);
 		} else {
 			content = this.value;
+			// content = this.valueFactory.get(this.value);
 		}
 		return content;
 	}

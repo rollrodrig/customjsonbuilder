@@ -11,10 +11,10 @@ import {
 import { IElement } from "./element";
 import { randomString } from "../utils/random-string";
 export interface IValueGenerator {
-	get(value: string): void;
+	get(value: string): any;
 	setNext(next: IValueGenerator): void;
 }
-export abstract class BaseGenerator {
+export abstract class BaseGenerator implements IValueGenerator {
 	next: IValueGenerator;
 	type = "static";
 	value: string;
@@ -27,7 +27,7 @@ export abstract class BaseGenerator {
 			return this.next.get(this.value);
 		}
 	}
-	setNext(next: IValueGenerator) {
+	setNext(next: IValueGenerator): void {
 		if (this.next) {
 			this.next.setNext(next);
 		} else {
@@ -114,6 +114,27 @@ export class ImageGenerator extends BaseGenerator {
 	type = "image";
 	protected generate() {
 		return random.image();
+	}
+}
+export class ValueGeneratorFactory implements IValueGenerator {
+	generator: IValueGenerator;
+	constructor() {
+		this.generator = new StringGenerator();
+		this.generator.setNext(new NumberGenerator());
+		this.generator.setNext(new BooleanGenerator());
+		this.generator.setNext(new NullGenerator());
+		this.generator.setNext(new UndefinedGenerator());
+		this.generator.setNext(new FirstNameGenerator());
+		this.generator.setNext(new LastNameGenerator());
+		this.generator.setNext(new NameGenerator());
+		this.generator.setNext(new EmailGenerator());
+		this.generator.setNext(new UuidGenerator());
+		this.generator.setNext(new ImageGenerator());
+		this.generator.setNext(new StaticGenerator());
+	}
+	setNext(): void {}
+	get(value: string) {
+		return this.generator.get(value);
 	}
 }
 // ======>

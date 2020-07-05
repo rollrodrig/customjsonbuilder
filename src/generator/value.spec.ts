@@ -14,6 +14,7 @@ import {
 	EmailGenerator,
 	UuidGenerator,
 	ImageGenerator,
+	ValueGeneratorFactory,
 } from "./value";
 describe("ValueGenerator", () => {
 	it("should generate corresponding value type", () => {
@@ -29,6 +30,23 @@ describe("ValueGenerator", () => {
 		generator.setNext(new UuidGenerator());
 		generator.setNext(new ImageGenerator());
 		generator.setNext(new StaticGenerator());
+		expect(generator.get("jhon")).eq("jhon");
+		expect(generator.get("PROC112")).eq("PROC112");
+		assert.isString(generator.get("string"));
+		assert.isBoolean(generator.get("boolean"));
+		assert.isNumber(generator.get("number"));
+		assert.isNull(generator.get("null"));
+		assert.isUndefined(generator.get("undefined"));
+		assert.isString(generator.get("firstname"));
+		assert.isString(generator.get("lastname"));
+		assert.isString(generator.get("name"));
+		assert.isTrue(generator.get("email").search("@") > 1);
+		assert.isString(generator.get("uuid"));
+		assert.isString(generator.get("image"));
+		expect(generator.get("EE001-R1")).eq("EE001-R1");
+	});
+	it("should generate from factory", () => {
+		const generator = new ValueGeneratorFactory();
 		expect(generator.get("jhon")).eq("jhon");
 		expect(generator.get("PROC112")).eq("PROC112");
 		assert.isString(generator.get("string"));
