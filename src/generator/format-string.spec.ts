@@ -1,12 +1,32 @@
 import { expect, assert } from "chai";
 import { DataStorage } from "./generator";
+import { stub } from "sinon";
+import { ValueGeneratorFactory } from "./value";
 import {
 	FormatString,
 	ResponseDict,
 	ResponseList,
 	ValueGenerator,
 } from "./format-string";
+
 describe("FormatString: ", () => {
+	let stub1: any;
+	let stub2: any;
+	before(function () {
+		stub1 = stub(ResponseDict.prototype, "generate").callsFake((): any => {
+			return { name: "string", age: "number" };
+		});
+		stub2 = stub(ResponseList.prototype, "generate").callsFake((): any => {
+			return [
+				{ name: "string", age: "number" },
+				{ name: "string", age: "number" },
+			];
+		});
+	});
+	after(function () {
+		stub1.restore();
+		stub2.restore();
+	});
 	it("should return dict response", () => {
 		const string = "{name:string,age:number}";
 		const f = new FormatString(string);
@@ -25,6 +45,17 @@ describe("FormatString: ", () => {
 	});
 });
 describe("ResponseDict: ", () => {
+	let stub1: any;
+	before(function () {
+		stub1 = stub(ValueGenerator.prototype, "generate").callsFake(
+			(value): any => {
+				return value;
+			}
+		);
+	});
+	after(function () {
+		stub1.restore();
+	});
 	it("should generate json with single value", () => {
 		const string = "{name:string}";
 		const f = new ResponseDict(string);
@@ -52,6 +83,17 @@ describe("ResponseDict: ", () => {
 	});
 });
 describe("ResponseList: ", () => {
+	let stub1: any;
+	before(function () {
+		stub1 = stub(ValueGenerator.prototype, "generate").callsFake(
+			(value): any => {
+				return value;
+			}
+		);
+	});
+	after(function () {
+		stub1.restore();
+	});
 	it("should generate array with 2 responses", () => {
 		const string = "{name:string,age:number,$times:2,city:lima}";
 		const res = new ResponseList(string);
@@ -96,6 +138,17 @@ describe("ResponseList: ", () => {
 	});
 });
 describe("ValueGenerator: ", () => {
+	let stub1: any;
+	before(function () {
+		stub1 = stub(ValueGeneratorFactory.prototype, "get").callsFake(
+			(value): any => {
+				return value;
+			}
+		);
+	});
+	after(function () {
+		stub1.restore();
+	});
 	it("should return staic value", () => {
 		const v = new ValueGenerator();
 		expect(v.generate("string")).to.equal("string");

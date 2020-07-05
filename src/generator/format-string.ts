@@ -128,8 +128,8 @@ export class ValueGenerator {
 			const storageKey: string = this.getStorageKey();
 			content = this.storage.get(storageKey);
 		} else {
-			content = this.value;
-			// content = this.valueFactory.get(this.value);
+			// content = this.value;
+			content = this.valueFactory.get(this.value);
 		}
 		return content;
 	}
