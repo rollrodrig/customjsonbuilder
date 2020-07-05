@@ -18,10 +18,12 @@
   },
   "homepage": "https://github.com/rollrodrig/customjsonbuilder#readme",
   "dependencies": {
+    "faker": "^4.1.0",
     "uuid": "^8.2.0"
   },
   "devDependencies": {
     "@types/chai": "^4.2.11",
+    "@types/faker": "^4.1.12",
     "@types/mocha": "^7.0.2",
     "@types/node": "^14.0.13",
     "@types/sinon": "^9.0.4",
