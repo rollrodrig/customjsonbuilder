@@ -1,5 +1,5 @@
 import { expect, assert } from "chai";
-import Builder from "./builder";
+import { Builder } from "./builder";
 import { Error } from "./builder";
 describe("Builder", () => {
 	it("should return the json ", () => {
@@ -9,8 +9,7 @@ describe("Builder", () => {
 				age: number
 			}
 		`;
-		const builder = new Builder();
-		const res = builder.run(input);
+		const res = Builder.run(input);
 		assert.isString(res.name);
 		assert.isNumber(res.age);
 	});
@@ -20,8 +19,7 @@ describe("Builder", () => {
 				name: firstname,
 				age: number
 		`;
-		const builder = new Builder();
-		const res = builder.run(input);
+		const res = Builder.run(input);
 		expect(res).to.deep.eq({
 			error: "There is one missing ] or [ or } or {",
 		});
@@ -39,8 +37,7 @@ describe("Builder", () => {
 				}
 			}
 	    `;
-		const builder = new Builder();
-		const res = builder.run(input);
+		const res = Builder.run(input);
 		assert.isString(res.name);
 		assert.isObject(res.age);
 		assert.isNumber(res.age.year);
@@ -59,8 +56,7 @@ describe("Builder", () => {
 				}
 			}
 		`;
-		const builder = new Builder();
-		const res = builder.run(input);
+		const res = Builder.run(input);
 		assert.isString(res.user);
 		assert.isArray(res.posts);
 		assert.equal(res.posts.length, 3);
@@ -73,8 +69,7 @@ describe("Builder", () => {
 				$times:3
 			}
 		`;
-		const builder = new Builder();
-		const res = builder.run(input);
+		const res = Builder.run(input);
 		assert.isArray(res);
 		assert.equal(res.length, 3);
 		assert.isNumber(res[0].id);
@@ -96,8 +91,7 @@ describe("Builder", () => {
 				}
 			}
 		`;
-		const builder = new Builder();
-		const res = builder.run(pattern);
+		const res = Builder.run(pattern);
 		assert.isObject(res);
 		assert.isObject(res.a1);
 		assert.isObject(res.a1.a2);
@@ -118,8 +112,7 @@ describe("Builder", () => {
 				}
 			}
 		`;
-		const builder = new Builder();
-		const res = builder.run(pattern);
+		const res = Builder.run(pattern);
 		assert.isString(res.name);
 		assert.isNumber(res.age.year);
 		assert.isObject(res.age.city);
