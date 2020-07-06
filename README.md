@@ -46,8 +46,41 @@ Running on http://0.0.0.0:6500
 
 Open the browser and visit the link [http://0.0.0.0:6500](http://localhost:6500/)
 
-Get some fake data 
+Now query some fake data from your React, Angular, Vue or any external project 
 
+```jsx
+class Posts extends React.Component {
+	// my other cool code
+	componentDidMount() {
+		let pattern = `
+			{
+				posts: {
+					id: number,
+					title: string,
+					$times: 3
+				}
+			}
+		`
+		axios.get(`http://0.0.0.0:6500/${pattern}`)
+			.then((res) => {
+				this.setState({
+					posts: res.data.posts
+				})
+			})
+	}
+	render() {
+		return (
+		  	<div>
+		  		{this.state.posts.map(p => {
+		  			return </div>p.title<div>
+		  		})}
+		  	</div>
+		);
+	}
+}
+
+
+```
 `
 http://localhost:6500/{userId:uuid,posts:{id:uuid,title:string,$times:3}}`
 
