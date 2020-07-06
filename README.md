@@ -50,7 +50,7 @@ Now query some fake data from your React, Angular, Vue or any external project.
 
 [Example plain jquery project](https://github.com/rollrodrig/customjsonbuilder/tree/develop/examples/query-fake-server/index.html)
 
-React example
+### React example
 
 ```jsx
 class Posts extends React.Component {
