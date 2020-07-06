@@ -25,9 +25,6 @@
     "uuid": "^8.2.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.10.4",
-    "@babel/core": "^7.10.4",
-    "@babel/preset-typescript": "^7.10.4",
     "@types/chai": "^4.2.11",
     "@types/faker": "^4.1.12",
     "@types/mocha": "^7.0.2",

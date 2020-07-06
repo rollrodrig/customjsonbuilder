@@ -2,12 +2,6 @@
     "compilerOptions": {
 		"outDir": "./dist/src",
 		"noImplicitAny": true,
-		// web
-		// "moduleResolution": "classic",
-		// "module": "es6",
-		// "target": "es5",
-		// "outFile": "./build/build.js",
-		// backend
 		"moduleResolution": "node",
 		"module": "commonjs",
 		"target": "es5",
@@ -24,28 +18,6 @@
     ],
     "exclude": [
         "node_modules",
-        "old",
         "**/*.spec.ts",
     ]
 }
-// {
-//     "version" : "3.0.3",
-//     "compilerOptions" : {
-// 		"module" : "amd",
-// 		"target": "es5",
-//         "removeComments" : true,
-//         "outFile" : "./dist/builder.js",
-//         "baseUrl" : "./",
-//         // "sourceMap" : true,
-//         "alwaysStrict" : true,
-//         // "declaration" : true,
-//     },
-//     "include": [
-//         "./src/**/*.ts"
-//     ],
-//     "exclude": [
-// 		"node_modules",
-// 		"old",
-// 		"**/*.spec.ts",
-//     ]
-// }
