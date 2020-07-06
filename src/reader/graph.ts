@@ -2,7 +2,6 @@ export interface IGraphable {}
 export interface IGraphHandable {
 	handleNode(node: Node): void;
 }
-import { Block } from "../generator/block";
 export class Node {
 	private _visited = false;
 	public get visited(): boolean {

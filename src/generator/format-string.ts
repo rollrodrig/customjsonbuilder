@@ -144,13 +144,3 @@ export class ValueGenerator {
 		return this.getContent();
 	}
 }
-// class StaticGenerator {
-// 	static get(value: string): string | boolean | number {
-// 		const v = "";
-// 		// switch (value) {
-// 		// case "string":
-// 		// 	v = value;
-// 		// }
-// 		return value;
-// 	}
-// }

@@ -137,7 +137,7 @@ export class ValueGeneratorFactory implements IValueGenerator {
 		return this.generator.get(value);
 	}
 }
-// ======>
+// TODO, remove this
 export class StaticValue<T> implements IElement {
 	value: T;
 	constructor(value: T) {

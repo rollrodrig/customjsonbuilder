@@ -1,9 +1,8 @@
-import { Graph, Node, IGraphable, IGraphHandable } from "../reader/graph";
-import { Block, IBlock } from "./block";
+import { Graph, Node, IGraphHandable } from "../reader/graph";
+import { Block } from "./block";
 import { VAR_CHILD_IDENTIFIER } from "./format-string";
 export class Generator implements IGraphHandable {
 	private graph: Graph;
-	private parent: string;
 	private storage: DataStorage;
 	constructor(graph: Graph) {
 		this.graph = graph;
@@ -16,13 +15,10 @@ export class Generator implements IGraphHandable {
 			const parentNode = this.graph.getNode(parentVertex);
 			BlockUpdater.execute(parentNode, node);
 		}
-		// console.log("parent ", parentVertex);
 	}
 	private generateContent(node: Node): void {
 		const content = BlockGenerator.execute(node);
 		this.storage.add(node.vertex, content);
-		// console.log("generated ", node.vertex);
-		// console.log(content);
 	}
 	handleNode(node: Node) {
 		this.updateBlocks(node);
@@ -30,7 +26,6 @@ export class Generator implements IGraphHandable {
 	}
 	generate() {
 		this.graph.depthFirstTraverse();
-		// console.log(this.storage.data);
 		return this.storage.get(this.graph.root);
 	}
 }

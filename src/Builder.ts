@@ -1,5 +1,5 @@
-import Cleaner from "./cleaner/cleaner";
-import Validator from "./validator/validator";
+import { Cleaner } from "./cleaner/cleaner";
+import { Validator } from "./validator/validator";
 import { Generator } from "./generator/generator";
 import { Reader } from "./reader/reader";
 export class Builder {

@@ -1,5 +1,5 @@
 import { expect, assert } from "chai";
-import Cleaner from "./cleaner";
+import { Cleaner } from "./cleaner";
 describe("Cleaner: ", () => {
 	it(".run: should return one line string without spaces, tabs, breaklines, etc", () => {
 		const c = new Cleaner();

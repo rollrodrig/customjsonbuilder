@@ -5,7 +5,7 @@ import {
 	BlockGenerator,
 	DataStorage,
 } from "./generator";
-import { Graph, Node, IGraphable } from "../reader/graph";
+import { Graph, Node } from "../reader/graph";
 import { Reader } from "../reader/reader";
 import { Block, IBlock } from "../generator/block";
 import { stub } from "sinon";

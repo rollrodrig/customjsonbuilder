@@ -1,7 +1,6 @@
 import { expect, assert } from "chai";
-import { IBlock, Block } from "./block";
+import { Block } from "./block";
 import { FormatString } from "./format-string";
-import { bracesCounter } from "../utils/helpers";
 import { stub } from "sinon";
 describe("Block: ", () => {
 	it("should replace sub patterns", () => {
