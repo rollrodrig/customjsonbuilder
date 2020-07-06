@@ -48,9 +48,11 @@ Open the browser and visit the link [http://0.0.0.0:6500](http://localhost:6500/
 
 Now query some fake data from your React, Angular, Vue or any external project. 
 
+### Simple jquery usage example
+
 [Example plain jquery project](https://github.com/rollrodrig/customjsonbuilder/tree/develop/examples/query-fake-server/index.html)
 
-### React example
+### React usage example
 
 ```jsx
 class Posts extends React.Component {
