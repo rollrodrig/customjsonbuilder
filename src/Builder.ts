@@ -2,7 +2,7 @@ import { Cleaner } from "./cleaner/cleaner";
 import { Validator } from "./validator/validator";
 import { Generator } from "./generator/generator";
 import { Reader } from "./reader/reader";
-export class Builder {
+export default class CustomJsonBuilder {
 	static run(pattern: string): any {
 		const cleaner = new Cleaner();
 		const validator = new Validator();

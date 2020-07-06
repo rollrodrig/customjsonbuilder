@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node index.js",
     "test": "./node_modules/.bin/mocha --extension ts --watch src --require ts-node/register src/**/*.spec.ts",
-    "build": "webpack"
+    "build:front": "webpack --config webpack.frontend.js",
+    "tsc": "./node_modules/.bin/tsc"
   },
   "repository": {
     "type": "git",
@@ -24,6 +25,9 @@
     "uuid": "^8.2.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.10.4",
+    "@babel/core": "^7.10.4",
+    "@babel/preset-typescript": "^7.10.4",
     "@types/chai": "^4.2.11",
     "@types/faker": "^4.1.12",
     "@types/mocha": "^7.0.2",
@@ -43,6 +47,7 @@
     "ts-node": "^8.10.2",
     "typescript": "^3.9.3",
     "webpack": "^4.43.0",
-    "webpack-cli": "^3.3.12"
+    "webpack-cli": "^3.3.12",
+    "webpack-node-externals": "^1.7.2"
   }
 }

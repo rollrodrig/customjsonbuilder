@@ -1,1 +1,0 @@
-module.exports = require('./app/src/Builder.js');
