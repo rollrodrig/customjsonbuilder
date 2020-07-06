@@ -16,90 +16,116 @@ will respond with json like:
 ```
 
 ## Installation
-1. clone the project or download [the zip file](https://github.com/rollrodrig/jsonbuilder/archive/master.zip)
-2. go to the folder 
+Clone the project or download [the zip file](https://github.com/rollrodrig/jsonbuilder/archive/master.zip)
+
+Go to the folder 
 ```
 cd customjsonbuilder-master
 ```
 ## Run server on Node
-1. Install dependencies
+
+Install dependencies
+
 ```
 npm install
 ```
-2. Launch the server
+
+Launch the server
+
 ```
 npm start
 // or with a custom port
 PORT=4545 npm start
 ```
-3. It will prompt
+
+It will prompt
+
 ```
 Running on http://0.0.0.0:6500
 ```
-4. Open the browser and visit the link [http://0.0.0.0:6500](http://localhost:6500/)
+
+Open the browser and visit the link [http://0.0.0.0:6500](http://localhost:6500/)
 
 
 ## NPM
-WE ARE NOT SUPPORTING NPM WITH THIS VERSION (but we are working on it)
-<!-- 1. install via npm
+
+Install via npm
+
 ```
-npm install customjsonbuilder --save
+npm install customjsonbuilder --save-dev
 ```
-2. usage example
+
+Node example
+
 ```javascript
-const customJsonBuilder = require('customjsonbuilder');
-
-// set the pattern that you need
-let cjb = new customJsonBuilder("{name:firstname,age:age,verified:boolean}");
-console.log(cjb.getResponse())
-
-// update the pattern
-cjb.setPattern("{email:email,name:username}")
-console.log(cjb.getResponse())
-
-// or use the static method
-console.log(customJsonBuilder.generateJson("{email:email,name:username}"))
-
+// index.js
+let customjsonbuilder = require('customjsonbuilder');
+let fake = customjsonbuilder.build("{name:string}");
+console.log(fake)
+// run con terminal "node index.js"
 ```
-3. node example
+
+Express example
+
+Create your own custom fake server and use customjsobuilder to generate fake data
+
 ```javascript
-const express = require('express');
-const app = express();
-const CustomJsonBuilder = require("./dist/src/builder").default;
-app.get('/', (req, res) => {
-	const response = CustomJsonBuilder.build(req.params.pattern);
+let express = require('express');
+let app = express();
+let customjsonbuilder = require('customjsonbuilder');
+app.get('/posts', (req, res) => {
+	let posts = `
+		{
+			posts: {
+				id: number,
+				title: string,
+				$times: 3
+			}
+		}
+	`
+	let response = customjsonbuilder.build(posts);
 	res.json(response);
 });
 app.listen('8200', '0.0.0.0');
 console.log(`Running on http://0.0.0.0:8200`);
 ```
- -->
-
 
 # Pattern Guide
+
 ### Pattern
+
 Example: `http://localhost:6500/<THE PATTERN GOES HERE>`
 
 ### key: value
+
 It is like writing regular json
+
 ```
 {THE_KEY_THAT_I_WANT : THE_DATA_TYPE}
 ```
+
 ### Simple example
+
 I want an object with a key `name` and a random word as `value`
+
 ```
 {
 	name: string
 }
 ```
+
 The server will respond with data like
+
 ```json
 {
     "name": "vm2sgdbmf2e7mmbc8502w8q"
 }
 ```
+
 ### Multiple values
+
 Now I need a json response with `id`, `name` and `email`
+
 ```
 {
 	id: number,
@@ -107,7 +133,9 @@ Now I need a json response with `id`, `name` and `email`
 	email: email
 }
 ``` 
+
 The server will respond with data like
+
 ```json
 {
     "id": 49994,
@@ -115,9 +143,13 @@ The server will respond with data like
     "email": "Eula_Deckow@yahoo.com"
 }
 ```
+
 ### Nested object
+
 I want an object with a `userId`, a `name` and a nested object `contact` which contains `phone` and `email`.
+
 The pattern should be:
+
 ```
 {
 	userId: number,
@@ -128,7 +160,9 @@ The pattern should be:
 	}
 }
 ```
+
 The server will respond with data like
+
 ```json
 {
     "userId":94781,
@@ -139,9 +173,12 @@ The server will respond with data like
     }
 }
 ```
+
 ### Doubly nested object
+
 Lets try something more complex.
 I want an object with `userId`, `name`, a nested object with `contact` that contains `phone` and `email` with nested content `personal_email` and `company_email`
+
 ```
 {
 	userId: number,
@@ -155,7 +192,9 @@ I want an object with `userId`, `name`, a nested object with `contact` that cont
 	}
 }
 ```
+
 The server will respond with data like
+
 ```json
 {
     "userId": 7316,
@@ -169,7 +208,9 @@ The server will respond with data like
     }
 }
 ```
+
 ### Array response
+
 I want 3 `posts` with `id` and `title`
 
 To get an array response just add key `$times:NUMBER`, were `number` is the number of elements that i want in the array.
@@ -183,7 +224,9 @@ To get an array response just add key `$times:NUMBER`, were `number` is the numb
 	}
 }
 ```
+
 And the server will respond with data like
+
 ```json
 {
     "posts": [
@@ -202,7 +245,9 @@ And the server will respond with data like
     ]
 }
 ```
+
 ## Data types
+
 In the current version we support these data types:
 * string
 * number
@@ -228,32 +273,43 @@ In the current version we support these data types:
 * age18 (number between 18-110)
 * true (always return true)
 * false (always return false)
+
 ### Example
+
 post title
+
 ```
 {
 	postTitle: title
 }
 ```
+
 will generate
+
 ```json
 {
     "postTitle": "Rerum odio quam."
 }
 ```
+
 user email
+
 ```
 {
 	user_email: email
 }
 ```
+
 will generate
+
 ```json
 {
     "user_email": "Heber1@hotmail.com"
 }
 ```
+
 # Awesome examples
+
 * Basic
 ```
 {

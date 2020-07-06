@@ -1,10 +1,10 @@
 {
   "name": "customjsonbuilder",
-  "version": "0.1.0",
+  "version": "1.0.4",
   "description": "",
-  "main": "index.ts",
+  "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node app.js",
     "test": "./node_modules/.bin/mocha --extension ts --watch src --require ts-node/register src/**/*.spec.ts",
     "build:front": "webpack --config webpack.frontend.js",
     "tsc": "./node_modules/.bin/tsc"
