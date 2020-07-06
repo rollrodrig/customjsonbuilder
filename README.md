@@ -1,11 +1,11 @@
-# JSONbuilder
+# custom JSONbuilder
 # Fake json responses with custom fields on the fly (beta)
 
 
 ## Example
 A simple query like this
 
-``` http://localhost:6500/q/?q={name:string,email:email}```
+``` http://localhost:6500/{name:string,email:email}```
 
 will respond with json like:
 ```json
@@ -36,22 +36,12 @@ PORT=4545 npm start
 ```
 Running on http://0.0.0.0:6500
 ```
-4. Open the browser and visit the link [http://0.0.0.0:6500](http://localhost:6500/q/?q={name:string})
+4. Open the browser and visit the link [http://0.0.0.0:6500](http://localhost:6500/{name:string})
 
-## Run on Docker
-1. Make sure that docker is installed, you can follow this [docker getting started tutorial](https://www.docker.com/get-started)
-2. Create a docker container with `docker-compose`
-```
-docker-compose build --no-cache
-```
-3. Run the container
-```
-docker-compose up
-```
-4. Open the browser and visit [http://localhost:6500](http://localhost:6500/q/?q={name:string})
 
 ## NPM
-1. install via npm
+WE ARE NOT SUPPORTING NPM WITH THIS VERSION (but we are working on it)
+<!-- 1. install via npm
 ```
 npm install customjsonbuilder --save
 ```
@@ -71,37 +61,26 @@ console.log(cjb.getResponse())
 console.log(customJsonBuilder.generateJson("{email:email,name:username}"))
 
 ```
-3. express example
+3. node example
 ```javascript
 const express = require('express');
 const app = express();
-const customJsonBuilder = require('customjsonbuilder');
-
-// set the pattern that you need
-let cjb = new customJsonBuilder("{name:firstname,age:age,verified:boolean}");
-
+const CustomJsonBuilder = require("./dist/src/builder").default;
 app.get('/', (req, res) => {
-	
-	// and generate
-	let response = cjb.getResponse();
-	res.end(JSON.stringify( response ));
-	
-	// update the pattern
-	cjb.setPattern("{email:email,name:username}")
-	console.log(cjb.getResponse()); // { email: 'Bennie.Lakin@yahoo.com', name: 'Caleb11' }
-
+	const response = CustomJsonBuilder.build(req.params.pattern);
+	res.json(response);
 });
 app.listen('8200', '0.0.0.0');
 console.log(`Running on http://0.0.0.0:8200`);
 ```
-
+ -->
 
 
 # Pattern Guide
 ### Pattern
-The pattern should come after the `?q=` variable. Example: `http://localhost:6500/q/q?=<THE PATTERN GOES HERE>`
+Example: `http://localhost:6500/<THE PATTERN GOES HERE>`
 
-### Key:Value
+### key: value
 It is like writing regular json
 ```
 {THE_KEY_THAT_I_WANT : THE_DATA_TYPE}
@@ -109,32 +88,45 @@ It is like writing regular json
 ### Simple example
 I want an object with a key `name` and a random word as `value`
 ```
-{name:string}
+{
+	name: string
+}
 ```
 The server will respond with data like
 ```json
 {
-    "name":"Granite"
+    "name": "vm2sgdbmf2e7mmbc8502w8q"
 }
 ```
 ### Multiple values
 Now I need a json response with `id`, `name` and `email`
 ```
-{id:number,name:string,email:email}
+{
+	id: number,
+	name: string,
+	email: email
+}
 ``` 
 The server will respond with data like
 ```json
 {
-    "id":49994,
-    "name":"Mission",
-    "email":"Eula_Deckow@yahoo.com"
+    "id": 49994,
+    "name": "Mission",
+    "email": "Eula_Deckow@yahoo.com"
 }
 ```
 ### Nested object
 I want an object with a `userId`, a `name` and a nested object `contact` which contains `phone` and `email`.
 The pattern should be:
 ```
-{userId:number,name:firstname,contact:{phone:number,email:email}}
+{
+	userId: number,
+	name: firstname,
+	contact: {
+		phone: number,
+		email: email
+	}
+}
 ```
 The server will respond with data like
 ```json
@@ -151,30 +143,45 @@ The server will respond with data like
 Lets try something more complex.
 I want an object with `userId`, `name`, a nested object with `contact` that contains `phone` and `email` with nested content `personal_email` and `company_email`
 ```
-{userId:number,name:firstname,contact:{phone:number,email:{personal_email:email,company_email:email}}}
+{
+	userId: number,
+	name: firstname,
+	contact: {
+		phone: number,
+		email: {
+			personal_email: email,
+			company_email: email
+		}
+	}
+}
 ```
 The server will respond with data like
 ```json
 {
-    "userId":7316,
-    "name":"discrete",
-    "contact":{
-        "phone":14357,
-        "email":{
-            "personal_email":"Rowena_Homenick@yahoo.com",
-            "company_email":"Caesar52@hotmail.com"
+    "userId": 7316,
+    "name": "discrete",
+    "contact": {
+        "phone": 14357,
+        "email": {
+            "personal_email": "Rowena_Homenick@yahoo.com",
+            "company_email": "Caesar52@hotmail.com"
         }
     }
 }
 ```
 ### Array response
 I want 3 `posts` with `id` and `title`
-The array follow this pattern. 
 
-Notice that we use `KEY:[{...};3]`.
-the `;3` signifies the number of `posts` that the server should generate
+To get an array response just add key `$times:NUMBER`, were `number` is the number of elements that i want in the array.
+
 ```
-{posts:[{id:number,title:string};3]}
+{
+	posts: {
+		id: number,
+		title: string,
+		$times: 3
+	}
+}
 ```
 And the server will respond with data like
 ```json
@@ -182,15 +189,15 @@ And the server will respond with data like
     "posts": [
         {
             "id": 65450,
-            "title": "Concrete"
+            "title": "vs4brxz5497yggxg80wvy"
         },
         {
             "id": 11251,
-            "title": "interactive"
+            "title": "v6tfhr591s3isajey067j3l"
         },
         {
             "id": 89704,
-            "title": "User-centric"
+            "title": "vs3q84xh8nmdcp87w2c9ax8"
         }
     ]
 }
@@ -224,7 +231,9 @@ In the current version we support these data types:
 ### Example
 post title
 ```
-{postTitle:title}
+{
+	postTitle: title
+}
 ```
 will generate
 ```json
@@ -234,7 +243,9 @@ will generate
 ```
 user email
 ```
-{user_email:email}
+{
+	user_email: email
+}
 ```
 will generate
 ```json
@@ -245,7 +256,9 @@ will generate
 # Awesome examples
 * Basic
 ```
-{name:string}
+{
+	name: string
+}
 ```
 ```json
 {
@@ -254,7 +267,12 @@ will generate
 ```
 * User information
 ```
-{userId:number,username:username,name:firstname,email:email}
+{
+	userId: number,
+	username: username,
+	name: firstname,
+	email: email
+}
 ```
 ```json
 {
@@ -266,7 +284,19 @@ will generate
 ```
 * User last 3 posts
 ```
-{data:{user_id:number,posts:[{post_id:number,title:title,post_resume:paragraph,views_number:number,comments_number:number};3]}}
+{
+	data: {
+		user_id: number,
+		posts: {
+			post_id: number,
+			title: title,
+			post_resume: paragraph,
+			views_number: number,
+			comments_number: number,
+			$times: 3
+		}
+	}
+}
 ```
 ```json
 {
@@ -300,7 +330,20 @@ will generate
 ```
 * Shopping card example
 ```
-{data:{shopId:number,finished:boolean,catId:number,clientId:number,items:[{id:number,name:word,quantity:number};3]}}
+{
+	data: {
+		shopId: number,
+		finished: boolean,
+		catId: number,
+		clientId: number,
+		items: {
+			id: number,
+			name: word,
+			quantity: number,
+			$times:3
+		}
+	}
+}
 ```
 Will generate
 ```json
@@ -332,13 +375,16 @@ Will generate
 ```
 * true, false example
 ```
-{valid:true,erros:false}
+{ 
+	valid: true,
+	erros: false
+}
 ```
 Will generate
 ```json
 {
-    "valid":true,
-    "errors":false
+    "valid": true,
+    "errors": false
 }
 ```
 # Beta

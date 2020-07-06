@@ -1,25 +1,23 @@
 {
     "compilerOptions": {
-        "module": "commonjs",
-        "target": "es6",
-        "esModuleInterop": true,
-        "noImplicitAny": false,
-        "moduleResolution": "node",
-        "sourceMap": false,
-        "baseUrl": ".",
-        "outDir": "./app",
-        "paths": {
-            "*": [
-                "node_modules/*"
-            ]
-        }
+		"outDir": "./dist/src",
+		"noImplicitAny": true,
+		"moduleResolution": "node",
+		"module": "commonjs",
+		"target": "es5",
+		"sourceMap": false,
+		"removeComments" : true,
+		"typeRoots": [
+			"node_modules/@types"
+		],
+		"lib": [
+		]
     },
     "include": [
-        "./**/*"
+        "src/**/*"
     ],
     "exclude": [
         "node_modules",
         "**/*.spec.ts",
-        "**/*.test.ts"
     ]
 }

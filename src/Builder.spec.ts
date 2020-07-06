@@ -1,51 +1,129 @@
-import { expect, assert } from 'chai';
-import Builder from './Builder';
-describe('Builder: ', () => {
-	it('.getResponse: should return the json ', () => {
-        let builder = new Builder();
-        builder.setPattern("{name:string}");
-        let response = builder.getResponse();
-        expect(response).to.deep.eq({name:response.name})
-    });
-    it('.validatePattern: should not throw error ', () => {
-        let b1 = new Builder("{name:string,data:{a:string,b:number}}");
-        expect(()=>{b1.validatePattern()}).to.not.throw(SyntaxError);
-
-        let b2 = new Builder("{name:string,data:[{a:string,b:number};10],age:number}");
-        expect(()=>{b2.validatePattern()}).to.not.throw(SyntaxError);
-    });
-    it('.validatePattern: pattern is wrong should throw error ', () => {
-        let b1 = new Builder("{name:string");
-        expect(()=>{b1.validatePattern()}).to.throw(SyntaxError);
-
-        let b2 = new Builder("{name:string,name:{a:string,age:number}");
-        expect(()=>{b2.validatePattern()}).to.throw(SyntaxError);
-
-        let b3 = new Builder("{name:string,name:[{a:string};10,age:number}");
-        expect(()=>{b3.validatePattern()}).to.throw(SyntaxError);
-    });
-    it('static .generateJson: should response with error', () => {
-        expect(()=>{ Builder.generateJson("{name:string") }).to.throw(SyntaxError);
-        expect(()=>{ Builder.generateJson("{name:string,name:{a:string,age:number}") }).to.throw(SyntaxError);
-        expect(()=>{ Builder.generateJson("{name:string,name:[{a:string};10,age:number}") }).to.throw(SyntaxError);
-    });
-    it('static .generateJson: should generate json object', () => {
-        let r1 = Builder.generateJson("{name:string}");
-        expect(r1)
-            .to.deep.eq({name:r1.name})
-        let r2 = Builder.generateJson("{name:string, email:email}");
-        expect(r2)
-            .to.deep.eq({name:r2.name,email:r2.email})
-        let r3 = Builder.generateJson("{name:string, email:[{main:email};3]}");
-        assert.isArray(r3.email);
-        expect(r3.email.length).eq(3)
-    });
-    it('.supernested object ', () => {
-        let supernested = "{bottom:string}";
-        for(var i = 0; i < 26; i++) {
-            supernested = `{nested_${i}:${supernested}}`;
-        }
-        let generated = Builder.generateJson(supernested);
-        // console.log(generated);
-    })
+import { expect, assert } from "chai";
+import CustomJsonBuilder from "./builder";
+import { Error } from "./builder";
+describe("CustomJsonBuilder", () => {
+	it("should return the json ", () => {
+		const input = `
+			{
+				name: firstname,
+				age: number,
+			}
+		`;
+		const res = CustomJsonBuilder.build(input);
+		assert.isString(res.name);
+		assert.isNumber(res.age);
+	});
+	it("should return an error message ", () => {
+		const input = `
+			{
+				name: firstname,
+				age: number
+		`;
+		const res = CustomJsonBuilder.build(input);
+		expect(res).to.deep.eq({
+			error: "There is one missing ] or [ or } or {",
+		});
+	});
+	it("should return nested object", () => {
+		const input = `
+			{
+				name:string,
+				age:{
+					year:number
+				},
+				id:{
+					main:number,
+					second:number
+				}
+			}
+	    `;
+		const res = CustomJsonBuilder.build(input);
+		assert.isString(res.name);
+		assert.isObject(res.age);
+		assert.isNumber(res.age.year);
+		assert.isObject(res.id);
+		assert.isNumber(res.id.main);
+		assert.isNumber(res.id.second);
+	});
+	it("should return nested array", () => {
+		const input = `
+			{
+				user:name,
+				posts:{
+					id:number,
+					title:string,
+					$times:3
+				}
+			}
+		`;
+		const res = CustomJsonBuilder.build(input);
+		assert.isString(res.user);
+		assert.isArray(res.posts);
+		assert.equal(res.posts.length, 3);
+	});
+	it("should return array", () => {
+		const input = `
+			{
+				id:number,
+				name:firstname,
+				$times:3
+			}
+		`;
+		const res = CustomJsonBuilder.build(input);
+		assert.isArray(res);
+		assert.equal(res.length, 3);
+		assert.isNumber(res[0].id);
+		assert.isString(res[0].name);
+	});
+	it("should super deep nested object", () => {
+		const pattern = `
+			{
+				a1:{
+					a2:{
+						a3:{
+							a4:{
+								a5:{
+									a6:number
+								}
+							}
+						}
+					}
+				}
+			}
+		`;
+		const res = CustomJsonBuilder.build(pattern);
+		assert.isObject(res);
+		assert.isObject(res.a1);
+		assert.isObject(res.a1.a2);
+		assert.isObject(res.a1.a2.a3);
+		assert.isObject(res.a1.a2.a3.a4);
+		assert.isObject(res.a1.a2.a3.a4.a5);
+		assert.isNumber(res.a1.a2.a3.a4.a5.a6);
+	});
+	it("nice example 1", () => {
+		const pattern = `
+			{
+				name:string,
+				age:{
+					year:number,
+					city:{
+						place:string
+					}
+				}
+			}
+		`;
+		const res = CustomJsonBuilder.build(pattern);
+		assert.isString(res.name);
+		assert.isNumber(res.age.year);
+		assert.isObject(res.age.city);
+		assert.isString(res.age.city.place);
+	});
+});
+describe("Error: ", () => {
+	it(".missingBrances: should print error braquest message", () => {
+		const expected = {
+			error: "There is one missing ] or [ or } or {",
+		};
+		expect(Error.missingBrances()).to.deep.eq(expected);
+	});
 });
