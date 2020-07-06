@@ -50,33 +50,33 @@ Now query some fake data from your React, Angular, Vue or any external project
 
 ```jsx
 class Posts extends React.Component {
-	// my other cool code
-	componentDidMount() {
-		let pattern = `
-			{
-				posts: {
-					id: number,
-					title: string,
-					$times: 3
-				}
-			}
-		`
-		axios.get(`http://0.0.0.0:6500/${pattern}`)
-			.then((res) => {
-				this.setState({
-					posts: res.data.posts
-				})
-			})
-	}
-	render() {
-		return (
-		  	<div>
-		  		{this.state.posts.map(p => {
-		  			return </div>p.title<div>
-		  		})}
-		  	</div>
-		);
-	}
+    // my other cool code
+    componentDidMount() {
+        let pattern = `
+            {
+                posts: {
+                    id: number,
+                    title: string,
+                    $times: 3
+                }
+            }
+        `
+        axios.get(`http://0.0.0.0:6500/${pattern}`)
+            .then((res) => {
+                this.setState({
+                    posts: res.data.posts
+                })
+            })
+    }
+    render() {
+        return (
+              <div>
+                  {this.state.posts.map(p => {
+                      return </div>p.title<div>
+                  })}
+              </div>
+        );
+    }
 }
 
 
@@ -111,17 +111,17 @@ let express = require('express');
 let app = express();
 let customjsonbuilder = require('customjsonbuilder');
 app.get('/posts', (req, res) => {
-	let posts = `
-		{
-			posts: {
-				id: number,
-				title: string,
-				$times: 3
-			}
-		}
-	`
-	let response = customjsonbuilder.build(posts);
-	res.json(response);
+    let posts = `
+        {
+            posts: {
+                id: number,
+                title: string,
+                $times: 3
+            }
+        }
+    `
+    let response = customjsonbuilder.build(posts);
+    res.json(response);
 });
 app.listen('8200', '0.0.0.0');
 console.log(`Running on http://0.0.0.0:8200`);
@@ -147,7 +147,7 @@ I want an object with a key `name` and a random word as `value`
 
 ```
 {
-	name: string
+    name: string
 }
 ```
 
@@ -165,9 +165,9 @@ Now I need a json response with `id`, `name` and `email`
 
 ```
 {
-	id: number,
-	name: string,
-	email: email
+    id: number,
+    name: string,
+    email: email
 }
 ``` 
 
@@ -189,12 +189,12 @@ The pattern should be:
 
 ```
 {
-	userId: number,
-	name: firstname,
-	contact: {
-		phone: number,
-		email: email
-	}
+    userId: number,
+    name: firstname,
+    contact: {
+        phone: number,
+        email: email
+    }
 }
 ```
 
@@ -218,15 +218,15 @@ I want an object with `userId`, `name`, a nested object with `contact` that cont
 
 ```
 {
-	userId: number,
-	name: firstname,
-	contact: {
-		phone: number,
-		email: {
-			personal_email: email,
-			company_email: email
-		}
-	}
+    userId: number,
+    name: firstname,
+    contact: {
+        phone: number,
+        email: {
+            personal_email: email,
+            company_email: email
+        }
+    }
 }
 ```
 
@@ -254,11 +254,11 @@ To get an array response just add key `$times:NUMBER`, were `number` is the numb
 
 ```
 {
-	posts: {
-		id: number,
-		title: string,
-		$times: 3
-	}
+    posts: {
+        id: number,
+        title: string,
+        $times: 3
+    }
 }
 ```
 
@@ -317,7 +317,7 @@ post title
 
 ```
 {
-	postTitle: title
+    postTitle: title
 }
 ```
 
@@ -333,7 +333,7 @@ user email
 
 ```
 {
-	user_email: email
+    user_email: email
 }
 ```
 
@@ -350,7 +350,7 @@ will generate
 * Basic
 ```
 {
-	name: string
+    name: string
 }
 ```
 ```json
@@ -361,10 +361,10 @@ will generate
 * User information
 ```
 {
-	userId: number,
-	username: username,
-	name: firstname,
-	email: email
+    userId: number,
+    username: username,
+    name: firstname,
+    email: email
 }
 ```
 ```json
@@ -378,17 +378,17 @@ will generate
 * User last 3 posts
 ```
 {
-	data: {
-		user_id: number,
-		posts: {
-			post_id: number,
-			title: title,
-			post_resume: paragraph,
-			views_number: number,
-			comments_number: number,
-			$times: 3
-		}
-	}
+    data: {
+        user_id: number,
+        posts: {
+            post_id: number,
+            title: title,
+            post_resume: paragraph,
+            views_number: number,
+            comments_number: number,
+            $times: 3
+        }
+    }
 }
 ```
 ```json
@@ -424,18 +424,18 @@ will generate
 * Shopping card example
 ```
 {
-	data: {
-		shopId: number,
-		finished: boolean,
-		catId: number,
-		clientId: number,
-		items: {
-			id: number,
-			name: word,
-			quantity: number,
-			$times:3
-		}
-	}
+    data: {
+        shopId: number,
+        finished: boolean,
+        catId: number,
+        clientId: number,
+        items: {
+            id: number,
+            name: word,
+            quantity: number,
+            $times:3
+        }
+    }
 }
 ```
 Will generate
@@ -469,8 +469,8 @@ Will generate
 * true, false example
 ```
 { 
-	valid: true,
-	erros: false
+    valid: true,
+    erros: false
 }
 ```
 Will generate
