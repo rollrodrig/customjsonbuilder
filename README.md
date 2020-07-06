@@ -36,7 +36,7 @@ PORT=4545 npm start
 ```
 Running on http://0.0.0.0:6500
 ```
-4. Open the browser and visit the link [http://0.0.0.0:6500](http://localhost:6500/{name:string})
+4. Open the browser and visit the link [http://0.0.0.0:6500](http://localhost:6500/)
 
 
 ## NPM
