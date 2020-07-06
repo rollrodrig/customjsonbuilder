@@ -62,7 +62,7 @@ Node example
 let customjsonbuilder = require('customjsonbuilder');
 let fake = customjsonbuilder.build("{name:string}");
 console.log(fake)
-// run con terminal "node index.js"
+// run on terminal "node index.js"
 ```
 
 Express example
