@@ -9,7 +9,7 @@ describe("CustomJsonBuilder", () => {
 				age: number,
 			}
 		`;
-		const res = CustomJsonBuilder.run(input);
+		const res = CustomJsonBuilder.build(input);
 		assert.isString(res.name);
 		assert.isNumber(res.age);
 	});
@@ -19,7 +19,7 @@ describe("CustomJsonBuilder", () => {
 				name: firstname,
 				age: number
 		`;
-		const res = CustomJsonBuilder.run(input);
+		const res = CustomJsonBuilder.build(input);
 		expect(res).to.deep.eq({
 			error: "There is one missing ] or [ or } or {",
 		});
@@ -37,7 +37,7 @@ describe("CustomJsonBuilder", () => {
 				}
 			}
 	    `;
-		const res = CustomJsonBuilder.run(input);
+		const res = CustomJsonBuilder.build(input);
 		assert.isString(res.name);
 		assert.isObject(res.age);
 		assert.isNumber(res.age.year);
@@ -56,7 +56,7 @@ describe("CustomJsonBuilder", () => {
 				}
 			}
 		`;
-		const res = CustomJsonBuilder.run(input);
+		const res = CustomJsonBuilder.build(input);
 		assert.isString(res.user);
 		assert.isArray(res.posts);
 		assert.equal(res.posts.length, 3);
@@ -69,7 +69,7 @@ describe("CustomJsonBuilder", () => {
 				$times:3
 			}
 		`;
-		const res = CustomJsonBuilder.run(input);
+		const res = CustomJsonBuilder.build(input);
 		assert.isArray(res);
 		assert.equal(res.length, 3);
 		assert.isNumber(res[0].id);
@@ -91,7 +91,7 @@ describe("CustomJsonBuilder", () => {
 				}
 			}
 		`;
-		const res = CustomJsonBuilder.run(pattern);
+		const res = CustomJsonBuilder.build(pattern);
 		assert.isObject(res);
 		assert.isObject(res.a1);
 		assert.isObject(res.a1.a2);
@@ -112,7 +112,7 @@ describe("CustomJsonBuilder", () => {
 				}
 			}
 		`;
-		const res = CustomJsonBuilder.run(pattern);
+		const res = CustomJsonBuilder.build(pattern);
 		assert.isString(res.name);
 		assert.isNumber(res.age.year);
 		assert.isObject(res.age.city);

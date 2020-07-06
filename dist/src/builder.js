@@ -8,7 +8,7 @@ var reader_1 = require("./reader/reader");
 var CustomJsonBuilder = (function () {
     function CustomJsonBuilder() {
     }
-    CustomJsonBuilder.run = function (pattern) {
+    CustomJsonBuilder.build = function (pattern) {
         var cleaner = new cleaner_1.Cleaner();
         var validator = new validator_1.Validator();
         pattern = cleaner.run(pattern);

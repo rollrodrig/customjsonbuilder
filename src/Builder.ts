@@ -3,7 +3,7 @@ import { Validator } from "./validator/validator";
 import { Generator } from "./generator/generator";
 import { Reader } from "./reader/reader";
 export default class CustomJsonBuilder {
-	static run(pattern: string): any {
+	static build(pattern: string): any {
 		const cleaner = new Cleaner();
 		const validator = new Validator();
 		pattern = cleaner.run(pattern);

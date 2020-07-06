@@ -16,7 +16,7 @@ app.use(function (req, res, next) {
 app.all("/:pattern?", (req, res) => {
 	if (req.params.pattern) {
 		console.log(req.params.pattern)
-		const response = CustomJsonBuilder.run(req.params.pattern);
+		const response = CustomJsonBuilder.build(req.params.pattern);
 		res.json(response);
 	} else {
 		res.end("Try this example\n\nhttp://localhost:" + port + "/{user:number,posts:{id:uuid,title:string,$times:3}}");
