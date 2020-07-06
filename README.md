@@ -22,7 +22,7 @@ Go to the folder
 ```
 cd customjsonbuilder-master
 ```
-## Run server on Node
+## Run fake api on Node
 
 Install dependencies
 
@@ -46,6 +46,10 @@ Running on http://0.0.0.0:6500
 
 Open the browser and visit the link [http://0.0.0.0:6500](http://localhost:6500/)
 
+Get some fake data 
+
+`
+http://localhost:6500/{userId:uuid,posts:{id:uuid,title:string,$times:3}}`
 
 ## NPM
 
