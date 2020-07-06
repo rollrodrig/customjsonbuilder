@@ -92,7 +92,7 @@ Install via npm
 npm install customjsonbuilder --save-dev
 ```
 
-Node example
+### Node example
 
 ```javascript
 // index.js
@@ -102,7 +102,7 @@ console.log(fake)
 // run on terminal "node index.js"
 ```
 
-Express example
+### Express example
 
 Create your own custom fake server and use customjsobuilder to generate fake data
 
