@@ -13,18 +13,15 @@
         <script>
             $(document).ready(function(){
 				var pattern = `
-				{
-				user: word,
-				posts:{
-					id:number,
-					comments:{
-						id: number,
-						content: word,
-						$times: 2,
-					},
-					$times: 3,
-				}
-			}
+					{
+						userid: uuid,
+						name: name,
+						posts: {
+							title: title,
+							resume: paragraph,
+							$times: 5
+						},
+					}
 				`;
 				$.ajax({
 					url: "http://localhost:6500/" + pattern,
