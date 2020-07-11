@@ -100,6 +100,27 @@ describe("CustomJsonBuilder", () => {
 		assert.isObject(res.a1.a2.a3.a4.a5);
 		assert.isNumber(res.a1.a2.a3.a4.a5.a6);
 	});
+	it("shoudl generate nested array wit nested object", () => {
+		const pattern = `
+			{
+				user: word,
+				posts:{
+					id:number,
+					comments:{
+						id: number,
+						content: word,
+						$times: 2,
+					},
+					$times: 3,
+				}
+			}
+		`;
+		const res = CustomJsonBuilder.build(pattern);
+		assert.isArray(res.posts);
+		assert.isObject(res.posts[0]);
+		assert.isArray(res.posts[0].comments);
+		assert.isObject(res.posts[0].comments[0]);
+	});
 	it("nice example 1", () => {
 		const pattern = `
 			{
