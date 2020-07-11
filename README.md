@@ -293,25 +293,24 @@ In the current version we support these data types:
 * boolean
 * null
 * undefined
-* empty
-* username
+* empty (empty string "")
+* true (always generate true)
+* false (always generate false)
 * name
 * firstName
 * lastName
+* age (number between 1-99)
+* age18 (number between 18-99)
+* agekid (number between 1-18)
 * email
+* username
+* uuid
 * title
 * text
 * word
 * words
-* sentence
-* sentences
 * paragraph
 * paragraphs
-* uuid
-* age (number between 1-110)
-* age18 (number between 18-110)
-* true (always return true)
-* false (always return false)
 
 ### Example
 

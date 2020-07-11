@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.bracesCounter = void 0;
+exports.randomNumber = exports.bracesCounter = void 0;
 exports.bracesCounter = function (pattern) {
     var l = pattern.length;
     var left = [];
@@ -16,4 +16,7 @@ exports.bracesCounter = function (pattern) {
     }
     console.log(left);
     console.log(right);
+};
+exports.randomNumber = function (min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
 };

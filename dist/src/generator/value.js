@@ -13,9 +13,10 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.EmailValue = exports.NameValue = exports.StringValue = exports.StaticValue = exports.ValueGeneratorFactory = exports.ImageGenerator = exports.UuidGenerator = exports.EmailGenerator = exports.NameGenerator = exports.LastNameGenerator = exports.FirstNameGenerator = exports.UndefinedGenerator = exports.NullGenerator = exports.BooleanGenerator = exports.NumberGenerator = exports.StringGenerator = exports.StaticGenerator = exports.BaseGenerator = void 0;
+exports.EmailValue = exports.NameValue = exports.StringValue = exports.StaticValue = exports.ValueGeneratorFactory = exports.ParagraphsGenerator = exports.ParagraphGenerator = exports.WordsGenerator = exports.WordGenerator = exports.TextGenerator = exports.TitleGenerator = exports.ImageGenerator = exports.UuidGenerator = exports.UserNameGenerator = exports.EmailGenerator = exports.AgeKidGenerator = exports.Age18Generator = exports.AgeGenerator = exports.LastNameGenerator = exports.FirstNameGenerator = exports.NameGenerator = exports.EmptyGenerator = exports.FalseGenerator = exports.TrueGenerator = exports.UndefinedGenerator = exports.NullGenerator = exports.StaticGenerator = exports.BooleanGenerator = exports.NumberGenerator = exports.StringGenerator = exports.BaseGenerator = void 0;
 var faker_1 = require("faker");
 var random_string_1 = require("../utils/random-string");
+var helpers_1 = require("../utils/helpers");
 var BaseGenerator = (function () {
     function BaseGenerator() {
         this.type = "static";
@@ -40,21 +41,6 @@ var BaseGenerator = (function () {
     return BaseGenerator;
 }());
 exports.BaseGenerator = BaseGenerator;
-var StaticGenerator = (function (_super) {
-    __extends(StaticGenerator, _super);
-    function StaticGenerator() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    StaticGenerator.prototype.generate = function () {
-        return this.value;
-    };
-    StaticGenerator.prototype.get = function (value) {
-        this.value = value;
-        return this.generate();
-    };
-    return StaticGenerator;
-}(BaseGenerator));
-exports.StaticGenerator = StaticGenerator;
 var StringGenerator = (function (_super) {
     __extends(StringGenerator, _super);
     function StringGenerator() {
@@ -94,6 +80,21 @@ var BooleanGenerator = (function (_super) {
     return BooleanGenerator;
 }(BaseGenerator));
 exports.BooleanGenerator = BooleanGenerator;
+var StaticGenerator = (function (_super) {
+    __extends(StaticGenerator, _super);
+    function StaticGenerator() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    StaticGenerator.prototype.generate = function () {
+        return this.value;
+    };
+    StaticGenerator.prototype.get = function (value) {
+        this.value = value;
+        return this.generate();
+    };
+    return StaticGenerator;
+}(BaseGenerator));
+exports.StaticGenerator = StaticGenerator;
 var NullGenerator = (function (_super) {
     __extends(NullGenerator, _super);
     function NullGenerator() {
@@ -120,6 +121,58 @@ var UndefinedGenerator = (function (_super) {
     return UndefinedGenerator;
 }(BaseGenerator));
 exports.UndefinedGenerator = UndefinedGenerator;
+var TrueGenerator = (function (_super) {
+    __extends(TrueGenerator, _super);
+    function TrueGenerator() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.type = "true";
+        return _this;
+    }
+    TrueGenerator.prototype.generate = function () {
+        return true;
+    };
+    return TrueGenerator;
+}(BaseGenerator));
+exports.TrueGenerator = TrueGenerator;
+var FalseGenerator = (function (_super) {
+    __extends(FalseGenerator, _super);
+    function FalseGenerator() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.type = "false";
+        return _this;
+    }
+    FalseGenerator.prototype.generate = function () {
+        return false;
+    };
+    return FalseGenerator;
+}(BaseGenerator));
+exports.FalseGenerator = FalseGenerator;
+var EmptyGenerator = (function (_super) {
+    __extends(EmptyGenerator, _super);
+    function EmptyGenerator() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.type = "empty";
+        return _this;
+    }
+    EmptyGenerator.prototype.generate = function () {
+        return "";
+    };
+    return EmptyGenerator;
+}(BaseGenerator));
+exports.EmptyGenerator = EmptyGenerator;
+var NameGenerator = (function (_super) {
+    __extends(NameGenerator, _super);
+    function NameGenerator() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.type = "name";
+        return _this;
+    }
+    NameGenerator.prototype.generate = function () {
+        return faker_1.name.findName();
+    };
+    return NameGenerator;
+}(BaseGenerator));
+exports.NameGenerator = NameGenerator;
 var FirstNameGenerator = (function (_super) {
     __extends(FirstNameGenerator, _super);
     function FirstNameGenerator() {
@@ -146,19 +199,45 @@ var LastNameGenerator = (function (_super) {
     return LastNameGenerator;
 }(BaseGenerator));
 exports.LastNameGenerator = LastNameGenerator;
-var NameGenerator = (function (_super) {
-    __extends(NameGenerator, _super);
-    function NameGenerator() {
+var AgeGenerator = (function (_super) {
+    __extends(AgeGenerator, _super);
+    function AgeGenerator() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.type = "name";
+        _this.type = "age";
         return _this;
     }
-    NameGenerator.prototype.generate = function () {
-        return faker_1.name.findName();
+    AgeGenerator.prototype.generate = function () {
+        return helpers_1.randomNumber(1, 99);
     };
-    return NameGenerator;
+    return AgeGenerator;
 }(BaseGenerator));
-exports.NameGenerator = NameGenerator;
+exports.AgeGenerator = AgeGenerator;
+var Age18Generator = (function (_super) {
+    __extends(Age18Generator, _super);
+    function Age18Generator() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.type = "age18";
+        return _this;
+    }
+    Age18Generator.prototype.generate = function () {
+        return helpers_1.randomNumber(18, 99);
+    };
+    return Age18Generator;
+}(BaseGenerator));
+exports.Age18Generator = Age18Generator;
+var AgeKidGenerator = (function (_super) {
+    __extends(AgeKidGenerator, _super);
+    function AgeKidGenerator() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.type = "agekid";
+        return _this;
+    }
+    AgeKidGenerator.prototype.generate = function () {
+        return helpers_1.randomNumber(1, 18);
+    };
+    return AgeKidGenerator;
+}(BaseGenerator));
+exports.AgeKidGenerator = AgeKidGenerator;
 var EmailGenerator = (function (_super) {
     __extends(EmailGenerator, _super);
     function EmailGenerator() {
@@ -172,6 +251,19 @@ var EmailGenerator = (function (_super) {
     return EmailGenerator;
 }(BaseGenerator));
 exports.EmailGenerator = EmailGenerator;
+var UserNameGenerator = (function (_super) {
+    __extends(UserNameGenerator, _super);
+    function UserNameGenerator() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.type = "username";
+        return _this;
+    }
+    UserNameGenerator.prototype.generate = function () {
+        return faker_1.internet.userName();
+    };
+    return UserNameGenerator;
+}(BaseGenerator));
+exports.UserNameGenerator = UserNameGenerator;
 var UuidGenerator = (function (_super) {
     __extends(UuidGenerator, _super);
     function UuidGenerator() {
@@ -198,6 +290,84 @@ var ImageGenerator = (function (_super) {
     return ImageGenerator;
 }(BaseGenerator));
 exports.ImageGenerator = ImageGenerator;
+var TitleGenerator = (function (_super) {
+    __extends(TitleGenerator, _super);
+    function TitleGenerator() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.type = "title";
+        return _this;
+    }
+    TitleGenerator.prototype.generate = function () {
+        return faker_1.lorem.sentence();
+    };
+    return TitleGenerator;
+}(BaseGenerator));
+exports.TitleGenerator = TitleGenerator;
+var TextGenerator = (function (_super) {
+    __extends(TextGenerator, _super);
+    function TextGenerator() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.type = "text";
+        return _this;
+    }
+    TextGenerator.prototype.generate = function () {
+        return faker_1.lorem.text();
+    };
+    return TextGenerator;
+}(BaseGenerator));
+exports.TextGenerator = TextGenerator;
+var WordGenerator = (function (_super) {
+    __extends(WordGenerator, _super);
+    function WordGenerator() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.type = "word";
+        return _this;
+    }
+    WordGenerator.prototype.generate = function () {
+        return faker_1.lorem.word();
+    };
+    return WordGenerator;
+}(BaseGenerator));
+exports.WordGenerator = WordGenerator;
+var WordsGenerator = (function (_super) {
+    __extends(WordsGenerator, _super);
+    function WordsGenerator() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.type = "words";
+        return _this;
+    }
+    WordsGenerator.prototype.generate = function () {
+        return faker_1.lorem.words();
+    };
+    return WordsGenerator;
+}(BaseGenerator));
+exports.WordsGenerator = WordsGenerator;
+var ParagraphGenerator = (function (_super) {
+    __extends(ParagraphGenerator, _super);
+    function ParagraphGenerator() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.type = "paragraph";
+        return _this;
+    }
+    ParagraphGenerator.prototype.generate = function () {
+        return faker_1.lorem.paragraph();
+    };
+    return ParagraphGenerator;
+}(BaseGenerator));
+exports.ParagraphGenerator = ParagraphGenerator;
+var ParagraphsGenerator = (function (_super) {
+    __extends(ParagraphsGenerator, _super);
+    function ParagraphsGenerator() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.type = "paragraphs";
+        return _this;
+    }
+    ParagraphsGenerator.prototype.generate = function () {
+        return faker_1.lorem.paragraphs();
+    };
+    return ParagraphsGenerator;
+}(BaseGenerator));
+exports.ParagraphsGenerator = ParagraphsGenerator;
 var ValueGeneratorFactory = (function () {
     function ValueGeneratorFactory() {
         this.generator = new StringGenerator();
@@ -205,12 +375,25 @@ var ValueGeneratorFactory = (function () {
         this.generator.setNext(new BooleanGenerator());
         this.generator.setNext(new NullGenerator());
         this.generator.setNext(new UndefinedGenerator());
+        this.generator.setNext(new TrueGenerator());
+        this.generator.setNext(new FalseGenerator());
+        this.generator.setNext(new EmptyGenerator());
+        this.generator.setNext(new NameGenerator());
         this.generator.setNext(new FirstNameGenerator());
         this.generator.setNext(new LastNameGenerator());
-        this.generator.setNext(new NameGenerator());
+        this.generator.setNext(new AgeGenerator());
+        this.generator.setNext(new Age18Generator());
+        this.generator.setNext(new AgeKidGenerator());
         this.generator.setNext(new EmailGenerator());
+        this.generator.setNext(new UserNameGenerator());
         this.generator.setNext(new UuidGenerator());
         this.generator.setNext(new ImageGenerator());
+        this.generator.setNext(new TitleGenerator());
+        this.generator.setNext(new TextGenerator());
+        this.generator.setNext(new WordGenerator());
+        this.generator.setNext(new WordsGenerator());
+        this.generator.setNext(new ParagraphGenerator());
+        this.generator.setNext(new ParagraphsGenerator());
         this.generator.setNext(new StaticGenerator());
     }
     ValueGeneratorFactory.prototype.setNext = function () { };
