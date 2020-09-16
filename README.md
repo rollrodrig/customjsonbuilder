@@ -1,5 +1,5 @@
 # custom JSONbuilder
-# Fake json responses with custom fields on the fly (beta)
+# Fake json responses with custom fields on the fly
 
 
 ## Example

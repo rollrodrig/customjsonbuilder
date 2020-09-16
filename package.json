@@ -1,7 +1,7 @@
 {
   "name": "customjsonbuilder",
   "version": "1.0.8",
-  "description": "",
+  "description": "Fake json responses with custom fields on the fly",
   "main": "index.js",
   "scripts": {
     "start": "node app.js",
