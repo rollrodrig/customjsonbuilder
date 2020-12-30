@@ -140,6 +140,23 @@ describe("CustomJsonBuilder", () => {
 		assert.isString(res.age.city.place);
 	});
 });
+describe("Many test examples", () => {
+	it("shuld return date", () => {
+		const pattern = `
+			{
+				name:name,
+				password:password,
+				date:date,
+			}
+		`;
+		const res = CustomJsonBuilder.build(pattern);
+		assert.isString(res.name);
+		assert.isString(res.password);
+		assert.isString(res.date);
+		expect(res.password).not.equal("password");
+		expect(res.date).not.equal("date");
+	});
+});
 describe("Error: ", () => {
 	it(".missingBrances: should print error braquest message", () => {
 		const expected = {
