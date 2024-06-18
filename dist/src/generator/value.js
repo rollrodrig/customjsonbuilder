@@ -13,8 +13,9 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.EmailValue = exports.NameValue = exports.StringValue = exports.StaticValue = exports.ValueGeneratorFactory = exports.ParagraphsGenerator = exports.ParagraphGenerator = exports.WordsGenerator = exports.WordGenerator = exports.TextGenerator = exports.TitleGenerator = exports.ImageGenerator = exports.UuidGenerator = exports.UserNameGenerator = exports.EmailGenerator = exports.AgeKidGenerator = exports.Age18Generator = exports.AgeGenerator = exports.LastNameGenerator = exports.FirstNameGenerator = exports.NameGenerator = exports.EmptyGenerator = exports.FalseGenerator = exports.TrueGenerator = exports.UndefinedGenerator = exports.NullGenerator = exports.StaticGenerator = exports.BooleanGenerator = exports.NumberGenerator = exports.StringGenerator = exports.BaseGenerator = void 0;
+exports.EmailValue = exports.NameValue = exports.StringValue = exports.StaticValue = exports.ValueGeneratorFactory = exports.DateGenerator = exports.ParagraphsGenerator = exports.ParagraphGenerator = exports.WordsGenerator = exports.WordGenerator = exports.TextGenerator = exports.TitleGenerator = exports.ImageGenerator = exports.UuidGenerator = exports.PasswordGenerator = exports.UserNameGenerator = exports.EmailGenerator = exports.AgeKidGenerator = exports.Age18Generator = exports.AgeGenerator = exports.LastNameGenerator = exports.FirstNameGenerator = exports.NameGenerator = exports.EmptyGenerator = exports.FalseGenerator = exports.TrueGenerator = exports.UndefinedGenerator = exports.NullGenerator = exports.StaticGenerator = exports.BooleanGenerator = exports.NumberGenerator = exports.StringGenerator = exports.BaseGenerator = void 0;
 var faker_1 = require("faker");
+var moment = require("moment");
 var random_string_1 = require("../utils/random-string");
 var helpers_1 = require("../utils/helpers");
 var BaseGenerator = (function () {
@@ -264,6 +265,19 @@ var UserNameGenerator = (function (_super) {
     return UserNameGenerator;
 }(BaseGenerator));
 exports.UserNameGenerator = UserNameGenerator;
+var PasswordGenerator = (function (_super) {
+    __extends(PasswordGenerator, _super);
+    function PasswordGenerator() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.type = "password";
+        return _this;
+    }
+    PasswordGenerator.prototype.generate = function () {
+        return faker_1.internet.password();
+    };
+    return PasswordGenerator;
+}(BaseGenerator));
+exports.PasswordGenerator = PasswordGenerator;
 var UuidGenerator = (function (_super) {
     __extends(UuidGenerator, _super);
     function UuidGenerator() {
@@ -368,6 +382,19 @@ var ParagraphsGenerator = (function (_super) {
     return ParagraphsGenerator;
 }(BaseGenerator));
 exports.ParagraphsGenerator = ParagraphsGenerator;
+var DateGenerator = (function (_super) {
+    __extends(DateGenerator, _super);
+    function DateGenerator() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.type = "date";
+        return _this;
+    }
+    DateGenerator.prototype.generate = function () {
+        return moment().format();
+    };
+    return DateGenerator;
+}(BaseGenerator));
+exports.DateGenerator = DateGenerator;
 var ValueGeneratorFactory = (function () {
     function ValueGeneratorFactory() {
         this.generator = new StringGenerator();
@@ -386,6 +413,7 @@ var ValueGeneratorFactory = (function () {
         this.generator.setNext(new AgeKidGenerator());
         this.generator.setNext(new EmailGenerator());
         this.generator.setNext(new UserNameGenerator());
+        this.generator.setNext(new PasswordGenerator());
         this.generator.setNext(new UuidGenerator());
         this.generator.setNext(new ImageGenerator());
         this.generator.setNext(new TitleGenerator());
@@ -394,6 +422,7 @@ var ValueGeneratorFactory = (function () {
         this.generator.setNext(new WordsGenerator());
         this.generator.setNext(new ParagraphGenerator());
         this.generator.setNext(new ParagraphsGenerator());
+        this.generator.setNext(new DateGenerator());
         this.generator.setNext(new StaticGenerator());
     }
     ValueGeneratorFactory.prototype.setNext = function () { };

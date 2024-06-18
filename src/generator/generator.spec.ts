@@ -73,6 +73,22 @@ describe("Generator: ", () => {
 		assert.isObject(res.age.city);
 		assert.isString(res.age.city.place);
 	});
+	it("should return password", () => {
+		const pattern = "{password:password}";
+		const reader = new Reader(pattern);
+		const gen = new Generator(reader.scan());
+		const res = gen.generate();
+		assert.isString(res.password);
+		expect(res.password).not.equal("password");
+	});
+	it("should return date", () => {
+		const pattern = "{created_at:date}";
+		const reader = new Reader(pattern);
+		const gen = new Generator(reader.scan());
+		const res = gen.generate();
+		assert.isString(res.created_at);
+		expect(res.created_at).not.equal("date");
+	});
 });
 const graph = new Graph();
 class FakeBlock extends Block {

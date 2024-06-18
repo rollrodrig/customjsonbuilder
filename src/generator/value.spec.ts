@@ -23,6 +23,7 @@ import {
 	// internet
 	EmailGenerator,
 	UserNameGenerator,
+	PasswordGenerator,
 	// random
 	UuidGenerator,
 	// image
@@ -34,6 +35,8 @@ import {
 	WordsGenerator,
 	ParagraphGenerator,
 	ParagraphsGenerator,
+	// Date
+	DateGenerator,
 	//
 	ValueGeneratorFactory,
 } from "./value";
@@ -59,6 +62,7 @@ describe("ValueGenerator", () => {
 		// internet
 		generator.setNext(new UserNameGenerator());
 		generator.setNext(new EmailGenerator());
+		generator.setNext(new PasswordGenerator());
 		// random
 		generator.setNext(new UuidGenerator());
 		// image
@@ -94,6 +98,7 @@ describe("ValueGenerator", () => {
 		// internet
 		assert.isTrue(generator.get("email").search("@") > 1);
 		assert.isString(generator.get("username"));
+		assert.isString(generator.get("password"));
 		// random
 		assert.isString(generator.get("uuid"));
 		// image
@@ -107,6 +112,10 @@ describe("ValueGenerator", () => {
 		assert.isString(generator.get("paragraphs"));
 		// fixed static
 		expect(generator.get("EE001-R1")).eq("EE001-R1");
+	});
+	it("should generate Date", () => {
+		const generator = new DateGenerator();
+		assert.isString(generator.get("date"));
 	});
 	it("should generate from factory", () => {
 		const generator = new ValueGeneratorFactory();
@@ -126,6 +135,7 @@ describe("ValueGenerator", () => {
 		expect(generator.get("EE001-R1")).eq("EE001-R1");
 	});
 });
+
 describe("Element", () => {
 	it("StaticElement: should return passed value", () => {
 		let i: IElement;

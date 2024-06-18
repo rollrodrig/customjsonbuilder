@@ -302,8 +302,9 @@ In the current version we support these data types:
 * age (number between 1-99)
 * age18 (number between 18-99)
 * agekid (number between 1-18)
-* email
 * username
+* email
+* password
 * uuid
 * title
 * text
@@ -311,6 +312,7 @@ In the current version we support these data types:
 * words
 * paragraph
 * paragraphs
+* date
 
 ### Example
 

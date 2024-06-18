@@ -8,6 +8,7 @@ import {
 	random,
 	system,
 } from "faker";
+import * as moment from "moment";
 import { IElement } from "./element";
 import { randomString } from "../utils/random-string";
 import { randomNumber } from "../utils/helpers";
@@ -145,6 +146,12 @@ export class UserNameGenerator extends BaseGenerator {
 		return internet.userName();
 	}
 }
+export class PasswordGenerator extends BaseGenerator {
+	type = "password";
+	protected generate() {
+		return internet.password();
+	}
+}
 // random
 export class UuidGenerator extends BaseGenerator {
 	type = "uuid";
@@ -196,6 +203,13 @@ export class ParagraphsGenerator extends BaseGenerator {
 		return lorem.paragraphs();
 	}
 }
+// Date
+export class DateGenerator extends BaseGenerator {
+	type = "date";
+	protected generate() {
+		return moment().format();
+	}
+}
 export class ValueGeneratorFactory implements IValueGenerator {
 	generator: IValueGenerator;
 	constructor() {
@@ -219,6 +233,7 @@ export class ValueGeneratorFactory implements IValueGenerator {
 		// internet
 		this.generator.setNext(new EmailGenerator());
 		this.generator.setNext(new UserNameGenerator());
+		this.generator.setNext(new PasswordGenerator());
 		// random
 		this.generator.setNext(new UuidGenerator());
 		// image
@@ -230,6 +245,8 @@ export class ValueGeneratorFactory implements IValueGenerator {
 		this.generator.setNext(new WordsGenerator());
 		this.generator.setNext(new ParagraphGenerator());
 		this.generator.setNext(new ParagraphsGenerator());
+		// date
+		this.generator.setNext(new DateGenerator());
 		// static fixed
 		this.generator.setNext(new StaticGenerator());
 	}
