@@ -1,20 +1,19 @@
-import { expect, assert } from "chai";
-import { Validator } from "./validator";
-describe("Validator: ", () => {
-	it(".run: count the numbers of {} and  [] are the same", () => {
-		const i = new Validator();
-		assert.isTrue(i.run("[{name:string}]"));
-		assert.isTrue(i.run("[{name:string}]"));
-		assert.isTrue(i.run("[{name:string, phone:{something}}]"));
-		assert.isTrue(i.run("{name:string, phone:{something}}"));
-		assert.isTrue(i.run("{name}"));
-		assert.isTrue(i.run("{}"));
-		assert.isTrue(i.run("nothing"));
-		assert.isTrue(i.run(""));
-		assert.isTrue(i.run(" "));
-		assert.isFalse(i.run("[{name:string]"));
-		assert.isFalse(i.run("[{name:string, phone:{something}]"));
-		assert.isFalse(i.run("{name:{string}, phone:{{something}}"));
-		assert.isFalse(i.run("{name}}"));
-	});
-});
+import { Validator } from './validator'
+describe('Validator: ', () => {
+  it('.run: count the numbers of {} and  [] are the same', () => {
+    const i = new Validator()
+    expect(i.run('[{name:string}]')).toBe(true)
+    expect(i.run('[{name:string}]')).toBe(true)
+    expect(i.run('[{name:string, phone:{something}}]')).toBe(true)
+    expect(i.run('{name:string, phone:{something}}')).toBe(true)
+    expect(i.run('{name}')).toBe(true)
+    expect(i.run('{}')).toBe(true)
+    expect(i.run('nothing')).toBe(true)
+    expect(i.run('')).toBe(true)
+    expect(i.run(' ')).toBe(true)
+    expect(i.run('[{name:string]')).toBe(false)
+    expect(i.run('[{name:string, phone:{something}]')).toBe(false)
+    expect(i.run('{name:{string}, phone:{{something}}')).toBe(false)
+    expect(i.run('{name}}')).toBe(false)
+  })
+})

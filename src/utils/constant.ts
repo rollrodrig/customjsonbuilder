@@ -1,1 +1,1 @@
-export const OPTION_TIME = "$times";
+export const OPTION_TIME = '$times'
