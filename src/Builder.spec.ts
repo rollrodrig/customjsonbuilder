@@ -1,5 +1,6 @@
 import CustomJsonBuilder from './builder'
 import { Error } from './builder'
+
 describe('CustomJsonBuilder', () => {
   it('should return the json ', () => {
     const input = `

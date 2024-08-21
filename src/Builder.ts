@@ -2,13 +2,13 @@ import { Cleaner } from './cleaner/cleaner'
 import { Validator } from './validator/validator'
 import { Generator } from './generator/generator'
 import { Reader } from './reader/reader'
+
 export default class CustomJsonBuilder {
   static build(pattern: string): any {
     const cleaner = new Cleaner()
     pattern = cleaner.run(pattern)
     const validator = new Validator()
     const validPattern = validator.run(pattern)
-    console.log(validPattern)
 
     if (validPattern) {
       const reader = new Reader(pattern)

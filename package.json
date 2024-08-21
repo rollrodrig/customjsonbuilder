@@ -11,7 +11,8 @@
     "prepare": "husky",
     "format": "prettier --write 'src/**/*.{ts,tsx,js,json,md}'",
     "dev": "./node_modules/.bin/ts-node src/index.ts",
-    "test": "jest"
+    "test": "jest",
+    "test:file": "npm run test -- src/scanner.spec.ts --watch"
   },
   "author": "",
   "license": "ISC",
