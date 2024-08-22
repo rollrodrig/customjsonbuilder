@@ -1,6 +1,6 @@
 {
   "name": "customjsonbuilder",
-  "version": "2.0.0-beta.1",
+  "version": "2.0.0",
   "description": "Fake json responses with custom fields on the fly",
   "main": "index.js",
   "scripts": {
