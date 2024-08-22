@@ -1,7 +1,6 @@
 import express from 'express'
 import dotenv from 'dotenv'
-import CustomJsonBuilder from './builder'
-
+import CustomJsonBuilder from './index'
 dotenv.config()
 
 const app = express()
@@ -23,8 +22,7 @@ app.all('/:pattern?', (req: any, res: any) => {
   const pattern = req.params.pattern
 
   if (pattern) {
-    console.log(pattern)
-    const response = CustomJsonBuilder.build(pattern)
+    const response = CustomJsonBuilder(pattern)
     res.json(response)
   } else {
     res.end(
