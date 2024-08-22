@@ -1,14 +1,11 @@
 {
   "compilerOptions": {
-    "outDir": "./dist/src",
-    "noImplicitAny": true,
-    "moduleResolution": "node",
+    "target": "es6",
     "module": "commonjs",
-    "target": "es5",
-    "sourceMap": false,
-    "removeComments": true,
-    "typeRoots": ["node_modules/@types"],
-    "lib": []
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true,
+    "esModuleInterop": true,
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "**/*.spec.ts"]
