@@ -122,7 +122,7 @@ npm install customjsonbuilder --save-dev
 ```javascript
 // index.js
 let customjsonbuilder = require('customjsonbuilder')
-let fake = customjsonbuilder.build('{name:string}')
+let fake = customjsonbuilder('{name:string}')
 console.log(fake)
 // run on terminal "node index.js"
 ```
@@ -145,7 +145,7 @@ app.get('/posts', (req, res) => {
             }
         }
     `
-  let response = customjsonbuilder.build(posts)
+  let response = customjsonbuilder(posts)
   res.json(response)
 })
 app.listen('8200', '0.0.0.0')
