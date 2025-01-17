@@ -6,7 +6,7 @@
 
 A simple query like this
 
-` http://localhost:6500/{name:string,email:email}`
+`[GET]` [https://customjsonbuilder.com/api/{name:string,email:email}](https://customjsonbuilder.com/api/{name:string,email:email})
 
 will respond with json like:
 
@@ -17,146 +17,14 @@ will respond with json like:
 }
 ```
 
-## Installation
+All the methods are supported in the same API: `GET`, `POST`, `PUT`, `PATCH`, `DELETE`
 
-Clone the project or download [the zip file](https://github.com/rollrodrig/jsonbuilder/archive/master.zip)
-
-Go to the folder
-
-```
-cd customjsonbuilder
-```
-
-## Run fake api on Node
-
-Install dependencies
-
-```
-npm install
-```
-
-Launch the server
-
-```
-npm start
-// or with a custom port
-PORT=4545 npm start
-```
-
-It will prompt
-
-```
-Running on http://0.0.0.0:6500
-```
-
-Open the browser and visit the link [http://0.0.0.0:6500](http://localhost:6500/)
-
-Now query some fake data from your React, Angular, Vue or any external project.
-
-### React usage example with fake local server
-
-```jsx
-export function Posts() {
-  const [posts, setPosts] = useState([])
-
-  useEffect(() => {
-    const pattern = `
-        {
-            posts: {
-                title: string,
-                _times: 3
-            }
-        }
-    `
-    axios.get(`http://0.0.0.0:6500/${pattern}`).then((res) => {
-      setPosts(res.data.posts)
-    })
-  }, [])
-
-  return (
-    <div>
-      {posts.map((p) => (
-        <div>{p.title}</div>
-      ))}
-    </div>
-  )
-}
-```
-
-### React usage example using builder
-
-```jsx
-import cjb from 'customjsonbuilder'
-
-const pattern = `
-    {
-        posts: {
-            title: string,
-            _times: 3
-        }
-    }
-`
-const fakePosts = cjb(pattern)
-export function Posts() {
-  const [posts] = useState(fakePosts.posts)
-  return (
-    <div>
-      {posts.map((p) => (
-        <div>{p.title}</div>
-      ))}
-    </div>
-  )
-}
-```
-
-## NPM
-
-Install via npm
-
-```
-npm install customjsonbuilder --save-dev
-```
-
-### Node example
-
-```javascript
-// index.js
-let customjsonbuilder = require('customjsonbuilder')
-let fake = customjsonbuilder('{name:string}')
-console.log(fake)
-// run on terminal "node index.js"
-```
-
-### Express example
-
-Create your own custom fake server and use customjsobuilder to generate fake data
-
-```javascript
-let express = require('express')
-let app = express()
-let customjsonbuilder = require('customjsonbuilder')
-app.get('/posts', (req, res) => {
-  let posts = `
-        {
-            posts: {
-                id: number,
-                title: string,
-                _times: 3
-            }
-        }
-    `
-  let response = customjsonbuilder(posts)
-  res.json(response)
-})
-app.listen('8200', '0.0.0.0')
-console.log(`Running on http://0.0.0.0:8200`)
-```
 
 # Pattern Guide
 
 ### Pattern
 
-Example: `http://localhost:6500/<THE PATTERN GOES HERE>`
+Example: `https://customjsonbuilder.com/api/<THE PATTERN GOES HERE>`
 
 ### key: value
 
@@ -170,11 +38,7 @@ It is like writing regular json
 
 I want an object with a key `name` and a random word as `value`
 
-```
-{
-    name: string
-}
-```
+`{name: string}`
 
 The server will respond with data like
 
@@ -188,13 +52,7 @@ The server will respond with data like
 
 Now I need a json response with `id`, `name` and `email`
 
-```
-{
-    id: number,
-    name: string,
-    email: email
-}
-```
+`{id:number, name:string, email:email}`
 
 The server will respond with data like
 
@@ -212,16 +70,9 @@ I want an object with a `userId`, a `name` and a nested object `contact` which c
 
 The pattern should be:
 
-```
-{
-    userId: number,
-    name: firstname,
-    contact: {
-        phone: number,
-        email: email
-    }
-}
-```
+
+`{userId: number, name: firstname, contact: {phone: number, email: email}}`
+
 
 The server will respond with data like
 
@@ -241,6 +92,9 @@ The server will respond with data like
 Lets try something more complex.
 I want an object with `userId`, `name`, a nested object with `contact` that contains `phone` and `email` with nested content `personal_email` and `company_email`
 
+`{userId: number, name: firstname, contact: {phone: number, email: {personal_email: email, company_email: email}}}`
+
+(better visualization)
 ```
 {
     userId: number,
@@ -277,15 +131,7 @@ I want 3 `posts` with `id` and `title`
 
 To get an array response just add key `_times:NUMBER`, were `number` is the number of elements that i want in the array.
 
-```
-{
-    posts: {
-        id: number,
-        title: string,
-        _times: 3
-    }
-}
-```
+`{posts: {id: number, title: string, _times: 3}}`
 
 And the server will respond with data like
 
@@ -524,9 +370,150 @@ Will generate
 }
 ```
 
-# API live
 
-Now it only works on localhost but we are working to launch a hosted app and create a public API.
+### React usage example
+
+```jsx
+export function Posts() {
+  const [posts, setPosts] = useState([])
+
+  useEffect(() => {
+    const pattern = `
+        {
+            posts: {
+                title: string,
+                _times: 3
+            }
+        }
+    `
+    axios.get(`http://customjsonbuilder.com/api/${pattern}`).then((res) => {
+      setPosts(res.data.posts)
+    })
+  }, [])
+
+  return (
+    <div>
+      {posts.map((p) => (
+        <div>{p.title}</div>
+      ))}
+    </div>
+  )
+}
+```
+
+
+## Local Installation
+
+Clone the project or download [the zip file](https://github.com/rollrodrig/jsonbuilder/archive/master.zip)
+
+Go to the folder
+
+```
+cd customjsonbuilder
+```
+
+## Run fake api on Node
+
+Install dependencies
+
+```
+npm install
+```
+
+Launch the server
+
+```
+npm start
+// or with a custom port
+PORT=4545 npm start
+```
+
+It will prompt
+
+```
+Running on http://0.0.0.0:6500
+```
+
+Open the browser and visit the link [http://0.0.0.0:6500](http://localhost:6500/)
+
+Now query some fake data from your React, Angular, Vue or any external project.
+
+`http://0.0.0.0:6500/{name:string,email:email}`
+
+
+## NPM
+
+Install via npm
+
+```
+npm install customjsonbuilder --save-dev
+```
+
+
+### React usage example using builder
+
+```jsx
+import cjb from 'customjsonbuilder'
+
+const pattern = `
+    {
+        posts: {
+            title: string,
+            _times: 3
+        }
+    }
+`
+const fakePosts = cjb(pattern)
+export function Posts() {
+  const [posts] = useState(fakePosts.posts)
+  return (
+    <div>
+      {posts.map((p) => (
+        <div>{p.title}</div>
+      ))}
+    </div>
+  )
+}
+```
+
+
+
+### Node example
+
+```javascript
+// index.js
+let customjsonbuilder = require('customjsonbuilder')
+let fake = customjsonbuilder('{name:string}')
+console.log(fake)
+// run on terminal "node index.js"
+```
+
+### Express example
+
+Create your own custom fake server and use customjsobuilder to generate fake data
+
+```javascript
+let express = require('express')
+let app = express()
+let customjsonbuilder = require('customjsonbuilder')
+app.get('/posts', (req, res) => {
+  let posts = `
+        {
+            posts: {
+                id: number,
+                title: string,
+                _times: 3
+            }
+        }
+    `
+  let response = customjsonbuilder(posts)
+  res.json(response)
+})
+app.listen('8200', '0.0.0.0')
+console.log(`Running on http://0.0.0.0:8200`)
+```
+
+
 
 # Features
 
@@ -541,5 +528,8 @@ Especial thanks to [faker](https://github.com/marak/Faker.js/) that is used behi
 Feel free to collaborate with this project.
 
 # Follow me
-
-on twitter [@rollrodrig](https://twitter.com/rollrodrig)
+[X: @rollrodrig](https://x.com/rollrodrig)
+[Github: rollrodrig](https://github.com/rollrodrig)
+[Youtube: RollTheCoder](https://www.youtube.com/@RollTheCoder)
+[Instagram: rollthecoder](https://www.instagram.com/rollthecoder/)
+[Tiktok: @rollthecoder](https://www.tiktok.com/@rollthecoder)
