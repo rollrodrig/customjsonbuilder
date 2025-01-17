@@ -32,3 +32,4 @@ app.all('/:pattern?', (req, res) => {
 app.listen(port, () => {
     console.log(`App running at on http://localhost:${port}`);
 });
+//# sourceMappingURL=app.js.map

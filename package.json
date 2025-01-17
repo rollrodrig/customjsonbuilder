@@ -1,6 +1,6 @@
 {
   "name": "customjsonbuilder",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "Fake json responses with custom fields on the fly",
   "main": "index.js",
   "scripts": {
@@ -13,6 +13,7 @@
     "dev": "./node_modules/.bin/ts-node src/index.ts",
     "test": "jest"
   },
+  "types": "./types/customjsonbuilder/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rollrodrig/customjsonbuilder.git"
