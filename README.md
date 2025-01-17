@@ -154,37 +154,9 @@ And the server will respond with data like
 }
 ```
 
-## Data types
 
-In the current version we support these data types:
 
-- string
-- number
-- boolean
-- null
-- undefined
-- empty (empty string "")
-- true (always generate true)
-- false (always generate false)
-- name
-- firstName
-- lastName
-- age (number between 1-99)
-- age18 (number between 18-99)
-- agekid (number between 1-18)
-- username
-- email
-- password
-- uuid
-- title
-- text
-- word
-- words
-- paragraph
-- paragraphs
-- date
-
-### Example
+### Examples
 
 post title
 
@@ -217,6 +189,153 @@ will generate
   "user_email": "Heber1@hotmail.com"
 }
 ```
+
+
+
+## Data types
+
+In the current version we support these data types:
+
+- string
+- number
+- boolean
+- null
+- undefined
+- empty (empty string "")
+- true (always generate true)
+- false (always generate false)
+- name
+- firstName
+- lastName
+- age (number between 1-99)
+- age18 (number between 18-99)
+- agekid (number between 1-18)
+- username
+- email
+- password
+- uuid
+- title
+- text
+- word
+- words
+- paragraph
+- paragraphs
+- date
+
+
+
+## NPM
+
+Install via npm
+
+```
+npm install customjsonbuilder --save-dev
+```
+
+
+### React usage example using builder
+
+```jsx
+import customjsonbuilder from 'customjsonbuilder'
+
+const pattern = `
+    {
+        posts: {
+            title: string,
+            _times: 3
+        }
+    }
+`
+const fakePosts = customjsonbuilder(pattern)
+export function Posts() {
+  const [posts] = useState(fakePosts.posts)
+  return (
+    <div>
+      {posts.map((p) => (
+        <div>{p.title}</div>
+      ))}
+    </div>
+  )
+}
+```
+
+
+
+### Node example
+
+```javascript
+// index.js
+let customjsonbuilder = require('customjsonbuilder')
+let fake = customjsonbuilder('{name:string}')
+console.log(fake)
+// run on terminal "node index.js"
+```
+
+### Express example
+
+Create your own custom fake server and use customjsobuilder to generate fake data
+
+```javascript
+let express = require('express')
+let app = express()
+let customjsonbuilder = require('customjsonbuilder')
+app.get('/posts', (req, res) => {
+  let posts = `
+        {
+            posts: {
+                id: number,
+                title: string,
+                _times: 3
+            }
+        }
+    `
+  let response = customjsonbuilder(posts)
+  res.json(response)
+})
+app.listen('8200', '0.0.0.0')
+console.log(`Running on http://0.0.0.0:8200`)
+```
+
+
+
+## Local Installation
+
+Clone the project or download [the zip file](https://github.com/rollrodrig/jsonbuilder/archive/master.zip)
+
+Go to the folder
+
+```
+cd customjsonbuilder
+```
+
+## Run fake api on Node
+
+Install dependencies
+
+```
+npm install
+```
+
+Launch the server
+
+```
+npm start
+// or with a custom port
+PORT=4545 npm start
+```
+
+It will prompt
+
+```
+Running on http://0.0.0.0:6500
+```
+
+Open the browser and visit the link [http://0.0.0.0:6500](http://localhost:6500/)
+
+Now query some fake data from your React, Angular, Vue or any external project.
+
+`http://0.0.0.0:6500/{name:string,email:email}`
+
 
 # Awesome examples
 
@@ -369,150 +488,6 @@ Will generate
   "errors": false
 }
 ```
-
-
-### React usage example
-
-```jsx
-export function Posts() {
-  const [posts, setPosts] = useState([])
-
-  useEffect(() => {
-    const pattern = `
-        {
-            posts: {
-                title: string,
-                _times: 3
-            }
-        }
-    `
-    axios.get(`http://customjsonbuilder.com/api/${pattern}`).then((res) => {
-      setPosts(res.data.posts)
-    })
-  }, [])
-
-  return (
-    <div>
-      {posts.map((p) => (
-        <div>{p.title}</div>
-      ))}
-    </div>
-  )
-}
-```
-
-
-## Local Installation
-
-Clone the project or download [the zip file](https://github.com/rollrodrig/jsonbuilder/archive/master.zip)
-
-Go to the folder
-
-```
-cd customjsonbuilder
-```
-
-## Run fake api on Node
-
-Install dependencies
-
-```
-npm install
-```
-
-Launch the server
-
-```
-npm start
-// or with a custom port
-PORT=4545 npm start
-```
-
-It will prompt
-
-```
-Running on http://0.0.0.0:6500
-```
-
-Open the browser and visit the link [http://0.0.0.0:6500](http://localhost:6500/)
-
-Now query some fake data from your React, Angular, Vue or any external project.
-
-`http://0.0.0.0:6500/{name:string,email:email}`
-
-
-## NPM
-
-Install via npm
-
-```
-npm install customjsonbuilder --save-dev
-```
-
-
-### React usage example using builder
-
-```jsx
-import cjb from 'customjsonbuilder'
-
-const pattern = `
-    {
-        posts: {
-            title: string,
-            _times: 3
-        }
-    }
-`
-const fakePosts = cjb(pattern)
-export function Posts() {
-  const [posts] = useState(fakePosts.posts)
-  return (
-    <div>
-      {posts.map((p) => (
-        <div>{p.title}</div>
-      ))}
-    </div>
-  )
-}
-```
-
-
-
-### Node example
-
-```javascript
-// index.js
-let customjsonbuilder = require('customjsonbuilder')
-let fake = customjsonbuilder('{name:string}')
-console.log(fake)
-// run on terminal "node index.js"
-```
-
-### Express example
-
-Create your own custom fake server and use customjsobuilder to generate fake data
-
-```javascript
-let express = require('express')
-let app = express()
-let customjsonbuilder = require('customjsonbuilder')
-app.get('/posts', (req, res) => {
-  let posts = `
-        {
-            posts: {
-                id: number,
-                title: string,
-                _times: 3
-            }
-        }
-    `
-  let response = customjsonbuilder(posts)
-  res.json(response)
-})
-app.listen('8200', '0.0.0.0')
-console.log(`Running on http://0.0.0.0:8200`)
-```
-
 
 
 # Features
