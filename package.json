@@ -1,6 +1,6 @@
 {
   "name": "customjsonbuilder",
-  "version": "2.0.5",
+  "version": "2.0.7",
   "description": "Fake json responses with custom fields on the fly",
   "main": "index.js",
   "scripts": {
@@ -23,7 +23,7 @@
   "bugs": {
     "url": "https://github.com/rollrodrig/customjsonbuilder/issues"
   },
-  "homepage": "https://github.com/rollrodrig/customjsonbuilder#readme",
+  "homepage": "https://customjsonbuilder.com",
   "dependencies": {
     "@faker-js/faker": "^8.4.1"
   },
